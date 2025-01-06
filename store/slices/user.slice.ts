@@ -5,3 +5,7 @@ interface UserState {
 	hasOnboarded: boolean;
 }
 
+const initialState: UserState = {
+	isLoggedIn: false,
+	hasOnboarded: false,
+};
