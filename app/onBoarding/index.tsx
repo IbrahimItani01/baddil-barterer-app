@@ -54,6 +54,8 @@ const OnboardingScreen = () => {
 				containerStyles={{
 					borderTopColor: "#e60000",
 				}}
+				onDone={handleNav}
+				onSkip={handleNav}
 		</Loader>
 	);
 };
