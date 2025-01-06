@@ -40,3 +40,10 @@ const OnboardingScreen = () => {
 		}
 	};
 
+	return (
+		<Loader>
+		</Loader>
+	);
+};
+
+export default OnboardingScreen;
