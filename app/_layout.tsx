@@ -9,3 +9,22 @@ export default function Layout() {
 			<StatusBar
 				barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
 			/>
+			<Stack>
+				<Stack.Screen
+					name='(tabs)'
+					options={{
+						headerShown:false
+					}}
+				/>
+				<Stack.Screen
+					name='onBoarding'
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen
+					name='+not-found'
+					options={{ headerShown: false }}
+				/>
+			</Stack>
+		</>
+	);
+}
