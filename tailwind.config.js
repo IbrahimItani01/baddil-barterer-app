@@ -7,7 +7,12 @@ module.exports = {
 	],
 	presets: [require("nativewind/preset")],
 	theme: {
-		extend: {},
-	},
-	plugins: [require("tailwindcss-motion")],
+		extend: {
+			colors: {
+				primary: "#E60000",
+				"light-bg": "#FFFFFF",
+				"dark-bg": "#140000",
+				"black-font": "#000000",
+				"white-font": "#FFFFFF",
+			},
 };
