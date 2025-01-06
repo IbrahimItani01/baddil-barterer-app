@@ -36,3 +36,14 @@ const AppNavigator = () => {
 		}
 	}, [isLoggedIn, hasOnboarded, router]);
 
+	return (
+		<Stack screenOptions={{ headerShown: false }}>
+			<Stack.Screen name='(tabs)' />
+			<Stack.Screen name='onBoarding/index' />
+			<Stack.Screen name='auth/index' />
+			<Stack.Screen name='+not-found' />
+		</Stack>
+	);
+};
+
+export default AppNavigator;
