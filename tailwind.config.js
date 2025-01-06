@@ -15,4 +15,21 @@ module.exports = {
 				"black-font": "#000000",
 				"white-font": "#FFFFFF",
 			},
+			fontFamily: {
+				raleway: [
+					"Raleway-Light",
+					"Raleway-Regular",
+					"Raleway-Medium",
+					"Raleway-SemiBold",
+					"Raleway-Bold",
+					"Raleway-ExtraBold",
+				],
+				nunito: [
+					"NunitoSans-Regular",
+					"NunitoSans-Medium",
+					"NunitoSans-SemiBold",
+					"NunitoSans-Bold",
+					"NunitoSans-ExtraBold",
+				],
+			},
 };
