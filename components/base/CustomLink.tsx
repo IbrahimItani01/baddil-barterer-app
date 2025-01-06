@@ -12,3 +12,17 @@ const CustomLink = (prop: CustomLinkInterface) => {
     }
   };
 
+  const linkHref = prop.href === "back" ? undefined : prop.href;
+
+  return (
+    <Link
+      href={linkHref || "/"} // Provide a default valid href
+      onPress={prop.href === "back" ? handlePress : undefined}
+      className={prop.NativeClasses}
+    >
+      {prop.content}
+    </Link>
+  );
+};
+
+export default CustomLink;
