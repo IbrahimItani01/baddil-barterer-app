@@ -5,3 +5,5 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setOnboarding } from "@/store/slices/user.slice";
 
+const AppNavigator = () => {
+	const router = useRouter();
