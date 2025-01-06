@@ -3,6 +3,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import CustomText from "@/components/base/CustomText";
 import CustomView from "@/components/base/CustomView";
 import CustomLink from "@/components/base/CustomLink";
+import '../global.css'
 
 export default function NotFoundScreen() {
 	return (
