@@ -11,6 +11,8 @@ const CustomView = (prop: CustomViewInterface) => {
 			style={{
 				backgroundColor:
 					theme === "dark" ? `${colors["dark-bg"]}` : `${colors["light-bg"]}`,
+					height: prop.mainScreen ? '100%' : 'auto', 
+
 			}}
 		>
 			{prop.children}
