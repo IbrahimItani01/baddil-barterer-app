@@ -11,3 +11,17 @@ const AppNavigator = () => {
 		(state: RootState) => state.user
 	);
 	const dispatch = useDispatch();
+
+	// Check onboarding status from AsyncStorage
+	useEffect(() => {
+		const checkOnboardingStatus = async () => {
+			const onboarded = await AsyncStorage.getItem("hasOnboarded");
+			if (onboarded === "true") {
+				dispatch(setOnboarding(true));
+			} else {
+				dispatch(setOnboarding(false));
+			}
+		};
+		checkOnboardingStatus();
+	}, [dispatch]);
+
