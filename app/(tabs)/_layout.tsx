@@ -7,4 +7,8 @@ import Loader from "@/components/base/Loader";
 export default function TabLayout() {
 	const theme = useColorScheme();
 
+	return (
+		<Loader>
+		</Loader>
+	);
 }
