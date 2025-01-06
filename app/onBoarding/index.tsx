@@ -14,3 +14,19 @@ const OnboardingScreen = () => {
 	const theme = useColorScheme();
 	const dispatch = useDispatch();
 
+	const DoneButton = () => (
+		<TouchableOpacity
+			onPress={() => {
+				dispatch(completeOnboarding());
+				router.replace("/auth");
+			}}
+		>
+			<MaterialIcons
+				name='login'
+				size={35}
+				color={colors.primary}
+				style={{ marginRight: 20, marginVertical: 10 }}
+			/>
+		</TouchableOpacity>
+	);
+
