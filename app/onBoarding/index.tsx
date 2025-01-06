@@ -30,3 +30,13 @@ const OnboardingScreen = () => {
 		</TouchableOpacity>
 	);
 
+	const handleNav = async () => {
+		try {
+			await AsyncStorage.setItem("hasOnboarded", "true");
+			dispatch(completeOnboarding());
+			router.replace("/auth");
+		} catch (error) {
+			console.error("Failed to save onboarding status:", error);
+		}
+	};
+
