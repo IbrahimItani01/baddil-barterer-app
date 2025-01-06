@@ -56,6 +56,7 @@ const OnboardingScreen = () => {
 				}}
 				onDone={handleNav}
 				onSkip={handleNav}
+				DoneButtonComponent={DoneButton}
 		</Loader>
 	);
 };
