@@ -1,3 +1,4 @@
+import React from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import { Image, TouchableOpacity, useColorScheme } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
@@ -8,4 +9,8 @@ import "../../global.css";
 import { completeOnboarding } from "@/store/slices/user.slice";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const OnboardingScreen = () => {
+	const theme = useColorScheme();
+	const dispatch = useDispatch();
 
