@@ -42,6 +42,18 @@ const OnboardingScreen = () => {
 
 	return (
 		<Loader>
+			<Onboarding
+				titleStyles={{
+					fontFamily: "Raleway-Bold",
+					fontSize: 32,
+				}}
+				subTitleStyles={{
+					fontFamily: "NunitoSans-SemiBold",
+					fontSize: 15,
+				}}
+				containerStyles={{
+					borderTopColor: "#e60000",
+				}}
 		</Loader>
 	);
 };
