@@ -1,5 +1,7 @@
-import { Stack } from "expo-router/stack";
+import React from "react";
 import { StatusBar, useColorScheme } from "react-native";
+import "../global.css";
+import AppNavigator from "@/components/AppNavigator";
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
@@ -9,11 +11,6 @@ export default function Layout() {
 			<StatusBar
 				barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
 			/>
-			<Stack screenOptions={{ headerShown: false }}>
-				<Stack.Screen name='(tabs)' />
-				<Stack.Screen name='onBoarding' />
-				<Stack.Screen name='+not-found' />
-			</Stack>
-		</>
+			<AppNavigator />
 	);
 }
