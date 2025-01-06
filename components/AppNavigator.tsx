@@ -10,3 +10,4 @@ const AppNavigator = () => {
 	const { isLoggedIn, hasOnboarded } = useSelector(
 		(state: RootState) => state.user
 	);
+	const dispatch = useDispatch();
