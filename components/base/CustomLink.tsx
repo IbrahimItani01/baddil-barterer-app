@@ -1,7 +1,10 @@
 import { Link, router } from "expo-router";
 import { CustomLinkInterface } from "@/lib/interfaces/CustomLink.interface";
+import { useColorScheme } from "react-native";
+import { colors } from "@/lib/constants/colors.constant";
 
 const CustomLink = (prop: CustomLinkInterface) => {
+  const theme = useColorScheme();
   const handlePress = () => {
     if (prop.href === "back") {
       if (prop.behavior === "replace") {
@@ -16,9 +19,12 @@ const CustomLink = (prop: CustomLinkInterface) => {
 
   return (
     <Link
-      href={linkHref || "/"} // Provide a default valid href
+      href={linkHref || "/"} 
       onPress={prop.href === "back" ? handlePress : undefined}
       className={prop.NativeClasses}
+      style={{
+        color: theme==='dark'?`${colors["white-font"]}`: `${colors["black-font"]}`
+      }}
     >
       {prop.content}
     </Link>
