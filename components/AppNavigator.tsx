@@ -25,3 +25,14 @@ const AppNavigator = () => {
 		checkOnboardingStatus();
 	}, [dispatch]);
 
+	// Handle navigation based on login and onboarding status
+	useEffect(() => {
+		if (!isLoggedIn) {
+			if (!hasOnboarded) {
+				router.replace("/onBoarding");
+			} else {
+				router.replace("/auth");
+			}
+		}
+	}, [isLoggedIn, hasOnboarded, router]);
+
