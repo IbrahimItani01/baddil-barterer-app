@@ -9,6 +9,20 @@ export default function TabLayout() {
 
 	return (
 		<Loader>
+			<Tabs
+				screenOptions={{
+					tabBarActiveTintColor: "#E60000",
+					tabBarLabelStyle: { fontSize: 12, fontFamily: "NunitoSans-Medium" },
+					tabBarStyle: {
+						backgroundColor:
+							theme === "dark"
+								? `${colors["dark-bg"]}`
+								: `${colors["light-bg"]}`,
+					},
+					headerShown: false,
+				}}
+			>
+			</Tabs>
 		</Loader>
 	);
 }
