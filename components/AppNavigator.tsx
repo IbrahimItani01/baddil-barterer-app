@@ -7,3 +7,6 @@ import { setOnboarding } from "@/store/slices/user.slice";
 
 const AppNavigator = () => {
 	const router = useRouter();
+	const { isLoggedIn, hasOnboarded } = useSelector(
+		(state: RootState) => state.user
+	);
