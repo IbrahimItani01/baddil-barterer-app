@@ -26,3 +26,30 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 
 	const theme = useColorScheme();
 	
+	const handleLogin = () => {
+		let hasError = false;
+
+		// Validate email
+		if (!isValidEmail(email)) {
+			setEmailError("Invalid email format!");
+			hasError = true;
+		} else {
+			setEmailError("");
+		}
+
+		// Validate password
+		if (!isValidPassword(password)) {
+			setPasswordError("Incorrect password");
+			hasError = true;
+		} else {
+			setPasswordError("");
+		}
+
+		// If no errors, call onSubmit
+		if (!hasError) {
+			onSubmit({ email, password });
+			setEmailError("");
+			setPasswordError("");
+		}
+	};
+
