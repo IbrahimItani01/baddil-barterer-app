@@ -21,38 +21,18 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const Login = ({ onPress, onSubmit }: AuthInterface) => {
-
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [emailError, setEmailError] = useState("");
-	const [passwordError, setPasswordError] = useState("");
+	const dispatch = useAppDispatch();
+	const { email, password, emailError, passwordError } = useAppSelector(
+		(state) => state.auth
+	);
 
 	const theme = useColorScheme();
-	
+
 	const handleLogin = () => {
-		let hasError = false;
-
-		// Validate email
-		if (!isValidEmail(email)) {
-			setEmailError("Invalid email format!");
-			hasError = true;
-		} else {
-			setEmailError("");
-		}
-
-		// Validate password
-		if (!isValidPassword(password)) {
-			setPasswordError("Incorrect password");
-			hasError = true;
-		} else {
-			setPasswordError("");
-		}
-
-		// If no errors, call onSubmit
-		if (!hasError) {
+		const isFormValid = dispatch(validateForm());
+		if (isFormValid) {
 			onSubmit({ email, password });
-			setEmailError("");
-			setPasswordError("");
+			dispatch(resetForm());
 		}
 	};
 
@@ -86,7 +66,7 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 							placeholder='john@example.com'
 							type='email'
 							value={email}
-							onChangeText={setEmail}
+							onChangeText={(text) => dispatch(setEmail(text))}
 							errorMessage={emailError}
 						/>
 						<CustomAuthInput
@@ -95,7 +75,7 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 							type='password'
 							isPassword={true}
 							value={password}
-							onChangeText={setPassword}
+							onChangeText={(text) => dispatch(setPassword(text))}
 							errorMessage={passwordError}
 						/>
 					</CustomView>
