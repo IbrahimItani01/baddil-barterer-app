@@ -22,9 +22,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const Login = ({ onPress, onSubmit }: AuthInterface) => {
 	const dispatch = useAppDispatch();
-	const { email, password, emailError, passwordError } = useAppSelector(
-		(state) => state.auth
-	);
+	const { email, password } = useAppSelector((state) => state.auth);
 
 	const theme = useColorScheme();
 
@@ -67,7 +65,6 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 							type='email'
 							value={email}
 							onChangeText={(text) => dispatch(setEmail(text))}
-							errorMessage={emailError}
 						/>
 						<CustomAuthInput
 							label='Password'
@@ -76,7 +73,6 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 							isPassword={true}
 							value={password}
 							onChangeText={(text) => dispatch(setPassword(text))}
-							errorMessage={passwordError}
 						/>
 					</CustomView>
 				</CustomView>
@@ -84,6 +80,7 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 					<Button
 						title='Login'
 						onPress={handleLogin}
+						disabled={!email || !password}
 					/>
 					<Divider
 						style={{
