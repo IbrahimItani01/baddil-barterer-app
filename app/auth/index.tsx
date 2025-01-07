@@ -10,3 +10,6 @@ export interface SubmitDTO {
 	confirmPassword?: string;
 }
 
+const Index = () => {
+	const [isLogin, setIsLogin] = useState(true);
+	
