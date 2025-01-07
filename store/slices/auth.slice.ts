@@ -39,6 +39,9 @@ const authSlice = createSlice({
 		setConfirmPassword(state, action: PayloadAction<string>) {
 			state.confirmPassword = action.payload;
 		},
+		setIsLogin(state, action: PayloadAction<boolean>) {
+			state.isLogin = action.payload;
+		},
 		validateForm(state) {
 			if (!isValidEmail(state.email)) {
 				state.emailError = "Invalid email format!";
