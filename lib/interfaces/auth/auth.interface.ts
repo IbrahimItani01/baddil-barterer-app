@@ -1,5 +1,4 @@
 export interface AuthInterface {
-	onPress: () => void;
 	onSubmit: (params: SubmitDTO) => void;
 }
 export interface AuthInputInterface {
