@@ -17,3 +17,10 @@ import {
 } from "@/lib/utils/authValidation.utils";
 import Loader from "../base/Loader";
 
+const Login = ({ onPress, onSubmit }: AuthInterface) => {
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
+
