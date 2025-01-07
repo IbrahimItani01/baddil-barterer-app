@@ -1,4 +1,7 @@
+import { StyleProp, TextStyle } from "react-native";
+
 export interface CustomTextInterface {
-    content:string;
-    NativeClasses?:string;
+	content: string;
+	NativeClasses?: string;
+	style?: StyleProp<TextStyle>;
 }
