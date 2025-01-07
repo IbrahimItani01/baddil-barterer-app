@@ -13,8 +13,7 @@ export const isValidPassword = (password: string): boolean => {
 	return passwordRegex.test(password);
 };
 
-export const isFormValid = (state: AuthFormState) => {
-	return (
-		!state.emailError && !state.passwordError && !state.confirmPasswordError
-	);
-};
+export const isValidUsername = (username: string) => username.trim().length > 0;
+
+export const passwordsMatch = (password: string, confirmPassword: string) =>
+	password === confirmPassword;
