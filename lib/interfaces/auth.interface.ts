@@ -1,5 +1,3 @@
-import { SubmitDTO } from "@/app/auth";
-
 export interface AuthInterface {
 	onPress: () => void;
 	onSubmit: (params: SubmitDTO) => void;
@@ -11,7 +9,12 @@ export interface AuthInputInterface {
 	NativeClasses?: string;
 	errorMessage?: string;
 	label: string;
-	onChangeText?: (text: string) => void; 
-	value?: string; 
-
+	onChangeText?: (text: string) => void;
+	value?: string;
+}
+export interface SubmitDTO {
+	username?: string;
+	email: string;
+	password: string;
+	confirmPassword?: string;
 }
