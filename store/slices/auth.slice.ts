@@ -61,3 +61,12 @@ const authSlice = createSlice({
 			}
 		},
 
+		resetForm(state) {
+			state.username = "";
+			state.email = "";
+			state.password = "";
+			state.confirmPassword = "";
+			state.emailError = "";
+			state.passwordError = "";
+			state.confirmPasswordError = "";
+		},
