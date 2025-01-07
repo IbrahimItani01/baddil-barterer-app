@@ -40,3 +40,24 @@ const authSlice = createSlice({
 		setConfirmPassword(state, action: PayloadAction<string>) {
 			state.confirmPassword = action.payload;
 		},
+		validateForm(state) {
+			if (!isValidEmail(state.email)) {
+				state.emailError = "Invalid email format!";
+			} else {
+				state.emailError = "";
+			}
+
+			if (!isValidPassword(state.password)) {
+				state.passwordError =
+					"Password must be at least 12 characters, contain one uppercase, one number, and one special character!";
+			} else {
+				state.passwordError = "";
+			}
+
+			if (state.confirmPassword !== state.password) {
+				state.confirmPasswordError = "Passwords do not match!";
+			} else {
+				state.confirmPasswordError = "";
+			}
+		},
+
