@@ -4,6 +4,7 @@ import "../global.css";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import AppNavigator from "@/components/AppNavigator";
+import Loader from "@/components/base/Loader";
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
@@ -13,7 +14,9 @@ export default function Layout() {
 			<StatusBar
 				barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
 			/>
-			<AppNavigator />
+			<Loader>
+				<AppNavigator />
+			</Loader>
 		</Provider>
 	);
 }
