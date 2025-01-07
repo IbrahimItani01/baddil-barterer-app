@@ -1,0 +1,19 @@
+import React, { useState } from "react";
+import CustomView from "../base/CustomView";
+import { AuthInterface } from "@/lib/interfaces/auth.interface";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Logo from "../../assets/images/base/logo.svg";
+import "../../global.css";
+import CustomText from "../base/CustomText";
+import CustomAuthInput from "../base/CustomAuthInput";
+import Button from "../base/Button";
+import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
+import { Divider } from "@rneui/themed";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { colors } from "@/lib/constants/colors.constant";
+import {
+	isValidEmail,
+	isValidPassword,
+} from "@/lib/utils/authValidation.utils";
+import Loader from "../base/Loader";
+
