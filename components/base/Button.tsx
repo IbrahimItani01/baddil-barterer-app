@@ -7,12 +7,16 @@ const Button = (prop: ButtonInterface) => {
 	return (
 		<TouchableOpacity
 			onPress={prop.onPress}
-			className={`py-4 px-6 m-2 rounded-full ${
+			style={{
+				paddingVertical:20,
+				marginHorizontal:10
+			}}
+			className={`rounded-full ${
 				prop.type === "outline" ? "border-2 border-primary" : "bg-primary"
 			} ${prop.style}`}
 		>
 			<Text
-				className={`uppercase text-center  font-nunito font-semibold ${
+				className={`uppercase text-center  font-nunito-semibold font-semibold  ${
 					prop.type === "outline" ? "text-primary" : "text-white-font"
 				} ${prop.textStyle}`}
 			>
