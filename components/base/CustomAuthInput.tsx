@@ -17,12 +17,11 @@ const CustomAuthInput = (props: AuthInputInterface) => {
 			}}
 		>
 			<Input
-				value={props.value} 
-				onChangeText={props.onChangeText} 
+				value={props.value}
+				onChangeText={props.onChangeText}
 				placeholder={props.placeholder}
 				secureTextEntry={props.isPassword}
 				autoComplete={props.type}
-				errorMessage={props.errorMessage}
 				label={props.label}
 				style={{
 					marginLeft: 5,
@@ -33,8 +32,9 @@ const CustomAuthInput = (props: AuthInputInterface) => {
 					color: theme === "light" ? "#000" : "#fff",
 					fontFamily: "NunitoSans-SemiBold",
 				}}
-				renderErrorMessage={!!props.errorMessage}
+				renderErrorMessage={false}
 			/>
+
 			{props.isPassword && (
 				<View
 					style={{
