@@ -2,7 +2,7 @@ import { Link, router } from "expo-router";
 import { CustomLinkInterface } from "@/lib/interfaces/CustomLink.interface";
 import { useColorScheme } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
-
+import "../../global.css"
 const CustomLink = (prop: CustomLinkInterface) => {
   const theme = useColorScheme();
   const handlePress = () => {
