@@ -1,8 +1,11 @@
 import {
 	isValidEmail,
 	isValidPassword,
+	isValidUsername,
+	passwordsMatch,
 } from "@/lib/utils/authValidation.utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Alert } from "react-native";
 
 export interface AuthFormState {
 	username: string;
