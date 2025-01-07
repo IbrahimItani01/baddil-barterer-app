@@ -24,3 +24,5 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 
+	const theme = useColorScheme();
+	
