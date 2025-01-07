@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomView from "../base/CustomView";
 import { AuthInterface } from "@/lib/interfaces/auth.interface";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -100,7 +100,7 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 								borderWidth: 2,
 								padding: 10,
 								borderRadius: 50,
-								alignSelf: "center", // Correct centering for RN
+								alignSelf: "center",
 							}}
 						>
 							<FontAwesome5
@@ -114,7 +114,6 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 				<View
 					style={{
 						marginHorizontal: "auto",
-						display: "flex",
 						flexDirection: "row",
 						alignItems: "center",
 						gap: 5,
@@ -132,10 +131,7 @@ const Login = ({ onPress, onSubmit }: AuthInterface) => {
 						>
 							Don't have an account?
 						</Text>
-						<TouchableOpacity
-							className='flex items-center'
-							onPress={onPress}
-						>
+						<TouchableOpacity onPress={onPress}>
 							<Text
 								style={{
 									textDecorationLine: "underline",
