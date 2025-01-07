@@ -43,23 +43,45 @@ const authSlice = createSlice({
 			state.isLogin = action.payload;
 		},
 		validateForm(state) {
-			if (!isValidEmail(state.email)) {
-				state.emailError = "Invalid email format!";
-			} else {
-				state.emailError = "";
-			}
+			const emailValid = isValidEmail(state.email);
+			const passwordValid = isValidPassword(state.password);
+			const usernameValid = isValidUsername(state.username);
+			const isPasswordsMatch = passwordsMatch(
+				state.password,
+				state.confirmPassword
+			);
 
-			if (!isValidPassword(state.password)) {
-				state.passwordError =
-					"Password must be at least 12 characters, contain one uppercase, one number, and one special character!";
+			if (state.isLogin) {
+				if (!emailValid && !passwordValid) {
+					Alert.alert("Invalid email and password!");
+				} else if (!emailValid) {
+					Alert.alert(
+						"Invalid email format!",
+						"Please enter a valid email address."
+					);
+				} else if (!passwordValid) {
+					Alert.alert(
+						"Invalid password format!",
+						"Password must be at least 12 characters, contain one uppercase letter, one number, and one special character."
+					);
+				}
 			} else {
-				state.passwordError = "";
-			}
+				const invalidFields = [];
 
-			if (state.confirmPassword !== state.password) {
-				state.confirmPasswordError = "Passwords do not match!";
-			} else {
-				state.confirmPasswordError = "";
+				if (!usernameValid) invalidFields.push("username");
+				if (!emailValid) invalidFields.push("email");
+				if (!passwordValid) invalidFields.push("password");
+				if (!isPasswordsMatch) invalidFields.push("confirm password");
+
+				if (invalidFields.length > 1) {
+					Alert.alert(
+						"Multiple invalid fields!",
+						`Please fix the following: ${invalidFields.join(", ")}.`
+					);
+				} else if (invalidFields.length === 1) {
+					const field = invalidFields[0];
+					Alert.alert(`Invalid ${field}!`, `Please enter a valid ${field}.`);
+				}
 			}
 		},
 
@@ -68,9 +90,6 @@ const authSlice = createSlice({
 			state.email = "";
 			state.password = "";
 			state.confirmPassword = "";
-			state.emailError = "";
-			state.passwordError = "";
-			state.confirmPasswordError = "";
 		},
 	},
 });
@@ -82,5 +101,6 @@ export const {
 	setConfirmPassword,
 	validateForm,
 	resetForm,
+	setIsLogin,
 } = authSlice.actions;
 export default authSlice.reducer;
