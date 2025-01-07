@@ -11,11 +11,14 @@ import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "@/lib/constants/colors.constant";
-import {
-	isValidEmail,
-	isValidPassword,
-} from "@/lib/utils/authValidation.utils";
 import Loader from "../base/Loader";
+import {
+	setEmail,
+	setPassword,
+	validateForm,
+	resetForm,
+} from "@/store/slices/auth.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const Login = ({ onPress, onSubmit }: AuthInterface) => {
 
