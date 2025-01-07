@@ -70,3 +70,15 @@ const authSlice = createSlice({
 			state.passwordError = "";
 			state.confirmPasswordError = "";
 		},
+	},
+});
+
+export const {
+	setUsername,
+	setEmail,
+	setPassword,
+	setConfirmPassword,
+	validateForm,
+	resetForm,
+} = authSlice.actions;
+export default authSlice.reducer;
