@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import "../../global.css";
+
 import Login from "@/components/auth/Login";
 import Register from "@/components/auth/Register";
-
-export interface SubmitDTO {
-	username?: string;
-	email: string;
-	password: string;
-	confirmPassword?: string;
-}
+import { SubmitDTO } from "@/lib/interfaces/auth.interface";
 
 const Index = () => {
 	const [isLogin, setIsLogin] = useState(true);
