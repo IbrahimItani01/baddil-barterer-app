@@ -9,3 +9,54 @@ const CustomAuthInput = (props: AuthInputInterface) => {
 		// handle forgot password
 	};
 
+	return (
+		<View
+			className={props.NativeClasses}
+			style={{
+				marginTop: 10,
+			}}
+		>
+			<Input
+				value={props.value} 
+				onChangeText={props.onChangeText} 
+				placeholder={props.placeholder}
+				secureTextEntry={props.isPassword}
+				autoComplete={props.type}
+				errorMessage={props.errorMessage}
+				label={props.label}
+				style={{
+					marginLeft: 5,
+					position: "relative",
+					color: theme === "light" ? "#000" : "#fff",
+				}}
+				labelStyle={{
+					color: theme === "light" ? "#000" : "#fff",
+					fontFamily: "NunitoSans-SemiBold",
+				}}
+				renderErrorMessage={!!props.errorMessage}
+			/>
+			{props.isPassword && (
+				<View
+					style={{
+						position: "absolute",
+						top: "110%",
+						right: 10,
+					}}
+				>
+					<TouchableOpacity onPress={handleForgotPassword}>
+						<Text
+							style={{
+								textDecorationLine: "underline",
+							}}
+							className='text-primary font-nunito-semibold font-semibold'
+						>
+							Forgot Password?
+						</Text>
+					</TouchableOpacity>
+				</View>
+			)}
+		</View>
+	);
+};
+
+export default CustomAuthInput;
