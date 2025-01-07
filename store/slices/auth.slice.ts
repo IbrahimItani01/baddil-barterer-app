@@ -12,9 +12,7 @@ export interface AuthFormState {
 	email: string;
 	password: string;
 	confirmPassword: string;
-	emailError: string;
-	passwordError: string;
-	confirmPasswordError: string;
+	isLogin: boolean;
 }
 
 const initialState: AuthFormState = {
@@ -22,9 +20,7 @@ const initialState: AuthFormState = {
 	email: "",
 	password: "",
 	confirmPassword: "",
-	emailError: "",
-	passwordError: "",
-	confirmPasswordError: "",
+	isLogin: true,
 };
 
 const authSlice = createSlice({
