@@ -12,4 +12,9 @@ export interface SubmitDTO {
 
 const Index = () => {
 	const [isLogin, setIsLogin] = useState(true);
-	
+	const changeFrom = () => {
+		setIsLogin(!isLogin);
+	};
+	const handleSubmit = async (params: SubmitDTO) => {
+		// TODO: handle calling api depending on isLogin state
+	};
