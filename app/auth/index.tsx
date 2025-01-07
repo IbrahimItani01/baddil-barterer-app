@@ -18,3 +18,22 @@ const Index = () => {
 	const handleSubmit = async (params: SubmitDTO) => {
 		// TODO: handle calling api depending on isLogin state
 	};
+
+	return (
+		<>
+			{isLogin ? (
+				<Login
+					onPress={changeFrom}
+					onSubmit={handleSubmit}
+				/>
+			) : (
+				<Register
+					onPress={changeFrom}
+					onSubmit={handleSubmit}
+				/>
+			)}
+		</>
+	);
+};
+
+export default Index;
