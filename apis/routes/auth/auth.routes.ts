@@ -35,7 +35,7 @@ export const registerUser = async (
 export const sendForgetPasswordEmail = async (email: string) => {
 	try {
 		const response = await axios.post(
-			`${APIS_BASE_URL}/firebase-client/reset-password`,
+			`${APIS_BASE_URL}/firebase/reset-password`,
 			{
 				email,
 			}
