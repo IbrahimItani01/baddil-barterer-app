@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleProp, ViewStyle } from "react-native";
 import React from "react";
 import CustomView from "@/components/base/CustomView";
 import Button from "@/components/base/Button";
@@ -12,6 +12,8 @@ interface AuthActions {
 	handleGoogleAuth: () => void;
 	buttonContent: string;
 	type: "login" | "register";
+	containerStyle: StyleProp<ViewStyle>;
+	dividerStyle: StyleProp<ViewStyle>;
 }
 
 const AuthActions = (props: AuthActions) => {
@@ -20,13 +22,7 @@ const AuthActions = (props: AuthActions) => {
 	);
 
 	return (
-		<CustomView
-			style={{
-				flex: 1,
-				flexDirection: "column",
-				justifyContent: "center",
-			}}
-		>
+		<CustomView style={props.containerStyle}>
 			<Button
 				title={props.buttonContent}
 				onPress={props.onSubmit}
@@ -37,11 +33,7 @@ const AuthActions = (props: AuthActions) => {
 				}
 			/>
 			<Divider
-				style={{
-					marginVertical: 20,
-					marginHorizontal: 50,
-				}}
-				insetType='left'
+				style={props.dividerStyle}
 				width={1}
 			/>
 			<TouchableOpacity onPress={props.handleGoogleAuth}>
