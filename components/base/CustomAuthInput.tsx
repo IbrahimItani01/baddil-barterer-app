@@ -3,7 +3,10 @@ import { Input } from "@rneui/themed";
 import { AuthInputInterface } from "@/lib/interfaces/auth/auth.interface";
 import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
 
-const CustomAuthInput = (props: AuthInputInterface) => {
+const CustomAuthInput = ({
+	forRegister = false,
+	...props
+}: AuthInputInterface) => {
 	const theme = useColorScheme();
 	const handleForgotPassword = () => {
 		// handle forgot password
@@ -35,7 +38,7 @@ const CustomAuthInput = (props: AuthInputInterface) => {
 				renderErrorMessage={false}
 			/>
 
-			{props.isPassword && (
+			{props.isPassword && !forRegister && (
 				<View
 					style={{
 						position: "absolute",
