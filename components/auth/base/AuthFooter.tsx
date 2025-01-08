@@ -1,4 +1,11 @@
-import { View, Text, useColorScheme, TouchableOpacity } from "react-native";
+import {
+	View,
+	Text,
+	useColorScheme,
+	TouchableOpacity,
+	StyleProp,
+	ViewStyle,
+} from "react-native";
 import React from "react";
 import Loader from "@/components/base/Loader";
 import { colors } from "@/lib/constants/colors.constant";
@@ -8,6 +15,7 @@ import { setIsLogin } from "@/store/slices/auth.slice";
 interface AuthFooterInterface {
 	hyperLinkContent: string;
 	hintContent: string;
+	containerStyle: StyleProp<ViewStyle>;
 }
 const AuthFooter = (props: AuthFooterInterface) => {
 	const dispatch = useAppDispatch();
@@ -17,15 +25,7 @@ const AuthFooter = (props: AuthFooterInterface) => {
 		dispatch(setIsLogin(!isLogin));
 	};
 	return (
-		<View
-			style={{
-				marginHorizontal: "auto",
-				flexDirection: "row",
-				alignItems: "center",
-				gap: 5,
-				marginBottom:10
-			}}
-		>
+		<View style={props.containerStyle}>
 			<Loader>
 				<Text
 					style={{
