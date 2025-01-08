@@ -37,10 +37,7 @@ const AppNavigator = () => {
 	}, [isLoggedIn, hasOnboarded, router]);
 
 	return (
-		<Stack
-			initialRouteName='/'
-			screenOptions={{ headerShown: false }}
-		>
+		<Stack screenOptions={{ headerShown: false }}>
 			<Stack.Screen name='(tabs)' />
 			<Stack.Screen name='onBoarding/index' />
 			<Stack.Screen name='auth/index' />
