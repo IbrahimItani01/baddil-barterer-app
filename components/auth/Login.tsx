@@ -28,6 +28,7 @@ const Login = ({ onSubmit }: AuthInterface) => {
 				marginTop: 40,
 				flexDirection: "column",
 				gap: 50,
+				marginHorizontal: 10,
 			}}
 		>
 			<Headline
