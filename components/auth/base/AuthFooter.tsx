@@ -10,7 +10,7 @@ import React from "react";
 import Loader from "@/components/base/Loader";
 import { colors } from "@/lib/constants/colors.constant";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setIsLogin } from "@/store/slices/auth.slice";
+import { resetForm, setIsLogin } from "@/store/slices/auth.slice";
 
 interface AuthFooterInterface {
 	hyperLinkContent: string;
@@ -23,6 +23,7 @@ const AuthFooter = (props: AuthFooterInterface) => {
 	const theme = useColorScheme();
 	const changeForm = () => {
 		dispatch(setIsLogin(!isLogin));
+		dispatch(resetForm());
 	};
 	return (
 		<View style={props.containerStyle}>
