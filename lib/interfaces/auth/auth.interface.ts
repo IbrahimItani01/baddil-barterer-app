@@ -10,6 +10,7 @@ export interface AuthInputInterface {
 	label: string;
 	onChangeText?: (text: string) => void;
 	value?: string;
+	forRegister?: boolean;
 }
 export interface SubmitDTO {
 	username?: string;
