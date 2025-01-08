@@ -1,24 +1,17 @@
 import React, { ReactNode } from "react";
 import CustomView from "@/components/base/CustomView";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleProp, ViewStyle } from "react-native";
 
 interface MainScreenProps {
 	children: ReactNode;
+	style: StyleProp<ViewStyle>;
 }
 
-const MainScreen: React.FC<MainScreenProps> = ({ children }) => {
+const MainScreen: React.FC<MainScreenProps> = ({ style, children }) => {
 	return (
 		<CustomView mainScreen>
-			<SafeAreaView
-				style={{
-					flex: 1,
-					marginTop: 40,
-					flexDirection: "column",
-					gap: 50,
-				}}
-			>
-				{children}
-			</SafeAreaView>
+			<SafeAreaView style={style}>{children}</SafeAreaView>
 		</CustomView>
 	);
 };
