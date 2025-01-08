@@ -21,7 +21,9 @@ const clearStorageOnDev = async () => {
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
-
+	useEffect(() => {
+		clearStorageOnDev();
+	}, []);
 	return (
 		<Provider store={store}>
 			<StatusBar
