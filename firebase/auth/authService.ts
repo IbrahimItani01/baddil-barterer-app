@@ -7,10 +7,13 @@ export const sendResetPasswordEmail = async (email: string): Promise<void> => {
 	if (await checkUserByEmail(email)) {
 		try {
 			await sendPasswordResetEmail(auth, email);
-			alert("Password reset email sent successfully! Check your inbox.");
+			Alert.alert(
+				"Success!",
+				"Password reset email sent successfully! Check your inbox."
+			);
 		} catch (error) {
 			console.error("Error sending password reset email:", error);
-			alert("Failed to send password reset email. Please try again.");
+			Alert.alert("Failed!", "Please try again.");
 		}
 	} else {
 		Alert.alert("You don't have an account with us. Please create one first.");
