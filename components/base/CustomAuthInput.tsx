@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { useAppSelector } from "@/store/hooks";
 import { sendForgetPasswordEmail } from "@/apis/routes/auth/auth.routes";
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "@/store/slices/screenLoader.slice";
 
 const CustomAuthInput = ({
 	forRegister = false,
@@ -17,9 +19,15 @@ const CustomAuthInput = ({
 }: AuthInputInterface) => {
 	const { email } = useAppSelector((state) => state.auth);
 	const theme = useColorScheme();
+	const dispatch = useDispatch();
 	const handleForgotPassword = async () => {
 		if (email) {
-			await sendForgetPasswordEmail(email);
+			dispatch(showLoader());
+			try {
+				await sendForgetPasswordEmail(email);
+			} finally {
+				dispatch(hideLoader());
+			}
 		} else {
 			Alert.alert("Please enter your email address.");
 		}
