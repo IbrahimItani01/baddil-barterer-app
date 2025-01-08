@@ -1,13 +1,15 @@
 import React from "react";
 import { AuthInterface } from "@/lib/interfaces/auth/auth.interface";
 import "../../global.css";
-import { validateForm, resetForm } from "@/store/slices/auth.slice";
+import { resetForm } from "@/store/slices/auth.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Headline from "./base/Headline";
 import MainScreen from "./base/MainScreen";
 import AuthFields from "./base/AuthFields";
 import AuthActions from "./base/AuthActions";
 import AuthFooter from "./base/AuthFooter";
+import { Alert } from "react-native";
+import { validateForm } from "@/lib/utils/authValidation.utils";
 
 const Register = ({ onSubmit }: AuthInterface) => {
 	const dispatch = useAppDispatch();
@@ -16,10 +18,23 @@ const Register = ({ onSubmit }: AuthInterface) => {
 	);
 
 	const handleRegister = () => {
-		const isFormValid = dispatch(validateForm());
-		if (isFormValid) {
-			onSubmit({ username, email, password, confirmPassword });
+		const formState = {
+			username,
+			email,
+			password,
+			confirmPassword,
+			isLogin: false,
+		};
+		const validationResult = validateForm(formState);
+
+		if (validationResult.isValid) {
+			onSubmit({ username, email, password });
 			dispatch(resetForm());
+		} else {
+			Alert.alert(
+				"Failed!",
+				`Please check: ${validationResult.errors.join(", ")}`
+			);
 		}
 	};
 
