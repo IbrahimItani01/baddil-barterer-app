@@ -6,26 +6,25 @@ import Register from "@/components/auth/Register";
 import { SubmitDTO } from "@/lib/interfaces/auth/auth.interface";
 import { useAppSelector } from "@/store/hooks";
 import { loginUser, registerUser } from "@/apis/routes/auth/auth.routes";
-import { Alert } from "react-native";
+import { withLoader } from "@/lib/utils/async.utils";
+import { useDispatch } from "react-redux";
+import { setIsLogin } from "@/store/slices/auth.slice";
 
 const Index = () => {
 	const isLogin = useAppSelector((state) => state.auth.isLogin);
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (params: SubmitDTO) => {
 		if (isLogin) {
 			// Call API for login
-			try {
-				await loginUser(params.email, params.password);
-			} catch (error) {
-				Alert.alert("Error", "failed to login");
-			}
+			withLoader(dispatch, () =>
+				loginUser(dispatch, params.email, params.password)
+			);
 		} else {
 			// Call API for register
-			try {
-				await registerUser(params.username, params.email, params.password);
-			} catch (error) {
-				Alert.alert("Error", "failed to register");
-			}
+			withLoader(dispatch, () =>
+				registerUser(params.username, params.email, params.password)
+			).then((_) => dispatch(setIsLogin(!isLogin)));
 		}
 	};
 
