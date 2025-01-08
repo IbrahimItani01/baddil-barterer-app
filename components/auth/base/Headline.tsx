@@ -2,28 +2,23 @@ import React from "react";
 import CustomView from "@/components/base/CustomView";
 import Logo from "../../../assets/images/base/logo.svg";
 import CustomText from "@/components/base/CustomText";
+import { StyleProp, ViewStyle } from "react-native";
 
 interface HeadlineInterface {
 	title: string;
 	description: string;
+	logoStyle: StyleProp<ViewStyle>;
+	headlineStyle: StyleProp<ViewStyle>;
 }
 
 const Headline = (props: HeadlineInterface) => {
 	return (
 		<>
-			<CustomView
-				style={{
-					display: "flex",
-					alignItems: "center",
-				}}
-			>
+			<CustomView style={props.logoStyle}>
 				<Logo />
 			</CustomView>
 			<CustomView
-				style={{
-					marginLeft: 15,
-					gap: 10,
-				}}
+				style={props.headlineStyle}
 			>
 				<CustomText
 					content={props.title}
