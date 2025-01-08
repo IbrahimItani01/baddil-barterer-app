@@ -1,23 +1,29 @@
 import React from "react";
 import { AuthInterface } from "@/lib/interfaces/auth/auth.interface";
 import "../../global.css";
-import { validateForm, resetForm } from "@/store/slices/auth.slice";
+import { resetForm } from "@/store/slices/auth.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Headline from "./base/Headline";
 import MainScreen from "./base/MainScreen";
 import AuthFields from "./base/AuthFields";
 import AuthActions from "./base/AuthActions";
 import AuthFooter from "./base/AuthFooter";
+import { validateForm } from "@/lib/utils/authValidation.utils";
+import { Alert } from "react-native";
 
 const Login = ({ onSubmit }: AuthInterface) => {
 	const dispatch = useAppDispatch();
 	const { email, password } = useAppSelector((state) => state.auth);
 
 	const handleLogin = () => {
-		const isFormValid = dispatch(validateForm());
-		if (isFormValid) {
+		const formState = { email, password, isLogin: true };
+		const validationResult = validateForm(formState);
+
+		if (validationResult.isValid) {
 			onSubmit({ email, password });
 			dispatch(resetForm());
+		} else {
+			Alert.alert("Failed!", validationResult.errors.join(", "));
 		}
 	};
 
