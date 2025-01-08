@@ -40,11 +40,20 @@ export const registerUser = async (
 			password,
 			user_type: "barterer",
 		});
-		console.log(response.data);
+		if (response.data.success) {
+			Alert.alert(
+				"Welcome to Baddil Community!",
+				"Login to start you journey!"
+			);
+			router.replace("/auth");
+			return true;
+		}
 	} catch (error) {
-		console.error(error);
+		Alert.alert("Failed!", "Something went wrong, try again!");
+		return false;
 	}
 };
+
 export const sendForgetPasswordEmail = async (email: string) => {
 	try {
 		const response = await axios.post(
