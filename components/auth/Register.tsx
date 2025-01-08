@@ -9,7 +9,20 @@ import AuthFields from "./base/AuthFields";
 import AuthActions from "./base/AuthActions";
 import AuthFooter from "./base/AuthFooter";
 
-const Register = (props:AuthInterface) => {
+const Register = ({ onSubmit }: AuthInterface) => {
+	const dispatch = useAppDispatch();
+	const { username, email, password, confirmPassword } = useAppSelector(
+		(state) => state.auth
+	);
+
+	const handleRegister = () => {
+		const isFormValid = dispatch(validateForm());
+		if (isFormValid) {
+			onSubmit({ username, email, password, confirmPassword });
+			dispatch(resetForm());
+		}
+	};
+
 	return (
 		<CustomView>
 			<CustomText content='Register' />
