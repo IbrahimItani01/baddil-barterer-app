@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import AppNavigator from "@/components/AppNavigator";
 import Loader from "@/components/base/Loader";
+import ScreenLoader from "@/components/base/ScreenLoader";
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
@@ -14,6 +15,7 @@ export default function Layout() {
 			<StatusBar
 				barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
 			/>
+			<ScreenLoader />
 			<Loader>
 				<AppNavigator />
 			</Loader>
