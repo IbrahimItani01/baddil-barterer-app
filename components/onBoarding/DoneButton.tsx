@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import React from "react";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useDispatch } from "react-redux";
 import { completeOnboarding } from "@/store/slices/user.slice";
 import { router } from "expo-router";
@@ -16,12 +15,17 @@ const DoneButton = () => {
 				router.replace("/auth");
 			}}
 		>
-			<MaterialIcons
-				name='login'
-				size={35}
-				color={colors.primary}
-				style={{ marginRight: 20, marginVertical: 10 }}
-			/>
+			<Text
+				style={{
+					fontFamily: "NunitoSans-Bold",
+					color: colors.primary,
+					marginRight: 20,
+					marginVertical: 10,
+					fontSize: 16,
+				}}
+			>
+				Let's Go!
+			</Text>
 		</TouchableOpacity>
 	);
 };
