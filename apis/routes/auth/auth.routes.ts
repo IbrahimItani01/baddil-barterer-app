@@ -15,10 +15,16 @@ export const loginUser = async (
 			emailOrIdToken: email,
 			password,
 		});
-		// TODO: handle to store jwt
-		console.log(response.data);
+
+		const { token, user } = response.data.data;
+		await AsyncStorage.setItem("jwtToken", token);
+		dispatch(login());
+		dispatch(setUserName(user.name));
+
+		Alert.alert("Success!", "Welcome Back!");
 	} catch (error) {
 		console.error(error);
+		Alert.alert("Failed!", "Login failed, try again!");
 	}
 };
 
