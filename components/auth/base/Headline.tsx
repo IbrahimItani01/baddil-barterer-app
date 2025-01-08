@@ -17,12 +17,10 @@ const Headline = (props: HeadlineInterface) => {
 			<CustomView style={props.logoStyle}>
 				<Logo />
 			</CustomView>
-			<CustomView
-				style={props.headlineStyle}
-			>
+			<CustomView style={props.headlineStyle}>
 				<CustomText
 					content={props.title}
-					NativeClasses='font-raleway-bold font-bold text-5xl'
+					NativeClasses='font-raleway-bold font-bold text-4xl'
 				/>
 				<CustomText
 					NativeClasses='font-nunito-semibold font-semibold'
