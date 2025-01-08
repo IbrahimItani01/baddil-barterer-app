@@ -4,7 +4,9 @@ import "../../global.css";
 import Login from "@/components/auth/Login";
 import Register from "@/components/auth/Register";
 import { SubmitDTO } from "@/lib/interfaces/auth/auth.interface";
-import {useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
+import { loginUser, registerUser } from "@/apis/routes/auth/auth.routes";
+import { Alert } from "react-native";
 
 const Index = () => {
 	const isLogin = useAppSelector((state) => state.auth.isLogin);
