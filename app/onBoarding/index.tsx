@@ -35,9 +35,7 @@ const OnboardingScreen = () => {
 					fontFamily: "NunitoSans-SemiBold",
 					fontSize: 15,
 				}}
-				containerStyles={{
-					borderTopColor: "#e60000",
-				}}
+				bottomBarHighlight={false}
 				onDone={handleNav}
 				onSkip={handleNav}
 				DoneButtonComponent={DoneButton}
