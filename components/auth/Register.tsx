@@ -24,9 +24,62 @@ const Register = ({ onSubmit }: AuthInterface) => {
 	};
 
 	return (
-		<CustomView>
-			<CustomText content='Register' />
-		</CustomView>
+		<MainScreen
+			style={{
+				display: "flex",
+				marginTop: 25,
+				flexDirection: "column",
+			}}
+		>
+			<Headline
+				headlineStyle={{
+					display: "flex",
+					flexDirection: "column",
+					gap: 2,
+					marginLeft: 10,
+					marginVertical: 30,
+				}}
+				logoStyle={{
+					alignSelf: "center",
+				}}
+				title='Register'
+				description='Welcome to Baddil, register to start!'
+			/>
+			<AuthFields
+				containerStyle={{
+					display: "flex",
+					flexDirection: "column",
+					gap: 2,
+				}}
+				type='register'
+			/>
+			<AuthActions
+				type='register'
+				buttonContent='Register'
+				onSubmit={handleRegister}
+				// TODO: add google auth
+				handleGoogleAuth={() => {}}
+				containerStyle={{
+					display: "flex",
+					flexDirection: "column",
+					gap: 10,
+					marginVertical: 25,
+				}}
+				dividerStyle={{
+					marginHorizontal: 50,
+				}}
+			/>
+			<AuthFooter
+				hyperLinkContent='Login'
+				hintContent='Already have an account?'
+				containerStyle={{
+					alignSelf: "center",
+					display: "flex",
+					flexDirection: "row",
+					gap: 5,
+				}}
+			/>
+		</MainScreen>
 	);
 };
 
