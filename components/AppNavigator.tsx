@@ -33,6 +33,8 @@ const AppNavigator = () => {
 			} else {
 				router.replace("/auth");
 			}
+		} else {
+			router.replace("/(tabs)");
 		}
 	}, [isLoggedIn, hasOnboarded, router]);
 
