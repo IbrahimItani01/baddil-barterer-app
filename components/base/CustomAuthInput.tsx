@@ -11,7 +11,7 @@ import {
 import { useAppSelector } from "@/store/hooks";
 import { sendForgetPasswordEmail } from "@/apis/routes/auth/auth.routes";
 import { useDispatch } from "react-redux";
-import { hideLoader, showLoader } from "@/store/slices/screenLoader.slice";
+import { withLoader } from "@/lib/utils/async.utils";
 
 const CustomAuthInput = ({
 	forRegister = false,
@@ -22,12 +22,7 @@ const CustomAuthInput = ({
 	const dispatch = useDispatch();
 	const handleForgotPassword = async () => {
 		if (email) {
-			dispatch(showLoader());
-			try {
-				await sendForgetPasswordEmail(email);
-			} finally {
-				dispatch(hideLoader());
-			}
+			await withLoader(dispatch, () => sendForgetPasswordEmail(email));
 		} else {
 			Alert.alert("Please enter your email address.");
 		}
