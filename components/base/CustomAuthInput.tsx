@@ -1,15 +1,28 @@
 import React from "react";
 import { Input } from "@rneui/themed";
 import { AuthInputInterface } from "@/lib/interfaces/auth/auth.interface";
-import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
+import {
+	Alert,
+	Text,
+	TouchableOpacity,
+	useColorScheme,
+	View,
+} from "react-native";
+import { useAppSelector } from "@/store/hooks";
+import { sendResetPasswordEmail } from "@/firebase/auth/authService";
 
 const CustomAuthInput = ({
 	forRegister = false,
 	...props
 }: AuthInputInterface) => {
+	const { email } = useAppSelector((state) => state.auth);
 	const theme = useColorScheme();
-	const handleForgotPassword = () => {
-		// handle forgot password
+	const handleForgotPassword = async () => {
+		if (email) {
+			await sendResetPasswordEmail(email);
+		} else {
+			Alert.alert("Please enter your email address.");
+		}
 	};
 
 	return (
