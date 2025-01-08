@@ -29,6 +29,7 @@ const Register = ({ onSubmit }: AuthInterface) => {
 				display: "flex",
 				marginTop: 25,
 				flexDirection: "column",
+				marginHorizontal: 10,
 			}}
 		>
 			<Headline
