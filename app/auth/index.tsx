@@ -12,19 +12,29 @@ const Index = () => {
 	const isLogin = useAppSelector((state) => state.auth.isLogin);
 
 	const handleSubmit = async (params: SubmitDTO) => {
-		// Handle calling API depending on isLogin state
+		if (isLogin) {
+			// Call API for login
+			try {
+				await loginUser(params.email, params.password);
+			} catch (error) {
+				Alert.alert("Error", "failed to login");
+			}
+		} else {
+			// Call API for register
+			try {
+				await registerUser(params.username, params.email, params.password);
+			} catch (error) {
+				Alert.alert("Error", "failed to register");
+			}
+		}
 	};
 
 	return (
 		<>
 			{isLogin ? (
-				<Login
-					onSubmit={handleSubmit}
-				/>
+				<Login onSubmit={handleSubmit} />
 			) : (
-				<Register
-					onSubmit={handleSubmit}
-				/>
+				<Register onSubmit={handleSubmit} />
 			)}
 		</>
 	);
