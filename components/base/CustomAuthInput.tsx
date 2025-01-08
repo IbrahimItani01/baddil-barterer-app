@@ -9,7 +9,7 @@ import {
 	View,
 } from "react-native";
 import { useAppSelector } from "@/store/hooks";
-import { sendResetPasswordEmail } from "@/firebase/auth/authService";
+import { sendForgetPasswordEmail } from "@/apis/routes/auth/auth.routes";
 
 const CustomAuthInput = ({
 	forRegister = false,
@@ -19,7 +19,7 @@ const CustomAuthInput = ({
 	const theme = useColorScheme();
 	const handleForgotPassword = async () => {
 		if (email) {
-			await sendResetPasswordEmail(email);
+			await sendForgetPasswordEmail(email);
 		} else {
 			Alert.alert("Please enter your email address.");
 		}
