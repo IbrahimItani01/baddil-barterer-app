@@ -17,6 +17,49 @@ import { UserStatusEnum } from "./enums.utils";
 import { showAlert } from "./async.utils";
 import { BackHandler, Platform } from "react-native";
 
+export const handleStatusNavigation = async (
+	isLoggedIn: boolean,
+	hasOnboarded: boolean,
+	status: UserStatusEnum,
+	router: Router,
+	dispatch: Dispatch
+) => {
+	if (status === UserStatusEnum.Active) {
+		handleNavigation(isLoggedIn, hasOnboarded, router);
+	} else if (status === UserStatusEnum.Flagged) {
+		await showAlert(
+			"Warning, Flagged User!",
+			"Contact support@baddil.com to resolve the conflict"
+		);
+		handleNavigation(isLoggedIn, hasOnboarded, router);
+	} else {
+		await showAlert(
+			"Can't Access Baddil, Banned User!",
+			"Contact support@baddil.com to resolve the conflict"
+		);
+		dispatch(logout());
+		if (Platform.OS === "android") {
+			BackHandler.exitApp(); // Close the app on Android
+		} else {
+			router.replace("/auth");
+		}
+	}
+};
+
+export const handleNavigation = (
+	isLoggedIn: boolean,
+	hasOnboarded: boolean,
+	router: Router
+) => {
+	if (!isLoggedIn && !hasOnboarded) {
+		router.replace("/onBoarding");
+	} else if (!isLoggedIn && hasOnboarded) {
+		router.replace("/auth");
+	} else {
+		router.replace("/(tabs)");
+	}
+};
+
 export const checkOnboardingStatus = async (dispatch: Dispatch) => {
 	const onboarded = await AsyncStorage.getItem("hasOnboarded");
 	dispatch(setOnboarding(onboarded === "true"));
