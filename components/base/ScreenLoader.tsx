@@ -39,6 +39,32 @@ const ScreenLoader: React.FC = () => {
 			});
 		}
 	}, [fadeAnim, booting, dispatch]);
+
+	if (!loading && !booting) return null;
+	if (loading && !booting) {
+		return (
+			<View style={styles.container}>
+				<ActivityIndicator
+					size='large'
+					color={`${colors.primary}`}
+				/>
+			</View>
+		);
+	}
+	return (
+		<Animated.View style={[styles.imageContainer, { opacity: fadeAnim }]}>
+			{theme === "light" ? (
+				<Image
+					style={styles.image}
+					source={LightSplash}
+				/>
+			) : (
+				<Image
+					style={styles.image}
+					source={DarkSplash}
+				/>
+			)}
+		</Animated.View>
 	);
 };
 
@@ -54,10 +80,19 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		zIndex: 1000,
 	},
-	message: {
-		marginTop: 10,
-		fontSize: 16,
-		color: "white",
+	image: {
+		width: "100%",
+		height: "100%",
+	},
+	imageContainer: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		zIndex: 1000,
 	},
 });
 
