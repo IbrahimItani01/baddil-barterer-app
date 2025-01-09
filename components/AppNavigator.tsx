@@ -1,50 +1,24 @@
 import { RootState } from "@/store/store";
 import { Stack, useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-	login,
-	logout,
-	setOnboarding,
-	setProfilePictureUrl,
-} from "@/store/slices/user.slice";
-import { serveUserProfileImage } from "@/apis/routes/user/user.routes";
+	checkLoginStatus,
+	checkOnboardingStatus,
+	fetchProfilePicture,
+	fetchUserData,
+	handleStatusNavigation,
+} from "@/lib/utils/system.utils";
 
 const AppNavigator = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const { isLoggedIn, hasOnboarded } = useSelector(
+	const navigationHandled = useRef(false); // Use ref to prevent repeated navigation
+
+	const { isLoggedIn, hasOnboarded, status } = useSelector(
 		(state: RootState) => state.user
 	);
 
-	const fetchProfilePicture = async () => {
-		const profilePictureUrl = await serveUserProfileImage();
-		if (profilePictureUrl) {
-			dispatch(setProfilePictureUrl(profilePictureUrl));
-		} else {
-			dispatch(setProfilePictureUrl(""));
-		}
-	};
-
-	const checkOnboardingStatus = async () => {
-		const onboarded = await AsyncStorage.getItem("hasOnboarded");
-		if (onboarded === "true") {
-			dispatch(setOnboarding(true));
-		} else {
-			dispatch(setOnboarding(false));
-		}
-	};
-	const checkLoginStatus = async () => {
-		const token = await AsyncStorage.getItem("jwtToken");
-		if (token) {
-			dispatch(login());
-		} else {
-			dispatch(logout());
-		}
-	};
-
-	// Check onboarding status from AsyncStorage
 	useEffect(() => {
 		checkOnboardingStatus(dispatch);
 		checkLoginStatus(dispatch);
@@ -52,12 +26,18 @@ const AppNavigator = () => {
 		fetchUserData(dispatch);
 	}, [dispatch]);
 
-	// Handle navigation based on login and onboarding status
 	useEffect(() => {
-		if (!isLoggedIn && !hasOnboarded) router.replace("/onBoarding");
-		else if (!isLoggedIn && hasOnboarded) router.replace("/auth");
-		else router.replace("/(tabs)");
-	}, [isLoggedIn, hasOnboarded, router]);
+		if (!navigationHandled.current) {
+			navigationHandled.current = true;
+			handleStatusNavigation(
+				isLoggedIn,
+				hasOnboarded,
+				status,
+				router,
+				dispatch
+			).finally(() => (navigationHandled.current = false));
+		}
+	}, [isLoggedIn, hasOnboarded, status, router, dispatch]);
 
 	return (
 		<Stack screenOptions={{ headerShown: false }}>
