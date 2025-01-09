@@ -10,7 +10,7 @@ interface UserState {
 const initialState: UserState = {
 	isLoggedIn: false,
 	hasOnboarded: false,
-	userName: null,
+	userName: "",
 	profilePictureUrl: "",
 };
 
