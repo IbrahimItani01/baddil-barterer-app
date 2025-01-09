@@ -17,6 +17,13 @@ import { UserStatusEnum } from "./enums.utils";
 import { showAlert } from "./async.utils";
 import { BackHandler, Platform } from "react-native";
 
+export const initializeApp = async (dispatch: Dispatch) => {
+	await checkOnboardingStatus(dispatch);
+	await checkLoginStatus(dispatch);
+	await fetchProfilePicture(dispatch);
+	await fetchUserData(dispatch);
+};
+
 export const handleStatusNavigation = async (
 	isLoggedIn: boolean,
 	hasOnboarded: boolean,
