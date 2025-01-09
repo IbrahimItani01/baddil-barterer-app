@@ -4,12 +4,14 @@ interface UserState {
 	isLoggedIn: boolean;
 	hasOnboarded: boolean;
 	userName: string | null;
+	profilePictureUrl: string;
 }
 
 const initialState: UserState = {
 	isLoggedIn: false,
 	hasOnboarded: false,
 	userName: null,
+	profilePictureUrl: "",
 };
 
 const userSlice = createSlice({
@@ -31,9 +33,18 @@ const userSlice = createSlice({
 		setUserName(state, action) {
 			state.userName = action.payload;
 		},
+		setProfilePictureUrl(state, action) {
+			state.profilePictureUrl = action.payload;
+		},
 	},
 });
 
-export const { login, logout, completeOnboarding, setOnboarding, setUserName } =
-	userSlice.actions;
+export const {
+	login,
+	logout,
+	completeOnboarding,
+	setOnboarding,
+	setUserName,
+	setProfilePictureUrl,
+} = userSlice.actions;
 export default userSlice.reducer;
