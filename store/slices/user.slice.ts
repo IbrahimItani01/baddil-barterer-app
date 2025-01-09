@@ -1,3 +1,4 @@
+import { UserStatusEnum } from "@/lib/utils/enums.utils";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
@@ -5,6 +6,7 @@ interface UserState {
 	hasOnboarded: boolean;
 	userName: string | null;
 	profilePictureUrl: string;
+	status: UserStatusEnum;
 }
 
 const initialState: UserState = {
@@ -12,6 +14,7 @@ const initialState: UserState = {
 	hasOnboarded: false,
 	userName: "",
 	profilePictureUrl: "",
+	status: UserStatusEnum.Active,
 };
 
 const userSlice = createSlice({
@@ -36,6 +39,9 @@ const userSlice = createSlice({
 		setProfilePictureUrl(state, action) {
 			state.profilePictureUrl = action.payload;
 		},
+		setStatus(state, action) {
+			state.status = action.payload;
+		},
 	},
 });
 
@@ -46,5 +52,6 @@ export const {
 	setOnboarding,
 	setUserName,
 	setProfilePictureUrl,
+	setStatus,
 } = userSlice.actions;
 export default userSlice.reducer;
