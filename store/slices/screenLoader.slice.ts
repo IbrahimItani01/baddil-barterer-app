@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface LoaderState {
 	loading: boolean;
+	booting: boolean;
 }
 
 const initialState: LoaderState = {
 	loading: false,
+	booting: true,
 };
 
 const screenLoaderSlice = createSlice({
@@ -18,8 +20,12 @@ const screenLoaderSlice = createSlice({
 		hideLoader: (state) => {
 			state.loading = false;
 		},
+		stoppedBooting: (state) => {
+			state.booting = false;
+		},
 	},
 });
 
-export const { showLoader, hideLoader } = screenLoaderSlice.actions;
+export const { showLoader, hideLoader, stoppedBooting } =
+	screenLoaderSlice.actions;
 export default screenLoaderSlice.reducer;
