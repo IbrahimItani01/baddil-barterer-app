@@ -1,4 +1,5 @@
 import { APIS_BASE_URL } from "@/apis/main";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export const checkUserByEmail = async (email: string): Promise<boolean> => {
@@ -11,4 +12,20 @@ export const checkUserByEmail = async (email: string): Promise<boolean> => {
 			console.error(error);
 			return false;
 		});
+};
+export const serveUserProfileImage = async () => {
+	const token = await AsyncStorage.getItem("jwtToken");
+	if (!token) return;
+	return await axios
+		.get(`${APIS_BASE_URL}/users/profile-picture`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		.then((response) => {
+			if (response.data.success) {
+				return response.data.data;
+			}
+		})
+		.catch((e) => false);
 };
