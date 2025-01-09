@@ -3,27 +3,23 @@ import { Stack, useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	checkLoginStatus,
-	checkOnboardingStatus,
-	fetchProfilePicture,
-	fetchUserData,
 	handleStatusNavigation,
+	initializeApp,
 } from "@/lib/utils/system.utils";
+import { useAppSelector } from "@/store/hooks";
+import ScreenLoader from "./base/ScreenLoader";
 
 const AppNavigator = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const navigationHandled = useRef(false); // Use ref to prevent repeated navigation
-
+	const { booting } = useAppSelector((state) => state.screenLoader);
 	const { isLoggedIn, hasOnboarded, status } = useSelector(
 		(state: RootState) => state.user
 	);
 
 	useEffect(() => {
-		checkOnboardingStatus(dispatch);
-		checkLoginStatus(dispatch);
-		fetchProfilePicture(dispatch);
-		fetchUserData(dispatch);
+		initializeApp(dispatch);
 	}, [dispatch]);
 
 	useEffect(() => {
