@@ -4,16 +4,26 @@ import React from "react";
 import { View, ActivityIndicator, StyleSheet, Text } from "react-native";
 
 const ScreenLoader: React.FC = () => {
-	const isLoading = useAppSelector((state) => state.screenLoader.loading);
-
-	if (!isLoading) return null;
-	return (
-		<View style={styles.container}>
-			<ActivityIndicator
-				size='large'
-				color={`${colors.primary}`}
-			/>
-		</View>
+	useEffect(() => {
+		if (booting) {
+			// Fade-in and fade-out animation sequence
+			Animated.sequence([
+				Animated.timing(fadeAnim, {
+					toValue: 1,
+					duration: 500,
+					useNativeDriver: true,
+				}),
+				Animated.delay(1000),
+				Animated.timing(fadeAnim, {
+					toValue: 0,
+					duration: 500,
+					useNativeDriver: true,
+				}),
+			]).start(() => {
+				dispatch(stoppedBooting());
+			});
+		}
+	}, [fadeAnim, booting, dispatch]);
 	);
 };
 
