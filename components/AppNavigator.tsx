@@ -3,14 +3,30 @@ import { Stack, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { login, logout, setOnboarding } from "@/store/slices/user.slice";
+import {
+	login,
+	logout,
+	setOnboarding,
+	setProfilePictureUrl,
+} from "@/store/slices/user.slice";
+import { serveUserProfileImage } from "@/apis/routes/user/user.routes";
 
 const AppNavigator = () => {
 	const router = useRouter();
+	const dispatch = useDispatch();
 	const { isLoggedIn, hasOnboarded } = useSelector(
 		(state: RootState) => state.user
 	);
-	const dispatch = useDispatch();
+
+	const fetchProfilePicture = async () => {
+		const profilePictureUrl = await serveUserProfileImage();
+		if (profilePictureUrl) {
+			dispatch(setProfilePictureUrl(profilePictureUrl));
+		} else {
+			dispatch(setProfilePictureUrl(""));
+		}
+	};
+
 	const checkOnboardingStatus = async () => {
 		const onboarded = await AsyncStorage.getItem("hasOnboarded");
 		if (onboarded === "true") {
@@ -32,6 +48,7 @@ const AppNavigator = () => {
 	useEffect(() => {
 		checkOnboardingStatus();
 		checkLoginStatus();
+		fetchProfilePicture();
 	}, [dispatch]);
 
 	// Handle navigation based on login and onboarding status
