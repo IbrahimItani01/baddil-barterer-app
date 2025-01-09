@@ -46,9 +46,10 @@ const AppNavigator = () => {
 
 	// Check onboarding status from AsyncStorage
 	useEffect(() => {
-		checkOnboardingStatus();
-		checkLoginStatus();
-		fetchProfilePicture();
+		checkOnboardingStatus(dispatch);
+		checkLoginStatus(dispatch);
+		fetchProfilePicture(dispatch);
+		fetchUserData(dispatch);
 	}, [dispatch]);
 
 	// Handle navigation based on login and onboarding status
