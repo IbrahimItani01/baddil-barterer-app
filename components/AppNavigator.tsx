@@ -11,17 +11,14 @@ const AppNavigator = () => {
 		(state: RootState) => state.user
 	);
 	const dispatch = useDispatch();
-
-	// Check onboarding status from AsyncStorage
-	useEffect(() => {
-		const checkOnboardingStatus = async () => {
-			const onboarded = await AsyncStorage.getItem("hasOnboarded");
-			if (onboarded === "true") {
-				dispatch(setOnboarding(true));
-			} else {
-				dispatch(setOnboarding(false));
-			}
-		};
+	const checkLoginStatus = async () => {
+		const token = await AsyncStorage.getItem("jwtToken");
+		if (token) {
+			dispatch(login());
+		} else {
+			dispatch(logout());
+		}
+	};
 		checkOnboardingStatus();
 	}, [dispatch]);
 
