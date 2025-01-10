@@ -9,6 +9,7 @@ import TierProgressBar from "@/components/tabs/home/TierProgressBar";
 import CategoriesSection from "@/components/tabs/home/CategoriesSection";
 import ItemsSection from "@/components/tabs/home/ItemsSection";
 import AiFAB from "@/components/base/AiFAB";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Tab() {
 	const dispatch = useDispatch();
@@ -18,20 +19,18 @@ export default function Tab() {
 		router.replace("/onBoarding");
 	};
 	return (
-		<CustomView
-			mainScreen={true}
-			NativeClasses='flex justify-center items-center'
-		>
-			{/* TODO: welcome component with profile image shower */}
-			<WelcomeBar />
-			{/* TODO: Tier Progress Component */}
-			<TierProgressBar />
-			{/* TODO: Categories component container */}
-			<CategoriesSection />
-			{/* TODO: Random Items posted */}
-			<ItemsSection />
-			{/* TODO: Ai FAB */}
-			<AiFAB />
+		<CustomView mainScreen={true}>
+			<SafeAreaView>
+				<WelcomeBar />
+				{/* TODO: Tier Progress Component */}
+				<TierProgressBar />
+				{/* TODO: Categories component container */}
+				<CategoriesSection />
+				{/* TODO: Random Items posted */}
+				<ItemsSection />
+				{/* TODO: Ai FAB */}
+				<AiFAB />
+			</SafeAreaView>
 		</CustomView>
 	);
 }
