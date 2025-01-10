@@ -58,3 +58,9 @@ export const validateForm = (state: AuthFormState) => {
 
 	return validationPayload;
 };
+export const isValidProfilePictureUrl = (url: string): boolean => {
+	const regex = /^http:\/\/localhost:8800\/uploads\/profilepictures\/.+/i;
+
+	// Check if the URL matches the pattern
+	return regex.test(url);
+};
