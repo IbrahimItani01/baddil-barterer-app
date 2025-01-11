@@ -1,13 +1,12 @@
 import { Tabs } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useColorScheme } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
 import Loader from "@/components/base/Loader";
-import '../../global.css'
+import "../../global.css";
+import { useAppSelector } from "@/store/hooks";
 
 export default function TabLayout() {
-	const theme = useColorScheme();
-
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	return (
 		<Loader>
 			<Tabs
