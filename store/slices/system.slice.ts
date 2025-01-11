@@ -7,3 +7,9 @@ interface System {
 	notifications: boolean;
 }
 
+const initialState: System = {
+	colorScheme: Appearance.getColorScheme(),
+	language: "en",
+	notifications: true,
+};
+
