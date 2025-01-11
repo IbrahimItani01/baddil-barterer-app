@@ -10,9 +10,36 @@ const TierProgressBar = () => {
 	const { progress, currentTier } = useAppSelector((state) => state.tiers);
 	const theme = useColorScheme();
 	return (
-		<View>
-			<Text>TierProgressBar</Text>
-		</View>
+		<CustomView
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: 5,
+			}}
+		>
+			{currentTier ? (
+				<>
+					<CustomText
+						content={`Tier: ${currentTier}`}
+						style={{
+							fontSize: 18,
+							fontFamily: "NunitoSans-SemiBold",
+						}}
+					/>
+					<Progress.Bar
+						progress={progress / 100}
+						width={null}
+						height={12}
+						useNativeDriver={true}
+						color={colors.primary}
+						borderColor={theme === 'light'? colors["light-gray-light-theme"]:colors["dark-gray-dark-theme"] }
+						borderRadius={20}
+					/>
+				</>
+			) : (
+				<CustomText content='Start Bartering to open Tiers' />
+			)}
+		</CustomView>
 	);
 };
 
