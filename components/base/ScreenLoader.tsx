@@ -16,7 +16,7 @@ import LightSplash from "../../assets/images/splash.png";
 const ScreenLoader: React.FC = () => {
 	const { booting, loading } = useAppSelector((state) => state.screenLoader);
 	const dispatch = useAppDispatch();
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	useEffect(() => {
