@@ -1,4 +1,4 @@
-import { Image, useColorScheme } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import { useAppSelector } from "@/store/hooks";
 import CustomText from "@/components/base/CustomText";
@@ -7,7 +7,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { isValidProfilePictureUrl } from "@/lib/utils/authValidation.utils";
 const WelcomeBar = () => {
 	const { userName, profilePictureUrl } = useAppSelector((state) => state.user);
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 
 	return (
 		<CustomView
