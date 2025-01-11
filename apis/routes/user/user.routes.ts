@@ -46,3 +46,4 @@ export const getUserInfo = async () => {
 		})
 		.catch((e) => false);
 };
+// TODO: fetch user settings
