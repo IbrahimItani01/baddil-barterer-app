@@ -9,7 +9,7 @@ import TierProgressBar from "@/components/tabs/home/TierProgressBar";
 import CategoriesSection from "@/components/tabs/home/CategoriesSection";
 import ItemsSection from "@/components/tabs/home/ItemsSection";
 import AiFAB from "@/components/base/AiFAB";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import SearchBar from "@/components/tabs/home/SearchBar";
 
 export default function Tab() {
@@ -19,31 +19,37 @@ export default function Tab() {
 		dispatch(logout());
 		router.replace("/onBoarding");
 	};
+
 	return (
 		<CustomView
 			mainScreen={true}
-			style={{
-				paddingHorizontal: 15,
-				paddingTop: 10,
-			}}
+			style={styles.customView}
 		>
-			<SafeAreaView
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					gap: 15,
-				}}
-			>
-				<WelcomeBar />
-				<TierProgressBar />
-				<SearchBar />
-				{/* TODO: Categories component container */}
-				<CategoriesSection />
-				{/* TODO: Random Items posted */}
-				<ItemsSection />
-				{/* TODO: Ai FAB */}
-				<AiFAB />
-			</SafeAreaView>
+			<View style={styles.wrapper}>
+				<SafeAreaView style={styles.safeAreaView}>
+					<WelcomeBar />
+					<TierProgressBar />
+					<SearchBar />
+					<CategoriesSection />
+					<ItemsSection />
+					<AiFAB />
+				</SafeAreaView>
+			</View>
 		</CustomView>
 	);
 }
+
+const styles = StyleSheet.create({
+	customView: {
+		paddingHorizontal: 15,
+	},
+	wrapper: {
+		marginTop: 30,
+	},
+	safeAreaView: {
+		display: "flex",
+		flexDirection: "column",
+		marginTop: 15,
+		gap: 15,
+	},
+});
