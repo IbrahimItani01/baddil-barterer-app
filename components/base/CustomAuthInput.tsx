@@ -18,7 +18,7 @@ const CustomAuthInput = ({
 	...props
 }: AuthInputInterface) => {
 	const { email } = useAppSelector((state) => state.auth);
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	const dispatch = useDispatch();
 	const handleForgotPassword = async () => {
 		if (email) {
