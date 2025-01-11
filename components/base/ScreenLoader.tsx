@@ -6,7 +6,6 @@ import {
 	View,
 	ActivityIndicator,
 	StyleSheet,
-	useColorScheme,
 	Animated,
 	Image,
 } from "react-native";
