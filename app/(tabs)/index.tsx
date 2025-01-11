@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 	},
 	wrapper: {
-		marginTop: 30,
+		marginTop: 45,
 	},
 	safeAreaView: {
 		display: "flex",
