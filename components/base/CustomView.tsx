@@ -1,23 +1,18 @@
-import { View, useColorScheme } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { CustomViewInterface } from "@/lib/interfaces/CustomView.interface";
 import { colors } from "@/lib/constants/colors.constant";
-import "../../global.css";
 import { useAppSelector } from "@/store/hooks";
 
 const CustomView = (prop: CustomViewInterface) => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
+	const themeStyle =
+		theme === "dark" ? styles.darkBackground : styles.lightBackground;
+
 	return (
 		<View
 			className={prop.NativeClasses}
-			style={[
-				{
-					backgroundColor:
-						theme === "dark" ? `${colors["dark-bg"]}` : `${colors["light-bg"]}`,
-					height: prop.mainScreen ? "100%" : "auto",
-				},
-				prop.style,
-			]}
+			style={[themeStyle, prop.mainScreen && styles.mainScreen, prop.style]}
 		>
 			{prop.children}
 		</View>
@@ -25,3 +20,15 @@ const CustomView = (prop: CustomViewInterface) => {
 };
 
 export default CustomView;
+
+const styles = StyleSheet.create({
+	darkBackground: {
+		backgroundColor: colors["dark-bg"],
+	},
+	lightBackground: {
+		backgroundColor: colors["light-bg"],
+	},
+	mainScreen: {
+		height: "100%",
+	},
+});
