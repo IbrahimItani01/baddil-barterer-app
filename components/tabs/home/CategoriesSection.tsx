@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
@@ -23,5 +22,32 @@ const CategoriesSection = () => {
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {},
+	title: {
+		fontSize: 18,
+		marginBottom: 12,
+		fontFamily: `${fontFamily.Raleway.SemiBold}`,
+	},
+	categoryContainer: {
+		flex: 1,
+		alignItems: "center",
+		marginBottom: 12,
+	},
+	iconWrapper: {
+		width: 60,
+		height: 60,
+		borderRadius: 12,
+		backgroundColor: colors.primary, // Adjust to your theme's primary color
+		alignItems: "center",
+		justifyContent: "center",
+		marginBottom: 8,
+	},
+	categoryText: {
+		fontSize: 12,
+		textAlign: "center",
+	},
+});
 
 export default CategoriesSection;
