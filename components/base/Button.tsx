@@ -1,43 +1,79 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import React from "react";
-import { MaterialIcons } from "@expo/vector-icons"; 
-
+import { MaterialIcons } from "@expo/vector-icons";
 import { ButtonInterface } from "@/lib/interfaces/Button.interface";
 import "../../global.css";
+import { colors } from "@/lib/constants/colors.constant";
+import { fontFamily } from "@/lib/constants/fonts.constant";
 
 const Button = (prop: ButtonInterface) => {
-  return (
-    <TouchableOpacity
-      onPress={prop.onPress}
-      style={{
-        paddingVertical: 20,
-        marginHorizontal: 10,
-        opacity: prop.disabled ? 0.5 : 1, 
-      }}
-      className={`rounded-full ${
-        prop.type === "outline" ? "border-2 border-primary" : "bg-primary"
-      } ${prop.style}`}
-      disabled={prop.disabled}
-    >
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        {prop.disabled ? (
-          <MaterialIcons
-            name="lock"
-            size={20}
-            color={prop.type === "outline" ? "gray" : "white"} // Change color based on button type
-          />
-        ) : (
-          <Text
-            className={`uppercase text-center font-nunito-semibold font-semibold ${
-              prop.type === "outline" ? "text-primary" : "text-white-font"
-            } ${prop.textStyle}`}
-          >
-            {prop.title}
-          </Text>
-        )}
-      </View>
-    </TouchableOpacity>
-  );
+	return (
+		<TouchableOpacity
+			onPress={prop.onPress}
+			style={[
+				styles.button,
+				prop.disabled && styles.disabledButton,
+				prop.type === "outline" ? styles.outlineButton : styles.primaryButton,
+				prop.style,
+			]}
+			disabled={prop.disabled}
+		>
+			<View style={styles.buttonContent}>
+				{prop.disabled ? (
+					<MaterialIcons
+						name='lock'
+						size={20}
+						color={prop.type === "outline" ? "gray" : "white"}
+					/>
+				) : (
+					<Text
+						style={[
+							styles.buttonText,
+							prop.type === "outline" ? styles.outlineText : styles.primaryText,
+							prop.textStyle,
+						]}
+					>
+						{prop.title}
+					</Text>
+				)}
+			</View>
+		</TouchableOpacity>
+	);
 };
+
+const styles = StyleSheet.create({
+	button: {
+		paddingVertical: 20,
+		marginHorizontal: 10,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	disabledButton: {
+		opacity: 0.5,
+	},
+	outlineButton: {
+		borderWidth: 2,
+		borderColor: `${colors.primary}`,
+	},
+	primaryButton: {
+		backgroundColor: `${colors.primary}`,
+	},
+	buttonContent: {
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	buttonText: {
+		textAlign: "center",
+		textTransform: "uppercase",
+		fontFamily: `${fontFamily.NunitoSans.SemiBold}`,
+		fontWeight: "600",
+	},
+	outlineText: {
+		color: `${colors.primary}`,
+	},
+	primaryText: {
+		color: "white",
+	},
+});
 
 export default Button;
