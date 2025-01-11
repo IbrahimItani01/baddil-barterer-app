@@ -8,6 +8,8 @@ import {
 } from "@/lib/utils/system.utils";
 import { useAppSelector } from "@/store/hooks";
 import ScreenLoader from "./base/ScreenLoader";
+import { setTheme } from "@/store/slices/system.slice";
+import { Appearance, ColorSchemeName } from "react-native";
 
 const AppNavigator = () => {
 	const router = useRouter();

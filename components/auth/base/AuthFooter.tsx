@@ -20,7 +20,7 @@ interface AuthFooterInterface {
 const AuthFooter = (props: AuthFooterInterface) => {
 	const dispatch = useAppDispatch();
 	const isLogin = useAppSelector((state) => state.auth.isLogin);
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	const changeForm = () => {
 		dispatch(setIsLogin(!isLogin));
 		dispatch(resetForm());
