@@ -40,6 +40,7 @@ const Button = (prop: ButtonInterface) => {
 		</TouchableOpacity>
 	);
 };
+export default Button;
 
 const styles = StyleSheet.create({
 	button: {
@@ -78,4 +79,3 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Button;
