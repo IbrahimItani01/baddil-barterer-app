@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./slices/user.slice";
-import authReducer from "./slices/auth.slice";
+import userSlice from "./slices/user.slice";
+import authSlice from "./slices/auth.slice";
 import screenLoaderSlice from "./slices/screenLoader.slice";
+import tierSlice from "./slices/tier.slice";
+import systemSlice from "./slices/system.slice";
 
 const store = configureStore({
 	reducer: {
-		user: userReducer,
-		auth: authReducer,
+		user: userSlice,
+		auth: authSlice,
 		screenLoader: screenLoaderSlice,
+		tiers: tierSlice,
+		system: systemSlice,
 	},
 });
 
