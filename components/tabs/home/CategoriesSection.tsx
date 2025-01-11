@@ -23,6 +23,8 @@ const CategoriesSection = () => {
 	);
 };
 
+export default CategoriesSection;
+
 const styles = StyleSheet.create({
 	container: {},
 	title: {
@@ -49,5 +51,3 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 });
-
-export default CategoriesSection;

@@ -4,6 +4,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "@/lib/constants/colors.constant";
 import { CategoryItem } from "@/lib/interfaces/home/categories.interface";
 import CustomText from "@/components/base/CustomText";
+import { fontFamily } from "@/lib/constants/fonts.constant";
 
 interface CategoryButtonProps {
 	item: CategoryItem;
@@ -20,7 +21,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ item }) => {
 				/>
 			</View>
 			<CustomText
-				content={item.name}
+				content={item.name.charAt(0).toUpperCase() + item.name.slice(1)}
 				style={styles.categoryText}
 			/>
 		</TouchableOpacity>
@@ -47,5 +48,6 @@ const styles = StyleSheet.create({
 	categoryText: {
 		fontSize: 12,
 		textAlign: "center",
+		fontFamily: fontFamily.NunitoSans.SemiBold
 	},
 });
