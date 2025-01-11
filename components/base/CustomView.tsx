@@ -3,9 +3,10 @@ import React from "react";
 import { CustomViewInterface } from "@/lib/interfaces/CustomView.interface";
 import { colors } from "@/lib/constants/colors.constant";
 import "../../global.css";
+import { useAppSelector } from "@/store/hooks";
 
 const CustomView = (prop: CustomViewInterface) => {
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	return (
 		<View
 			className={prop.NativeClasses}
