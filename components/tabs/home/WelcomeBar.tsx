@@ -13,8 +13,6 @@ const WelcomeBar = () => {
 		<CustomView
 			style={{
 				width: "100%",
-				paddingHorizontal: 15,
-				paddingTop: 10,
 				display: "flex",
 				flexDirection: "row",
 				justifyContent: "space-between",
@@ -25,9 +23,8 @@ const WelcomeBar = () => {
 					fontSize: 24,
 					fontFamily: "Raleway-Bold",
 				}}
-				content={`Welcome, ${userName}!`}
+				content={`Welcome, ${userName ? userName : "John"}!`}
 			/>
-			{/* TODO: serve the profile picture of the user */}
 			{isValidProfilePictureUrl(profilePictureUrl) ? (
 				<Image source={{ uri: profilePictureUrl }} />
 			) : (
