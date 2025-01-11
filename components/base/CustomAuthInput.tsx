@@ -1,17 +1,13 @@
 import React from "react";
 import { Input } from "@rneui/themed";
 import { AuthInputInterface } from "@/lib/interfaces/auth/auth.interface";
-import {
-	Alert,
-	Text,
-	TouchableOpacity,
-	useColorScheme,
-	View,
-} from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useAppSelector } from "@/store/hooks";
 import { sendForgetPasswordEmail } from "@/apis/routes/auth/auth.routes";
 import { useDispatch } from "react-redux";
 import { withLoader } from "@/lib/utils/async.utils";
+import { colors } from "@/lib/constants/colors.constant";
+import { fontFamily } from "@/lib/constants/fonts.constant";
 
 const CustomAuthInput = ({
 	forRegister = false,
@@ -20,6 +16,7 @@ const CustomAuthInput = ({
 	const { email } = useAppSelector((state) => state.auth);
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const dispatch = useDispatch();
+
 	const handleForgotPassword = async () => {
 		if (email) {
 			await withLoader(dispatch, () => sendForgetPasswordEmail(email));
@@ -29,12 +26,7 @@ const CustomAuthInput = ({
 	};
 
 	return (
-		<View
-			className={props.NativeClasses}
-			style={{
-				marginTop: 10,
-			}}
-		>
+		<View style={[styles.container]}>
 			<Input
 				value={props.value}
 				onChangeText={props.onChangeText}
@@ -42,35 +34,15 @@ const CustomAuthInput = ({
 				secureTextEntry={props.isPassword}
 				autoComplete={props.type}
 				label={props.label}
-				style={{
-					marginLeft: 5,
-					position: "relative",
-					color: theme === "light" ? "#000" : "#fff",
-				}}
-				labelStyle={{
-					color: theme === "light" ? "#000" : "#fff",
-					fontFamily: "NunitoSans-SemiBold",
-				}}
+				style={[styles.input, { color: theme === "light" ? "#000" : "#fff" }]}
+				labelStyle={styles.label}
 				renderErrorMessage={false}
 			/>
 
 			{props.isPassword && !forRegister && (
-				<View
-					style={{
-						position: "absolute",
-						top: "110%",
-						right: 10,
-					}}
-				>
+				<View style={styles.forgotPasswordContainer}>
 					<TouchableOpacity onPress={handleForgotPassword}>
-						<Text
-							style={{
-								textDecorationLine: "underline",
-							}}
-							className='text-primary font-nunito-semibold font-semibold'
-						>
-							Forgot Password?
-						</Text>
+						<Text style={styles.forgotPasswordText}>Forgot Password?</Text>
 					</TouchableOpacity>
 				</View>
 			)}
@@ -79,3 +51,27 @@ const CustomAuthInput = ({
 };
 
 export default CustomAuthInput;
+
+const styles = StyleSheet.create({
+	container: {
+		marginTop: 10,
+	},
+	input: {
+		marginLeft: 5,
+		position: "relative",
+	},
+	label: {
+		fontFamily: `${fontFamily.NunitoSans.SemiBold}`,
+	},
+	forgotPasswordContainer: {
+		position: "absolute",
+		top: "110%",
+		right: 10,
+	},
+	forgotPasswordText: {
+		textDecorationLine: "underline",
+		color: `${colors.primary}`, // Adjust the color as needed
+		fontFamily: `${fontFamily.NunitoSans.SemiBold}`,
+		fontWeight: "600",
+	},
+});
