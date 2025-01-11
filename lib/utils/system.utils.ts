@@ -16,12 +16,15 @@ import { Router } from "expo-router";
 import { UserStatusEnum } from "./enums.utils";
 import { showAlert } from "./async.utils";
 import { BackHandler, Platform } from "react-native";
+import { getUserTier } from "@/apis/routes/tiers/tiers.routes";
+import { useEffect } from "react";
 
 export const initializeApp = async (dispatch: Dispatch) => {
 	await checkOnboardingStatus(dispatch);
 	await checkLoginStatus(dispatch);
 	await fetchProfilePicture(dispatch);
 	await fetchUserData(dispatch);
+	await getUserTier(dispatch);
 };
 
 export const handleStatusNavigation = async (
