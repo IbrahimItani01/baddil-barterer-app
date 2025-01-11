@@ -19,8 +19,13 @@ export default function Tab() {
 		router.replace("/onBoarding");
 	};
 	return (
-		<CustomView mainScreen={true}>
-			<SafeAreaView>
+		<CustomView
+			mainScreen={true}
+			style={{
+				paddingHorizontal: 15,
+				paddingTop: 10,
+			}}
+		>
 				<WelcomeBar />
 				{/* TODO: Tier Progress Component */}
 				<TierProgressBar />
