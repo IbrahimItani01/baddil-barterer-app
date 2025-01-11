@@ -1,11 +1,15 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { colors } from "@/lib/constants/colors.constant";
 import { Searchbar } from "react-native-paper";
+import { useAppSelector } from "@/store/hooks";
+import { fontFamily } from "@/lib/constants/fonts.constant";
 
 const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState("");
 	const [searching, setSearching] = useState(false);
+	const theme = useAppSelector((state) => state.system.colorScheme);
+
 	const handleChange = (newValue: string) => setSearchValue(newValue);
 	const handleClear = () => {
 		setSearchValue("");
@@ -30,14 +34,35 @@ const SearchBar = () => {
 				onClearIconPress={handleClear}
 				onChangeText={handleChange}
 				onSubmitEditing={handleSearch}
-				style={{
-					backgroundColor: "transparent",
-					borderColor: colors["light-gray-light-theme"],
-					borderWidth: 0.5,
+				style={[
+					styles.searchbar,
+					{
+						borderColor:
+							theme === "dark"
+								? colors["dark-gray-dark-theme"]
+								: colors["light-gray-light-theme"],
+					},
+				]}
+				placeholderTextColor={
+					theme === "dark"
+						? colors["dark-gray-dark-theme"]
+						: colors["light-gray-light-theme"]
+				}
+				inputStyle={{
+					color: theme === "dark" ? "white" : "black",
+					fontFamily: `${fontFamily.NunitoSans.Regular}`
 				}}
+				
 			/>
 		</View>
 	);
 };
 
 export default SearchBar;
+
+const styles = StyleSheet.create({
+	searchbar: {
+		backgroundColor: "transparent",
+		borderWidth: 0.5,
+	},
+});
