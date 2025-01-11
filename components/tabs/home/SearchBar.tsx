@@ -19,6 +19,25 @@ const SearchBar = () => {
 			setSearchValue("");
 		}, 2000);
 	};
+
+	return (
+		<View>
+			<Searchbar
+				placeholder='Search'
+				value={searchValue}
+				selectionColor={colors.primary}
+				loading={searching}
+				onClearIconPress={handleClear}
+				onChangeText={handleChange}
+				onSubmitEditing={handleSearch}
+				style={{
+					backgroundColor: "transparent",
+					borderColor: colors["light-gray-light-theme"],
+					borderWidth: 0.5,
+				}}
+			/>
+		</View>
+	);
 };
 
 export default SearchBar;
