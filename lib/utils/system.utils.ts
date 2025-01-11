@@ -27,21 +27,62 @@ export const initializeApp = async (dispatch: Dispatch) => {
 	await getUserTier(dispatch);
 };
 
+export const handleNavigation = async (
+	isLoggedIn: boolean,
+	hasOnboarded: boolean,
+	booting: boolean,
+	router: Router
+) => {
+	// UseEffect to handle navigation after the component is mounted
+	useEffect(() => {
+		const checkStorageAndNavigate = async () => {
+			try {
+				// Retrieve values from AsyncStorage
+				const onboardedFromStorage = await AsyncStorage.getItem("hasOnboarded");
+				const token = await AsyncStorage.getItem("jwtToken");
+				const hasOnboardedFromStorage = onboardedFromStorage === "true";
+
+				if (
+					!isLoggedIn &&
+					!hasOnboarded &&
+					!token &&
+					!hasOnboardedFromStorage
+				) {
+					router.replace("/onBoarding");
+				} else if (
+					(!isLoggedIn && hasOnboarded) ||
+					(!token && hasOnboardedFromStorage)
+				) {
+					router.replace("/auth");
+				} else {
+					router.replace("/(tabs)");
+				}
+			} catch (error) {
+				console.error("Error checking AsyncStorage:", error);
+				router.replace("/auth");
+			}
+		};
+
+		checkStorageAndNavigate();
+	}, [isLoggedIn, hasOnboarded, booting, router]);
+};
+
 export const handleStatusNavigation = async (
 	isLoggedIn: boolean,
 	hasOnboarded: boolean,
 	status: UserStatusEnum,
+	booting: boolean,
 	router: Router,
 	dispatch: Dispatch
 ) => {
 	if (status === UserStatusEnum.Active) {
-		handleNavigation(isLoggedIn, hasOnboarded, router);
+		handleNavigation(isLoggedIn, hasOnboarded, booting, router);
 	} else if (status === UserStatusEnum.Flagged) {
 		await showAlert(
 			"Warning, Flagged User!",
 			"Contact support@baddil.com to resolve the conflict"
 		);
-		handleNavigation(isLoggedIn, hasOnboarded, router);
+		handleNavigation(isLoggedIn, hasOnboarded, booting, router);
 	} else {
 		await showAlert(
 			"Can't Access Baddil, Banned User!",
@@ -53,20 +94,6 @@ export const handleStatusNavigation = async (
 		} else {
 			router.replace("/auth");
 		}
-	}
-};
-
-export const handleNavigation = (
-	isLoggedIn: boolean,
-	hasOnboarded: boolean,
-	router: Router
-) => {
-	if (!isLoggedIn && !hasOnboarded) {
-		router.replace("/onBoarding");
-	} else if (!isLoggedIn && hasOnboarded) {
-		router.replace("/auth");
-	} else {
-		router.replace("/(tabs)");
 	}
 };
 
