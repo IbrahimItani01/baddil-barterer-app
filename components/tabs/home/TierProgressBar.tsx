@@ -4,26 +4,19 @@ import { useAppSelector } from "@/store/hooks";
 import CustomView from "@/components/base/CustomView";
 import * as Progress from "react-native-progress";
 import { colors } from "@/lib/constants/colors.constant";
+import { StyleSheet } from "react-native";
 
 const TierProgressBar = () => {
 	const { progress, currentTier } = useAppSelector((state) => state.tiers);
 	const theme = useAppSelector((state) => state.system.colorScheme);
+
 	return (
-		<CustomView
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				gap: 5,
-			}}
-		>
+		<CustomView style={styles.container}>
 			{currentTier ? (
 				<>
 					<CustomText
 						content={`Tier: ${currentTier}`}
-						style={{
-							fontSize: 18,
-							fontFamily: "NunitoSans-SemiBold",
-						}}
+						style={styles.tierText}
 					/>
 					<Progress.Bar
 						progress={progress / 100}
@@ -47,3 +40,15 @@ const TierProgressBar = () => {
 };
 
 export default TierProgressBar;
+
+const styles = StyleSheet.create({
+	container: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 5,
+	},
+	tierText: {
+		fontSize: 16,
+		fontFamily: "NunitoSans-SemiBold",
+	},
+});
