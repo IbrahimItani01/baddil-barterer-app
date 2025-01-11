@@ -1,6 +1,5 @@
 import React from "react";
 import { AuthInterface } from "@/lib/interfaces/auth/auth.interface";
-import "../../global.css";
 import { resetForm } from "@/store/slices/auth.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Headline from "./base/Headline";
@@ -9,7 +8,7 @@ import AuthFields from "./base/AuthFields";
 import AuthActions from "./base/AuthActions";
 import AuthFooter from "./base/AuthFooter";
 import { validateForm } from "@/lib/utils/authValidation.utils";
-import { Alert } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 
 const Login = ({ onSubmit }: AuthInterface) => {
 	const dispatch = useAppDispatch();
@@ -28,62 +27,69 @@ const Login = ({ onSubmit }: AuthInterface) => {
 	};
 
 	return (
-		<MainScreen
-			style={{
-				flex: 1,
-				marginTop: 40,
-				flexDirection: "column",
-				gap: 50,
-				marginHorizontal: 10,
-			}}
-		>
+		<MainScreen style={styles.mainScreen}>
 			<Headline
-				logoStyle={{
-					display: "flex",
-					alignItems: "center",
-				}}
-				headlineStyle={{
-					marginLeft: 15,
-					gap: 10,
-				}}
+				logoStyle={styles.headlineLogo}
+				headlineStyle={styles.headlineText}
 				title='Login'
 				description='Welcome back, login to continue!'
 			/>
 			<AuthFields
-				containerStyle={{
-					gap: 10,
-				}}
+				containerStyle={styles.authFields}
 				type='login'
 			/>
 			<AuthActions
 				type='login'
 				buttonContent='Login'
 				onSubmit={handleLogin}
-				// TODO: add google auth
 				handleGoogleAuth={() => {}}
-				containerStyle={{
-					flex: 1,
-					flexDirection: "column",
-					justifyContent: "center",
-				}}
-				dividerStyle={{
-					marginVertical: 20,
-					marginHorizontal: 50,
-				}}
+				containerStyle={styles.authActions}
+				dividerStyle={styles.dividerStyle}
 			/>
 			<AuthFooter
 				hyperLinkContent='Register'
 				hintContent="Don't have an account?"
-				containerStyle={{
-					marginHorizontal: "auto",
-					flexDirection: "row",
-					alignItems: "center",
-					gap: 5,
-					marginBottom: 10,
-				}}
+				containerStyle={styles.authFooter}
 			/>
 		</MainScreen>
 	);
 };
+
+const styles = StyleSheet.create({
+	mainScreen: {
+		flex: 1,
+		marginTop: 40,
+		flexDirection: "column",
+		gap: 50,
+		marginHorizontal: 10,
+	},
+	headlineLogo: {
+		display: "flex",
+		alignItems: "center",
+	},
+	headlineText: {
+		marginLeft: 15,
+		gap: 10,
+	},
+	authFields: {
+		gap: 10,
+	},
+	authActions: {
+		flex: 1,
+		flexDirection: "column",
+		justifyContent: "center",
+	},
+	dividerStyle: {
+		marginVertical: 20,
+		marginHorizontal: 50,
+	},
+	authFooter: {
+		marginHorizontal: "auto",
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 5,
+		marginBottom: 10,
+	},
+});
 
 export default Login;
