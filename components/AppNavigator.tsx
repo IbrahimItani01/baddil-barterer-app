@@ -19,8 +19,22 @@ const AppNavigator = () => {
 	);
 
 	useEffect(() => {
-		initializeApp(dispatch);
-	}, [dispatch]);
+		const initAndNavigate = async () => {
+			if (isLoggedIn) {
+				await initializeApp(dispatch);
+			}
+			handleStatusNavigation(
+				isLoggedIn,
+				hasOnboarded,
+				status,
+				booting,
+				router,
+				dispatch
+			);
+		};
+
+		initAndNavigate();
+	}, [isLoggedIn, hasOnboarded, status, router, booting, dispatch]);
 
 	useEffect(() => {
 		if (!navigationHandled.current) {
@@ -29,11 +43,14 @@ const AppNavigator = () => {
 				isLoggedIn,
 				hasOnboarded,
 				status,
+				booting,
 				router,
 				dispatch
-			).finally(() => (navigationHandled.current = false));
+			).finally(() => {
+				navigationHandled.current = false;
+			});
 		}
-	}, [isLoggedIn, hasOnboarded, status, router, dispatch]);
+	}, [isLoggedIn, hasOnboarded, status, router, booting, dispatch]);
 
 	return booting ? (
 		<ScreenLoader />
