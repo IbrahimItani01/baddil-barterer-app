@@ -26,6 +26,13 @@ export default function Tab() {
 				paddingTop: 10,
 			}}
 		>
+			<SafeAreaView
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: 15,
+				}}
+			>
 				<WelcomeBar />
 				{/* TODO: Tier Progress Component */}
 				<TierProgressBar />
