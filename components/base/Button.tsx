@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 10,
 		justifyContent: "center",
 		alignItems: "center",
+		borderRadius:50
 	},
 	disabledButton: {
 		opacity: 0.5,
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 	outlineButton: {
 		borderWidth: 2,
 		borderColor: `${colors.primary}`,
+		backgroundColor: 'transparent'
 	},
 	primaryButton: {
 		backgroundColor: `${colors.primary}`,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		textTransform: "uppercase",
 		fontFamily: `${fontFamily.NunitoSans.SemiBold}`,
-		fontWeight: "600",
+		fontSize:16
 	},
 	outlineText: {
 		color: `${colors.primary}`,
