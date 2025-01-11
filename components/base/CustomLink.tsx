@@ -1,10 +1,10 @@
 import { Link, router } from "expo-router";
 import { CustomLinkInterface } from "@/lib/interfaces/CustomLink.interface";
-import { useColorScheme } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
 import "../../global.css"
+import { useAppSelector } from "@/store/hooks";
 const CustomLink = (prop: CustomLinkInterface) => {
-  const theme = useColorScheme();
+  const theme = useAppSelector((state) => state.system.colorScheme);
   const handlePress = () => {
     if (prop.href === "back") {
       if (prop.behavior === "replace") {
