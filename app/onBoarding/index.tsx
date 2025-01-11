@@ -9,9 +9,10 @@ import { completeOnboarding } from "@/store/slices/user.slice";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DoneButton from "@/components/onBoarding/DoneButton";
+import { useAppSelector } from "@/store/hooks";
 
 const OnboardingScreen = () => {
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	const dispatch = useDispatch();
 
 	const handleNav = async () => {
