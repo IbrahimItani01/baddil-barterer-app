@@ -13,3 +13,22 @@ const initialState: System = {
 	notifications: true,
 };
 
+const systemSlice = createSlice({
+	name: "system",
+	initialState,
+	reducers: {
+		setTheme: (state, action: PayloadAction<ColorSchemeName>) => {
+			state.colorScheme = action.payload;
+		},
+		setLanguage: (state, action: PayloadAction<"en" | "fr">) => {
+			state.language = action.payload;
+		},
+		toggleNotifications: (state) => {
+			state.notifications = !state.notifications;
+		},
+	},
+});
+
+export const { setTheme, setLanguage, toggleNotifications } =
+	systemSlice.actions;
+export default systemSlice.reducer;
