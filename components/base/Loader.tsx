@@ -1,4 +1,4 @@
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
 import React from "react";
 import { useCustomFonts } from "@/hooks/fonts.hook";
 import { CustomWrapper } from "@/lib/interfaces/Wrapper.interface";
@@ -8,7 +8,7 @@ const Loader: React.FC<CustomWrapper> = ({ children, color, size }) => {
 
 	if (!fontsLoaded) {
 		return (
-			<View className='flex-1 items-center justify-center'>
+			<View style={styles.container}>
 				<ActivityIndicator
 					size={size}
 					color={color}
@@ -21,3 +21,11 @@ const Loader: React.FC<CustomWrapper> = ({ children, color, size }) => {
 };
 
 export default Loader;
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+});
