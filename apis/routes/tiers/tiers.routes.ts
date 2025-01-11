@@ -31,6 +31,6 @@ export const getUserTier = async (dispatch: AppDispatch) => {
 		dispatch(setCurrentTier(""));
 		dispatch(setTierRequirement(null));
 		dispatch(setCompletedBarters(null));
-		dispatch(setProgress(null));
+		dispatch(setProgress(0));
 	}
 };
