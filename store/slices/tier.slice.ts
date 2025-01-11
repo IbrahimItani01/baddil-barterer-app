@@ -7,3 +7,10 @@ interface TierState {
 	progress: number | 0;
 }
 
+const initialState: TierState = {
+	currentTier: "Bronze",
+	tierRequirement: null,
+	completedBarters: null,
+	progress: 40,
+};
+
