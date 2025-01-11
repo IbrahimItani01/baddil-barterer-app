@@ -1,4 +1,3 @@
-import { useColorScheme, View } from "react-native";
 import React from "react";
 import CustomText from "@/components/base/CustomText";
 import { useAppSelector } from "@/store/hooks";
@@ -8,7 +7,7 @@ import { colors } from "@/lib/constants/colors.constant";
 
 const TierProgressBar = () => {
 	const { progress, currentTier } = useAppSelector((state) => state.tiers);
-	const theme = useColorScheme();
+	const theme = useAppSelector((state) => state.system.colorScheme);
 	return (
 		<CustomView
 			style={{
@@ -32,7 +31,11 @@ const TierProgressBar = () => {
 						height={12}
 						useNativeDriver={true}
 						color={colors.primary}
-						borderColor={theme === 'light'? colors["light-gray-light-theme"]:colors["dark-gray-dark-theme"] }
+						borderColor={
+							theme === "light"
+								? colors["light-gray-light-theme"]
+								: colors["dark-gray-dark-theme"]
+						}
 						borderRadius={20}
 					/>
 				</>
