@@ -28,10 +28,50 @@ const AiFAB = () => {
 	}, [menuOpen]);
 
 	return (
-		<View>
-			<Text>AiFAB</Text>
+		<View style={styles.container}>
+			<View
+				style={{
+					position: "relative",
+				}}
+			>
+				<Animated.View style={{ opacity: fadeAnim }}>
+					{menuOpen && <AiFABMenu />}
+				</Animated.View>
+			</View>
+			<TouchableOpacity
+				onPress={toggleMenu}
+				style={styles.fab}
+			>
+				<MaterialIcons
+					name='stream'
+					size={30}
+					color='#fff'
+				/>
+			</TouchableOpacity>
 		</View>
 	);
 };
 
 export default AiFAB;
+
+const styles = StyleSheet.create({
+	container: {
+		position: "absolute",
+		bottom: 0,
+		right: 0,
+		alignItems: "center",
+	},
+	fab: {
+		width: 60,
+		height: 60,
+		backgroundColor: colors.primary,
+		borderRadius: 30,
+		justifyContent: "center",
+		alignItems: "center",
+		elevation: 5,
+		shadowColor: "#000",
+		shadowOpacity: 0.2,
+		shadowRadius: 5,
+		shadowOffset: { width: 0, height: 3 },
+	},
+});
