@@ -52,6 +52,18 @@ const AppNavigator = () => {
 		}
 	}, [isLoggedIn, hasOnboarded, status, router, booting, dispatch]);
 
+	useEffect(() => {
+		dispatch(setTheme(Appearance.getColorScheme()));
+
+		const listener = Appearance.addChangeListener(
+			({ colorScheme }: { colorScheme: ColorSchemeName }) => {
+				dispatch(setTheme(colorScheme)); // Corrected typo here
+			}
+		);
+
+		return () => listener.remove();
+	}, [dispatch]);
+
 	return booting ? (
 		<ScreenLoader />
 	) : (
