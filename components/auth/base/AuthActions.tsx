@@ -1,4 +1,10 @@
-import { View, TouchableOpacity, StyleProp, ViewStyle } from "react-native";
+import {
+	View,
+	TouchableOpacity,
+	StyleProp,
+	ViewStyle,
+	StyleSheet,
+} from "react-native";
 import React from "react";
 import CustomView from "@/components/base/CustomView";
 import Button from "@/components/base/Button";
@@ -37,15 +43,7 @@ const AuthActions = (props: AuthActions) => {
 				width={1}
 			/>
 			<TouchableOpacity onPress={props.handleGoogleAuth}>
-				<View
-					style={{
-						borderColor: `${colors.primary}`,
-						borderWidth: 2,
-						padding: 10,
-						borderRadius: 50,
-						alignSelf: "center",
-					}}
-				>
+				<View style={styles.googleButton}>
 					<FontAwesome5
 						name='google'
 						size={30}
@@ -56,5 +54,15 @@ const AuthActions = (props: AuthActions) => {
 		</CustomView>
 	);
 };
+
+const styles = StyleSheet.create({
+	googleButton: {
+		borderColor: colors.primary,
+		borderWidth: 2,
+		padding: 10,
+		borderRadius: 50,
+		alignSelf: "center",
+	},
+});
 
 export default AuthActions;
