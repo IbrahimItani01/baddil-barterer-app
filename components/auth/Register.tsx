@@ -1,6 +1,5 @@
 import React from "react";
 import { AuthInterface } from "@/lib/interfaces/auth/auth.interface";
-import "../../global.css";
 import { resetForm } from "@/store/slices/auth.slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Headline from "./base/Headline";
@@ -8,7 +7,7 @@ import MainScreen from "./base/MainScreen";
 import AuthFields from "./base/AuthFields";
 import AuthActions from "./base/AuthActions";
 import AuthFooter from "./base/AuthFooter";
-import { Alert } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { validateForm } from "@/lib/utils/authValidation.utils";
 
 const Register = ({ onSubmit }: AuthInterface) => {
@@ -39,64 +38,71 @@ const Register = ({ onSubmit }: AuthInterface) => {
 	};
 
 	return (
-		<MainScreen
-			style={{
-				display: "flex",
-				marginTop: 25,
-				flexDirection: "column",
-				marginHorizontal: 10,
-			}}
-		>
+		<MainScreen style={styles.mainScreen}>
 			<Headline
-				headlineStyle={{
-					display: "flex",
-					flexDirection: "column",
-					gap: 2,
-					marginLeft: 10,
-					marginVertical: 30,
-				}}
-				logoStyle={{
-					alignSelf: "center",
-				}}
+				headlineStyle={styles.headlineText}
+				logoStyle={styles.headlineLogo}
 				title='Register'
 				description='Welcome to Baddil, register to start!'
 			/>
 			<AuthFields
-				containerStyle={{
-					display: "flex",
-					flexDirection: "column",
-					gap: 2,
-				}}
+				containerStyle={styles.authFields}
 				type='register'
 			/>
 			<AuthActions
 				type='register'
 				buttonContent='Register'
 				onSubmit={handleRegister}
-				// TODO: add google auth
 				handleGoogleAuth={() => {}}
-				containerStyle={{
-					display: "flex",
-					flexDirection: "column",
-					gap: 10,
-					marginVertical: 25,
-				}}
-				dividerStyle={{
-					marginHorizontal: 50,
-				}}
+				containerStyle={styles.authActions}
+				dividerStyle={styles.dividerStyle}
 			/>
 			<AuthFooter
 				hyperLinkContent='Login'
 				hintContent='Already have an account?'
-				containerStyle={{
-					alignSelf: "center",
-					display: "flex",
-					flexDirection: "row",
-					gap: 5,
-				}}
+				containerStyle={styles.authFooter}
 			/>
 		</MainScreen>
 	);
 };
+
+const styles = StyleSheet.create({
+	mainScreen: {
+		display: "flex",
+		marginTop: 25,
+		flexDirection: "column",
+		marginHorizontal: 10,
+	},
+	headlineLogo: {
+		alignSelf: "center",
+	},
+	headlineText: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 2,
+		marginLeft: 10,
+		marginVertical: 30,
+	},
+	authFields: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 2,
+	},
+	authActions: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 10,
+		marginVertical: 25,
+	},
+	dividerStyle: {
+		marginHorizontal: 50,
+	},
+	authFooter: {
+		alignSelf: "center",
+		display: "flex",
+		flexDirection: "row",
+		gap: 5,
+	},
+});
 
 export default Register;
