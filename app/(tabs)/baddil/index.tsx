@@ -7,3 +7,19 @@ import { fontFamily } from "@/lib/constants/fonts.constant";
 import { useRouter } from "expo-router";
 
 export default function Tab() {
+	const router = useRouter();
+
+	const handleCategoryPress = (
+		categoryId: string,
+		subcategories: {
+			id: number;
+			name: string;
+			iconName: string;
+		}[]
+	) => {
+		if (subcategories.length>0) {
+			router.push(`/(tabs)/baddil/(subPages)/Subcategories?id=${categoryId}`);
+		} else {
+			router.push(`/(tabs)/baddil/(details)/DetailsPage?id=${categoryId}`);
+		}
+	};
