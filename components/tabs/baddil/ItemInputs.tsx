@@ -23,6 +23,9 @@ const ItemInputs = () => {
 				style={[
 					styles.input,
 					{
+						color:theme === "dark"
+						? colors['white-font']
+						: colors["black-font"],
 						borderColor:
 							theme === "dark"
 								? colors["dark-gray-dark-theme"]
@@ -44,6 +47,9 @@ const ItemInputs = () => {
 				style={[
 					styles.input,
 					{
+						color:theme === "dark"
+						? colors['white-font']
+						: colors["black-font"],
 						borderColor:
 							theme === "dark"
 								? colors["dark-gray-dark-theme"]
@@ -104,6 +110,9 @@ const ItemInputs = () => {
 				style={[
 					styles.textArea,
 					{
+						color:theme === "dark"
+						? colors['white-font']
+						: colors["black-font"],
 						borderColor:
 							theme === "dark"
 								? colors["dark-gray-dark-theme"]
@@ -133,6 +142,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		padding: 12,
 		marginBottom: 16,
+		fontFamily: fontFamily.NunitoSans.Regular
 	},
 	conditionContainer: {
 		flexDirection: "row",
@@ -151,6 +161,7 @@ const styles = StyleSheet.create({
 	conditionText: {},
 	selectedConditionText: {
 		color: colors["white-font"],
+		fontFamily: fontFamily.NunitoSans.Regular
 	},
 	textArea: {
 		borderWidth: 1,
@@ -159,5 +170,7 @@ const styles = StyleSheet.create({
 		height: 90,
 		textAlignVertical: "top",
 		marginBottom: 16,
+		fontFamily: fontFamily.NunitoSans.Regular
+
 	},
 });
