@@ -23,3 +23,33 @@ export default function Tab() {
 			router.push(`/(tabs)/baddil/(details)/DetailsPage?id=${categoryId}`);
 		}
 	};
+	return (
+		<TabScreen title='Baddil'>
+			<CustomText
+				style={{
+					fontFamily: fontFamily.NunitoSans.SemiBold,
+				}}
+				content='Choose category of your new item'
+			/>
+			<FlatList
+				data={categories}
+				style={{
+					height: "85%",
+					marginTop:5
+				}}
+				keyExtractor={(item) => item.id.toString()}
+				renderItem={({ item }) => (
+					<CategoryCard
+						name={item.name}
+						iconName={item.iconName}
+						subcategories={item.subcategories}
+						onPress={() =>
+							handleCategoryPress(item.id.toString(), item.subcategories)
+						}
+					/>
+				)}
+				showsVerticalScrollIndicator={false}
+			/>
+		</TabScreen>
+	);
+}
