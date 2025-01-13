@@ -4,6 +4,7 @@ import authSlice from "./slices/auth.slice";
 import screenLoaderSlice from "./slices/screenLoader.slice";
 import tierSlice from "./slices/tier.slice";
 import systemSlice from "./slices/system.slice";
+import itemsSlice from "./slices/items.slice";
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,8 @@ const store = configureStore({
 		screenLoader: screenLoaderSlice,
 		tiers: tierSlice,
 		system: systemSlice,
+		item: itemsSlice,
+
 	},
 });
 
