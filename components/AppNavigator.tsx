@@ -10,11 +10,15 @@ import { useAppSelector } from "@/store/hooks";
 import ScreenLoader from "./base/ScreenLoader";
 import { setTheme } from "@/store/slices/system.slice";
 import { Appearance, ColorSchemeName } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+	startBooting,
+	stoppedBooting,
+} from "@/store/slices/screenLoader.slice";
 
 const AppNavigator = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const navigationHandled = useRef(false); // Use ref to prevent repeated navigation
 	const { booting } = useAppSelector((state) => state.screenLoader);
 	const { isLoggedIn, hasOnboarded, status } = useSelector(
 		(state: RootState) => state.user
@@ -22,37 +26,17 @@ const AppNavigator = () => {
 
 	useEffect(() => {
 		const initAndNavigate = async () => {
-			if (isLoggedIn) {
-				await initializeApp(dispatch);
+			const token = await AsyncStorage.getItem("jwtToken");
+			const onboarded = await AsyncStorage.getItem("onboarded");
+			if (token) {
+				dispatch(startBooting());
+				await initializeApp(dispatch).finally(() => dispatch(stoppedBooting()));
 			}
-			handleStatusNavigation(
-				isLoggedIn,
-				hasOnboarded,
-				status,
-				booting,
-				router,
-				dispatch
-			);
+			handleStatusNavigation(status, router, token, onboarded, dispatch);
 		};
 
 		initAndNavigate();
-	}, [isLoggedIn, hasOnboarded, status, router, booting, dispatch]);
-
-	useEffect(() => {
-		if (!navigationHandled.current) {
-			navigationHandled.current = true;
-			handleStatusNavigation(
-				isLoggedIn,
-				hasOnboarded,
-				status,
-				booting,
-				router,
-				dispatch
-			).finally(() => {
-				navigationHandled.current = false;
-			});
-		}
-	}, [isLoggedIn, hasOnboarded, status, router, booting, dispatch]);
+	}, [isLoggedIn, hasOnboarded]);
 
 	useEffect(() => {
 		dispatch(setTheme(Appearance.getColorScheme()));
@@ -77,7 +61,6 @@ const AppNavigator = () => {
 				<Stack.Screen name='auth/index' />
 				<Stack.Screen name='+not-found' />
 				<Stack.Screen name='qr/index' />
-
 			</Stack>
 		</>
 	);
