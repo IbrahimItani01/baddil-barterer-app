@@ -7,6 +7,7 @@ interface UserState {
 	userName: string | null;
 	profilePictureUrl: string;
 	status: UserStatusEnum;
+	email: string;
 }
 
 const initialState: UserState = {
@@ -15,6 +16,7 @@ const initialState: UserState = {
 	userName: "",
 	profilePictureUrl: "",
 	status: UserStatusEnum.Active,
+	email: "",
 };
 
 const userSlice = createSlice({
