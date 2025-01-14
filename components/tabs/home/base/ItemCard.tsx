@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 		margin: 8,
 		marginLeft: 0,
 		width: 280,
-		height: 180,
+		height: 160,
 		borderWidth: 1,
 		overflow: "hidden",
 		position: "relative",
