@@ -1,12 +1,13 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { colors } from "@/lib/constants/colors.constant";
-import { categories } from "@/lib/constants/categories.constant";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import CategoryButton from "./base/CategoryButton";
 import CustomText from "@/components/base/CustomText";
+import { useAppSelector } from "@/store/hooks";
 
 const CategoriesSection = () => {
+	const categories = useAppSelector((state) => state.categories.categories);
 	return (
 		<View style={styles.container}>
 			<CustomText
@@ -17,7 +18,11 @@ const CategoriesSection = () => {
 				data={categories.slice(0, 8)}
 				numColumns={4}
 				keyExtractor={(item) => item.id.toString()}
-				renderItem={({ item }) => <CategoryButton item={item} />}
+				renderItem={({ item }) => (
+					<CategoryButton
+						item={item}
+					/>
+				)}
 			/>
 		</View>
 	);
