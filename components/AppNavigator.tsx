@@ -76,6 +76,8 @@ const AppNavigator = () => {
 				<Stack.Screen name='onBoarding/index' />
 				<Stack.Screen name='auth/index' />
 				<Stack.Screen name='+not-found' />
+				<Stack.Screen name='qr/index' />
+
 			</Stack>
 		</>
 	);
