@@ -1,6 +1,6 @@
 import CustomView from "@/components/base/CustomView";
 import "../../global.css";
-import { router } from "expo-router";
+import { router, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import { logout } from "@/store/slices/user.slice";
@@ -11,15 +11,24 @@ import ItemsSection from "@/components/tabs/home/ItemsSection";
 import AiFAB from "@/components/base/AiFAB";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import SearchBar from "@/components/tabs/home/SearchBar";
+import { useEffect } from "react";
 
 export default function Tab() {
 	const dispatch = useDispatch();
-	const handlePress = async () => {
-		await AsyncStorage.clear();
-		dispatch(logout());
-		router.replace("/onBoarding");
-	};
-
+	const router = useRouter()
+	useEffect(()=>{
+		const checkNav = async ()=>{
+			const token = await AsyncStorage.getItem('jwtToken')
+			const onboarded = await AsyncStorage.getItem('onboarded');
+			if(!token&&!onboarded){
+				router.replace('/onBoarding')
+			}
+			else if (onboarded&& !token){
+				router.replace('/auth')
+			}
+		}	
+		checkNav()
+	},[])
 	return (
 		<CustomView
 			mainScreen={true}
