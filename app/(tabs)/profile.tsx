@@ -6,8 +6,8 @@ import SettingsSection from "@/components/tabs/profile/SettingsSection";
 
 export default function ProfileScreen() {
 	return (
-		<TabScreen title='Profile'>
-			<ProfileHeader />
+		<TabScreen isProfile  title='Profile'>
+			<ProfileHeader/>
 
 			<ProfileSection />
 
