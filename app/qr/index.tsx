@@ -46,3 +46,135 @@ const index = () => {
 	}, [email]);
 	const theme = useAppSelector((state) => state.system.colorScheme);
 
+	return (
+		<CustomView
+			style={{
+				padding: 50,
+				display: "flex",
+				gap: 50,
+			}}
+			mainScreen
+		>
+			<CustomText
+				style={{
+					fontFamily: fontFamily.Raleway.Bold,
+					fontSize: 40,
+					marginHorizontal: "auto",
+                    color: theme==='dark'?colors["white-font"]:colors.primary
+				}}
+				content='Baddil'
+			/>
+			<View
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					alignContent: "center",
+					gap: 50,
+				}}
+			>
+				<View
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						justifyContent: "center",
+                        gap: 5
+					}}
+				>
+					<MaterialIcons
+						name='verified'
+						size={30}
+						color={
+							theme === "dark" ? colors["success-dark"] :  colors["success-light"]
+						}
+					/>
+					<CustomText
+						style={{
+							fontFamily: fontFamily.Raleway.Bold,
+							fontSize: 24,
+						}}
+						content='User Scanned!'
+					/>
+				</View>
+				<View
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						gap: 5,
+						alignItems: "center",
+                        marginHorizontal:'auto'
+
+					}}
+				>
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Bold,
+							fontSize: 16,
+						}}
+						content={"Username:"}
+					/>
+
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Regular,
+							fontSize: 16,
+						}}
+						content={userData.name}
+					/>
+				</View>
+				<View
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						gap: 5,
+						alignItems: "center",
+                        marginHorizontal:'auto'
+
+					}}
+				>
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Bold,
+							fontSize: 16,
+						}}
+						content={"Email:"}
+					/>
+
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Regular,
+							fontSize: 16,
+						}}
+						content={userData.email}
+					/>
+				</View>
+				<View
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						gap: 5,
+						alignItems: "center",
+                        marginHorizontal:'auto'
+					}}
+				>
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Bold,
+							fontSize: 16,
+						}}
+						content={"Active since:"}
+					/>
+
+					<CustomText
+						style={{
+							fontFamily: fontFamily.NunitoSans.Regular,
+							fontSize: 16,
+						}}
+						content={userData.createdAt}
+					/>
+				</View>
+			</View>
+		</CustomView>
+	);
+};
+
+export default index;
