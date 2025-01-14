@@ -52,3 +52,130 @@ const QRCodeBubble = () => {
 		setScannerVisible(false);
 	};
 
+	return (
+		<View
+			style={{
+				position: "absolute",
+				bottom: 40,
+				left: 20,
+				flexDirection: "column",
+				gap: 30,
+				padding: 20,
+				borderWidth: 1,
+				borderRadius: 12,
+				borderColor:
+					theme === "dark"
+						? colors["dark-gray-dark-theme"]
+						: colors["light-gray-light-theme"],
+			}}
+		>
+			<TouchableOpacity
+				onPress={handleQrDisplay}
+				style={styles.container}
+			>
+				<MaterialIcons
+					name='qr-code'
+					size={35}
+					color={theme === "dark" ? colors["light-bg"] : colors["dark-bg"]}
+				/>
+			</TouchableOpacity>
+			<TouchableOpacity
+				onPress={handleQrScan}
+				style={styles.container}
+			>
+				<MaterialIcons
+					name='qr-code-scanner'
+					size={35}
+					color={theme === "dark" ? colors["light-bg"] : colors["dark-bg"]}
+				/>
+			</TouchableOpacity>
+
+			<Modal
+				visible={isQrVisible}
+				transparent={true}
+			>
+				<View style={styles.modalContainer}>
+					<QRCode
+						value={uniqueId}
+						size={250}
+					/>
+					<Button
+						title='close'
+						style={{
+							width: 200,
+							marginTop: 40,
+						}}
+						onPress={handleCloseQr}
+					/>
+				</View>
+			</Modal>
+
+			{isScannerVisible && (
+				<Modal
+					visible={isScannerVisible}
+					transparent={true}
+				>
+					<View style={styles.modalContainer}>
+						{hasPermission === null ? (
+							<Text>Requesting camera permission...</Text>
+						) : hasPermission === false ? (
+							<Text>No access to camera</Text>
+						) : (
+							<View
+								style={{
+									borderRadius: 12,
+								}}
+							>
+								<CameraView
+									style={{
+										width: 300,
+										height: 300,
+									}}
+									onBarcodeScanned={({ data }) => {
+										if (!scanned) {
+											setScanned(true); // Set scanned to true immediately
+											setScannerVisible(false); // Hide scanner
+											Linking.openURL(data) // Open the link from QR code
+												.catch(() => {
+													alert("Invalid URL or failed to open link."); // Handle error
+												});
+										}
+									}}
+									facing='back'
+								/>
+							</View>
+						)}
+						<Button
+							title='close'
+							style={{
+								width: 200,
+								marginTop: 20,
+							}}
+							onPress={handleCloseScanner}
+						/>
+					</View>
+				</Modal>
+			)}
+		</View>
+	);
+};
+
+export default QRCodeBubble;
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 5,
+	},
+	text: {
+		fontFamily: fontFamily.NunitoSans.SemiBold,
+	},
+	modalContainer: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "rgba(0,0,0,0.5)",
+	},
+	closeButton: {},
+});
