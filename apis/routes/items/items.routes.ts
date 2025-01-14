@@ -95,3 +95,12 @@ export const addItemToWallet = async (payload: AddItemToWalletPayload) => {
 	}
 };
 
+export const fetchItemDetails = async (itemId: string): Promise<any> => {
+	try {
+		const response = await axios.get(`${APIS_BASE_URL}/wallet/items/${itemId}`);
+		return response.data.data;
+	} catch (error) {
+		console.error("Error fetching item details:", error);
+		throw error; // Re-throw error for further handling
+	}
+};
