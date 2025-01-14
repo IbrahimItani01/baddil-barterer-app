@@ -23,6 +23,7 @@ const iconMap: {
 	Password: "lock",
 	Account: "person",
 };
+const ProfileSection = () => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const { email } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
@@ -52,3 +53,155 @@ const iconMap: {
 	const handleAccountDelete = () => {
 		// handle account delete logic here
 	};
+
+	return (
+		<>
+			<CustomAlert
+				alertFor={alertFor}
+				visible={alertVisible}
+				onCancel={() => setAlertVisible(false)}
+				onConfirm={handleConfirm}
+			/>
+			<CustomView
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: 10,
+				}}
+			>
+				{["Profile Picture", "Username", "Password", "Account"].map(
+					(text, index) => (
+						<CustomView
+							key={index}
+							style={[
+								styles.accountDetailItem,
+								{
+									borderColor:
+										theme === "dark"
+											? colors["dark-gray-dark-theme"]
+											: colors["light-gray-light-theme"],
+								},
+							]}
+						>
+							<View
+								style={{
+									display: "flex",
+									flexDirection: "row",
+									alignItems: "center",
+									gap: 5,
+								}}
+							>
+								<MaterialIcons
+									name={iconMap[text as keyof typeof iconMap]} // Dynamically set icon name from iconMap
+									size={24}
+									color={
+										theme === "dark" ? colors["light-bg"] : colors["dark-bg"]
+									} // Dynamic color based on text and theme
+								/>
+
+								<CustomText
+									style={{
+										fontFamily: fontFamily.NunitoSans.Bold,
+									}}
+									content={text}
+								/>
+							</View>
+
+							{/* Icon before "Change" */}
+							<View
+								style={{
+									display: "flex",
+									flexDirection: "row",
+									gap: 5,
+									alignItems: "center",
+								}}
+							>
+								{text === "Account" ? (
+									<TouchableOpacity
+										style={{
+											display: "flex",
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 3,
+										}}
+										onPress={handleAccountDelete}
+									>
+										<MaterialIcons
+											name='delete'
+											size={16}
+											color={
+												theme === "dark"
+													? colors["white-font"]
+													: colors["black-font"]
+											}
+										/>
+										<></>
+										<CustomText
+											content='Delete'
+											style={[
+												styles.deleteText,
+												{
+													textDecorationLine: "underline",
+													color: colors["primary"],
+												},
+											]}
+										/>
+									</TouchableOpacity>
+								) : (
+									<TouchableOpacity
+										style={{
+											display: "flex",
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 3,
+										}}
+										onPress={() =>
+											text === "Username"
+												? handleOpenAlert("username")
+												: text === "Password"
+												? handleOpenAlert("password")
+												: handleOpenAlert("profilePicture")
+										}
+									>
+										<MaterialIcons
+											name='edit'
+											size={16}
+											color={
+												theme === "dark"
+													? colors["light-bg"]
+													: colors["dark-bg"]
+											} // Dynamic color based on text and theme
+										/>
+										<CustomText
+											content='Change'
+											style={styles.changeText}
+										/>
+									</TouchableOpacity>
+								)}
+							</View>
+						</CustomView>
+					)
+				)}
+			</CustomView>
+		</>
+	);
+};
+
+export default ProfileSection;
+const styles = StyleSheet.create({
+	accountDetailItem: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		padding: 20,
+		borderWidth: 1,
+		borderRadius: 8,
+	},
+	changeText: {
+		textDecorationLine: "underline",
+		color: colors.primary,
+		fontFamily: fontFamily.NunitoSans.SemiBold,
+	},
+	deleteText: {
+		fontFamily: fontFamily.NunitoSans.Bold,
+	},
+});
