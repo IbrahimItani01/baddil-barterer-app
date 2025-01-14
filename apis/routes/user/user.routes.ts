@@ -46,4 +46,26 @@ export const getUserInfo = async () => {
 		})
 		.catch((e) => false);
 };
+export const changeProfilePicture = async (
+	formData: FormData
+): Promise<any> => {
+	try {
+		const token = await AsyncStorage.getItem("jwtToken");
+		if (!token) return;
+		const response = await axios.put(
+			`${APIS_BASE_URL}/users/me/profile-picture`,
+			formData,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`, // Attach JWT token for authentication
+					"Content-Type": "multipart/form-data", // Set content type for file upload
+				},
+			}
+		);
+
+		return response.data;
+	} catch {
+		return false;
+	}
+};
 // TODO: fetch user settings
