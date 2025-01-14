@@ -23,7 +23,7 @@ const TabScreen: React.FC<GenericScreenProps> = ({
 					paddingTop: 15,
 					display: "flex",
 					flexDirection: "column",
-					gap: 30,
+					gap: 20,
 					...style, // Allow custom styles
 				}}
 			>
