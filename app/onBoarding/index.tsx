@@ -28,7 +28,7 @@ const OnboardingScreen = () => {
 
 	const handleNav = async () => {
 		try {
-			await AsyncStorage.setItem("hasOnboarded", "true");
+			await AsyncStorage.setItem("onboarded", "true");
 			dispatch(completeOnboarding());
 			router.replace("/auth");
 		} catch (error) {
