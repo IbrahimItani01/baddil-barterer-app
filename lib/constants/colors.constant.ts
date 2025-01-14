@@ -6,4 +6,6 @@ export const colors = {
 	"white-font": "#FFFFFF",
 	"light-gray-light-theme": "#D3D3D3",
 	"dark-gray-dark-theme": "#4A4A4A",
+	"success-light": "#4CAF50",  // Light mode success green
+	"success-dark": "#28A745",   // Dark mode success green
 };
