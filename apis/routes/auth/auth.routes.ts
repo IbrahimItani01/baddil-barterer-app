@@ -21,7 +21,6 @@ export const loginUser = async (
 		await dispatch(setStatus(user.status));
 		Alert.alert("Success!", "Welcome Back!");
 	} catch (error) {
-		console.error(error);
 		Alert.alert("Failed!", "Login failed, try again!");
 	}
 };
