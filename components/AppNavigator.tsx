@@ -32,7 +32,7 @@ const AppNavigator = () => {
 				dispatch(startBooting());
 				await initializeApp(dispatch).finally(() => dispatch(stoppedBooting()));
 			}
-			handleStatusNavigation(status, router, token, onboarded, dispatch);
+			handleStatusNavigation(status, router,dispatch);
 		};
 
 		initAndNavigate();
