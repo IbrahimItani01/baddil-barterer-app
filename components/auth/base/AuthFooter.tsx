@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
 	},
 	hyperLinkText: {
 		textDecorationLine: "underline",
+		color:colors.primary,
+		fontFamily: fontFamily.NunitoSans.Bold,
 	},
 });
 
