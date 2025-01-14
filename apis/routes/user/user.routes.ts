@@ -32,19 +32,14 @@ export const serveUserProfileImage = async () => {
 
 export const getUserInfo = async () => {
 	const token = await AsyncStorage.getItem("jwtToken");
-	if (!token) return;
-	return await axios
-		.get(`${APIS_BASE_URL}/users/me`, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
-		.then((response) => {
-			if (response.data.success) {
-				return response.data.data;
-			}
-		})
-		.catch((e) => false);
+	const response = await axios.get(`${APIS_BASE_URL}/users/me`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	if (response.data.success){
+		return response.data.data
+	}
 };
 export const changeProfilePicture = async (
 	formData: FormData
