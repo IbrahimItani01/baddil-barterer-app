@@ -1,20 +1,51 @@
-import { View, Text, ViewStyle } from "react-native";
+import { View, Text, ViewStyle, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import CustomText from "@/components/base/CustomText";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import CustomView from "@/components/base/CustomView";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { MaterialIcons } from "@expo/vector-icons";
+import { colors } from "@/lib/constants/colors.constant";
+import { useAppDispatch } from "@/store/hooks";
+import { logout } from "@/store/slices/user.slice";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface GenericScreenProps {
 	title: string;
 	children: React.ReactNode;
 	style?: ViewStyle;
+	isProfile?: boolean;
 }
 const TabScreen: React.FC<GenericScreenProps> = ({
 	title,
 	children,
 	style,
+	isProfile = false,
 }) => {
+	const dispatch = useAppDispatch()
+	const router = useRouter();
+	const handleLogout = ()=>{
+		Alert.alert(
+			'Logout Confirmation',
+			'Are you sure you want to log out?',
+			[
+			  {
+				text: 'Cancel',
+				style: 'cancel',
+			  },
+			  {
+				text: 'Yes',
+				onPress: async () => {
+				  dispatch(logout()); // Dispatch the logout action
+				  await AsyncStorage.removeItem('jwtToken'); // Remove the token
+				  router.replace('/auth'); // Navigate to the auth screen
+				},
+			  },
+			],
+			{ cancelable: true }
+		  );
+	}
 	return (
 		<CustomView mainScreen={true}>
 			<SafeAreaView
@@ -27,13 +58,31 @@ const TabScreen: React.FC<GenericScreenProps> = ({
 					...style, // Allow custom styles
 				}}
 			>
-				<CustomText
+				<View
 					style={{
-						fontFamily: fontFamily.Raleway.Bold,
-						fontSize: 40,
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "space-between",
 					}}
-					content={title}
-				/>
+				>
+					<CustomText
+						style={{
+							fontFamily: fontFamily.Raleway.Bold,
+							fontSize: 40,
+						}}
+						content={title}
+					/>
+					{isProfile && (
+						<TouchableOpacity onPress={handleLogout}>
+							<MaterialIcons
+								name='logout'
+								color={colors.primary}
+								size={30}
+							/>
+						</TouchableOpacity>
+					)}
+				</View>
 				{children}
 			</SafeAreaView>
 		</CustomView>
