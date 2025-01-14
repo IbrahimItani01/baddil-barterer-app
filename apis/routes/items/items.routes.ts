@@ -58,3 +58,40 @@ export const fetchUserItems = async (userId?: string) => {
 		throw error; // Propagate error for handling in the calling function
 	}
 };
+
+export const addItemToWallet = async (payload: AddItemToWalletPayload) => {
+	try {
+		if (payload.files.length !== 5) {
+			throw new Error("Exactly 5 images must be uploaded.");
+		}
+
+		const formData = new FormData();
+		formData.append("name", payload.name);
+		formData.append("description", payload.description);
+		formData.append("categoryId", payload.categoryId);
+		formData.append("subcategoryId", payload.subcategoryId);
+		formData.append("condition", payload.condition);
+		formData.append("locationId", payload.locationId);
+
+		payload.files.forEach((file) => {
+			formData.append("files", file); // Add each file to the FormData
+		});
+		const token = await AsyncStorage.getItem("jwtToken");
+		const response = await axios.post(
+			`${APIS_BASE_URL}/wallet/items`,
+			formData,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "multipart/form-data",
+				},
+			}
+		);
+
+		return response.data; // Handle success response
+	} catch (error) {
+		console.error("Error adding item to wallet:", error);
+		throw error; // Re-throw error for further handling
+	}
+};
+
