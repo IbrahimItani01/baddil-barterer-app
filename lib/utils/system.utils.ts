@@ -5,7 +5,6 @@ import {
 	logout,
 	setOnboarding,
 	setProfilePictureUrl,
-	setStatus,
 	setUserName,
 } from "@/store/slices/user.slice";
 import {
@@ -17,72 +16,54 @@ import { UserStatusEnum } from "./enums.utils";
 import { showAlert } from "./async.utils";
 import { BackHandler, Platform } from "react-native";
 import { getUserTier } from "@/apis/routes/tiers/tiers.routes";
-import { useEffect } from "react";
+import { fetchCategories } from "@/apis/routes/categories/categories.routes";
+import { setCategories } from "@/store/slices/categories.slice";
 
 export const initializeApp = async (dispatch: Dispatch) => {
 	await checkOnboardingStatus(dispatch);
 	await checkLoginStatus(dispatch);
 	await fetchProfilePicture(dispatch);
-	await fetchUserData(dispatch);
 	await getUserTier(dispatch);
+	await getCategoriesData(dispatch);
+	await fetchUserData(dispatch);
 };
 
 export const handleNavigation = async (
-	isLoggedIn: boolean,
-	hasOnboarded: boolean,
-	booting: boolean,
-	router: Router
+	router: Router,
+	token: string | null,
+	onboardedFromStorage: string | null
 ) => {
-	// UseEffect to handle navigation after the component is mounted
-	useEffect(() => {
-		const checkStorageAndNavigate = async () => {
-			try {
-				// Retrieve values from AsyncStorage
-				const onboardedFromStorage = await AsyncStorage.getItem("hasOnboarded");
-				const token = await AsyncStorage.getItem("jwtToken");
-				const hasOnboardedFromStorage = onboardedFromStorage === "true";
+	try {
+		// Retrieve values from AsyncStorage
+		const hasOnboardedFromStorage = onboardedFromStorage === "true";
 
-				if (
-					!isLoggedIn &&
-					!hasOnboarded &&
-					!token &&
-					!hasOnboardedFromStorage
-				) {
-					router.replace("/onBoarding");
-				} else if (
-					(!isLoggedIn && hasOnboarded) ||
-					(!token && hasOnboardedFromStorage)
-				) {
-					router.replace("/auth");
-				} else {
-					router.replace("/(tabs)");
-				}
-			} catch (error) {
-				console.error("Error checking AsyncStorage:", error);
-				router.replace("/auth");
-			}
-		};
-
-		checkStorageAndNavigate();
-	}, [isLoggedIn, hasOnboarded, booting, router]);
+		if (!token && !hasOnboardedFromStorage) {
+			router.replace("/onBoarding");
+		} else if (!token && hasOnboardedFromStorage) {
+			router.replace("/auth");
+		} else {
+			router.replace("/(tabs)");
+		}
+	} catch (error) {
+		router.replace("/auth");
+	}
 };
 
 export const handleStatusNavigation = async (
-	isLoggedIn: boolean,
-	hasOnboarded: boolean,
 	status: UserStatusEnum,
-	booting: boolean,
 	router: Router,
+	token: string | null,
+	onboardedFromStorage: string | null,
 	dispatch: Dispatch
 ) => {
 	if (status === UserStatusEnum.Active) {
-		handleNavigation(isLoggedIn, hasOnboarded, booting, router);
+		handleNavigation(router, token, onboardedFromStorage);
 	} else if (status === UserStatusEnum.Flagged) {
 		await showAlert(
 			"Warning, Flagged User!",
 			"Contact support@baddil.com to resolve the conflict"
 		);
-		handleNavigation(isLoggedIn, hasOnboarded, booting, router);
+		handleNavigation(router, token, onboardedFromStorage);
 	} else {
 		await showAlert(
 			"Can't Access Baddil, Banned User!",
@@ -119,7 +100,6 @@ export const fetchProfilePicture = async (dispatch: Dispatch) => {
 export const fetchUserData = async (dispatch: Dispatch) => {
 	const userData = await getUserInfo();
 	dispatch(setUserName(userData.name));
-	dispatch(setStatus(userData.status));
 };
 
 export const clearStorageOnDev = async () => {
@@ -131,4 +111,8 @@ export const clearStorageOnDev = async () => {
 			console.error("Failed to clear AsyncStorage", error);
 		}
 	}
+};
+export const getCategoriesData = async (dispatch: Dispatch) => {
+	const categoriesData = await fetchCategories();
+	dispatch(setCategories(categoriesData));
 };
