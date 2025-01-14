@@ -20,6 +20,7 @@ const index = () => {
 		createdAt: "",
 		userStatus: "",
 	});
+	const [noData, setNoData] = useState(true);
 
 	useEffect(() => {
 		const getUserData = async () => {
@@ -27,7 +28,7 @@ const index = () => {
 			if (normalizedEmail) {
 				try {
 					const response = await checkUserByEmail(normalizedEmail);
-                    console.log(response.data)
+					console.log(response.data);
 					if (response?.data) {
 						setUserData({
 							name: response.data.name || "",
@@ -35,6 +36,7 @@ const index = () => {
 							createdAt: formatDate(response.data.created_at) || "",
 							userStatus: response.data.user_status_id || "",
 						});
+						setNoData(false);
 					}
 				} catch (error) {
 					console.error("Failed to fetch user data:", error);
@@ -60,7 +62,7 @@ const index = () => {
 					fontFamily: fontFamily.Raleway.Bold,
 					fontSize: 40,
 					marginHorizontal: "auto",
-                    color: theme==='dark'?colors["white-font"]:colors.primary
+					color: theme === "dark" ? colors["white-font"] : colors.primary,
 				}}
 				content='Baddil'
 			/>
@@ -77,14 +79,18 @@ const index = () => {
 						display: "flex",
 						flexDirection: "row",
 						justifyContent: "center",
-                        gap: 5
+						gap: 5,
 					}}
 				>
 					<MaterialIcons
-						name='verified'
+						name={!noData ? "verified" : "error"}
 						size={30}
 						color={
-							theme === "dark" ? colors["success-dark"] :  colors["success-light"]
+							!noData
+								? theme === "dark"
+									? colors["success-dark"]
+									: colors["success-light"]
+								: colors.primary
 						}
 					/>
 					<CustomText
@@ -92,86 +98,90 @@ const index = () => {
 							fontFamily: fontFamily.Raleway.Bold,
 							fontSize: 24,
 						}}
-						content='User Scanned!'
+						content={!noData ? "User Scanned!" : "User not found!"}
 					/>
 				</View>
-				<View
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						gap: 5,
-						alignItems: "center",
-                        marginHorizontal:'auto'
+				{!noData ? (
+					<>
+						<View
+							style={{
+								display: "flex",
+								flexDirection: "row",
+								gap: 5,
+								alignItems: "center",
+								marginHorizontal: "auto",
+							}}
+						>
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Bold,
+									fontSize: 16,
+								}}
+								content={"Username:"}
+							/>
 
-					}}
-				>
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Bold,
-							fontSize: 16,
-						}}
-						content={"Username:"}
-					/>
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Regular,
+									fontSize: 16,
+								}}
+								content={userData.name}
+							/>
+						</View>
+						<View
+							style={{
+								display: "flex",
+								flexDirection: "row",
+								gap: 5,
+								alignItems: "center",
+								marginHorizontal: "auto",
+							}}
+						>
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Bold,
+									fontSize: 16,
+								}}
+								content={"Email:"}
+							/>
 
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Regular,
-							fontSize: 16,
-						}}
-						content={userData.name}
-					/>
-				</View>
-				<View
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						gap: 5,
-						alignItems: "center",
-                        marginHorizontal:'auto'
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Regular,
+									fontSize: 16,
+								}}
+								content={userData.email}
+							/>
+						</View>
+						<View
+							style={{
+								display: "flex",
+								flexDirection: "row",
+								gap: 5,
+								alignItems: "center",
+								marginHorizontal: "auto",
+							}}
+						>
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Bold,
+									fontSize: 16,
+								}}
+								content={"Active since:"}
+							/>
 
-					}}
-				>
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Bold,
-							fontSize: 16,
-						}}
-						content={"Email:"}
-					/>
-
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Regular,
-							fontSize: 16,
-						}}
-						content={userData.email}
-					/>
-				</View>
-				<View
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						gap: 5,
-						alignItems: "center",
-                        marginHorizontal:'auto'
-					}}
-				>
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Bold,
-							fontSize: 16,
-						}}
-						content={"Active since:"}
-					/>
-
-					<CustomText
-						style={{
-							fontFamily: fontFamily.NunitoSans.Regular,
-							fontSize: 16,
-						}}
-						content={userData.createdAt}
-					/>
-				</View>
+							<CustomText
+								style={{
+									fontFamily: fontFamily.NunitoSans.Regular,
+									fontSize: 16,
+								}}
+								content={userData.createdAt}
+							/>
+						</View>
+					</>
+				) : (
+					<></>
+				)}
 			</View>
 		</CustomView>
 	);
