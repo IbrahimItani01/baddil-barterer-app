@@ -1,47 +1,63 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ItemState {
-	title: string;
-	location: string;
-	condition: string;
+
+interface Item {
+	id: string;
+	name: string;
 	description: string;
-	images: string[];
+	category_id: string;
+	subcategory_id: string;
+	condition: string;
+	location_id: string;
+	wallet_id: string;
+	value: number;
+	created_at: Date;
+	updated_at: Date;
+	wallet: {
+		id: string;
+		created_at: Date;
+		updated_at: Date;
+		owner_id: string;
+		owner: {
+			email: string;
+		};
+	};
 }
 
-const initialState: ItemState = {
-	title: "",
-	location: "",
-	condition: "",
-	description: "",
-	images: [],
+interface ItemsState {
+	items: Item[]; 
+}
+
+
+const initialState: ItemsState = {
+	items: [],
 };
 
 const itemsSlice = createSlice({
-	name: "item",
+	name: "items",
 	initialState,
 	reducers: {
-		setItemField: (
-			state,
-			action: PayloadAction<{
-				field: Exclude<keyof ItemState, "images">;
-				value: string;
-			}>
-		) => {
-			state[action.payload.field] = action.payload.value;
+		setItems: (state, action: PayloadAction<Item[]>) => {
+			state.items = action.payload; 
 		},
-
-		addImage: (state, action: PayloadAction<string>) => {
-			if (state.images.length < 5) {
-				state.images.push(action.payload);
+		addItem: (state, action: PayloadAction<Item>) => {
+			state.items.push(action.payload); 
+		},
+		updateItem: (state, action: PayloadAction<Item>) => {
+			const index = state.items.findIndex(
+				(item) => item.id === action.payload.id
+			);
+			if (index !== -1) {
+				state.items[index] = action.payload; 
 			}
 		},
-		removeImage: (state, action: PayloadAction<string>) => {
-			state.images = state.images.filter((image) => image !== action.payload);
+		removeItem: (state, action: PayloadAction<string>) => {
+			state.items = state.items.filter((item) => item.id !== action.payload); 
 		},
-		resetItemForm: () => initialState,
+		resetItems: () => initialState, 
 	},
 });
 
-export const { setItemField, addImage, removeImage, resetItemForm } =
+export const { setItems, addItem, updateItem, removeItem, resetItems } =
 	itemsSlice.actions;
 export default itemsSlice.reducer;
