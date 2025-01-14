@@ -23,9 +23,12 @@ const screenLoaderSlice = createSlice({
 		stoppedBooting: (state) => {
 			state.booting = false;
 		},
+		startBooting: (state) => {
+			state.booting = true;
+		},
 	},
 });
 
-export const { showLoader, hideLoader, stoppedBooting } =
+export const { showLoader, hideLoader, stoppedBooting,startBooting } =
 	screenLoaderSlice.actions;
 export default screenLoaderSlice.reducer;
