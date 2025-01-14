@@ -64,3 +64,28 @@ export const changeProfilePicture = async (
 	}
 };
 // TODO: fetch user settings
+export const updateUserInfo = async (updateData: any): Promise<any> => {
+	try {
+	  const token = await AsyncStorage.getItem("jwtToken");
+	  if (!token) {
+		console.error("No token found");
+		return false;
+	  }
+  
+	  const response = await axios.put(
+		`${APIS_BASE_URL}/users/me`,
+		updateData,
+		{
+		  headers: {
+			Authorization: `Bearer ${token}`, // Include the JWT token
+		  },
+		}
+	  );
+  
+	  return response.data; // Assuming the API response has a `success` property
+	} catch (error) {
+	  console.error("Error updating user information:", error);
+	  return false;
+	}
+  };
+  
