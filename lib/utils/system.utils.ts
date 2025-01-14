@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import {
 	login,
 	logout,
+	setEmail,
 	setOnboarding,
 	setProfilePictureUrl,
 	setUserName,
@@ -18,6 +19,8 @@ import { BackHandler, Platform } from "react-native";
 import { getUserTier } from "@/apis/routes/tiers/tiers.routes";
 import { fetchCategories } from "@/apis/routes/categories/categories.routes";
 import { setCategories } from "@/store/slices/categories.slice";
+import { replaceLocalhost } from "./general.utils";
+import { currentIp } from "@/apis/main";
 
 export const initializeApp = async (dispatch: Dispatch) => {
 	await checkOnboardingStatus(dispatch);
@@ -28,18 +31,13 @@ export const initializeApp = async (dispatch: Dispatch) => {
 	await fetchUserData(dispatch);
 };
 
-export const handleNavigation = async (
-	router: Router,
-	token: string | null,
-	onboardedFromStorage: string | null
-) => {
+export const handleNavigation = async (router: Router) => {
 	try {
-		// Retrieve values from AsyncStorage
-		const hasOnboardedFromStorage = onboardedFromStorage === "true";
-
-		if (!token && !hasOnboardedFromStorage) {
+		const token = await AsyncStorage.getItem("jwtToken");
+		const onboarded = await AsyncStorage.getItem("onboarded");
+		if (!token && !onboarded) {
 			router.replace("/onBoarding");
-		} else if (!token && hasOnboardedFromStorage) {
+		} else if (!token && onboarded) {
 			router.replace("/auth");
 		} else {
 			router.replace("/(tabs)");
@@ -52,18 +50,16 @@ export const handleNavigation = async (
 export const handleStatusNavigation = async (
 	status: UserStatusEnum,
 	router: Router,
-	token: string | null,
-	onboardedFromStorage: string | null,
 	dispatch: Dispatch
 ) => {
 	if (status === UserStatusEnum.Active) {
-		handleNavigation(router, token, onboardedFromStorage);
+		handleNavigation(router);
 	} else if (status === UserStatusEnum.Flagged) {
 		await showAlert(
 			"Warning, Flagged User!",
 			"Contact support@baddil.com to resolve the conflict"
 		);
-		handleNavigation(router, token, onboardedFromStorage);
+		handleNavigation(router);
 	} else {
 		await showAlert(
 			"Can't Access Baddil, Banned User!",
@@ -94,12 +90,14 @@ export const checkLoginStatus = async (dispatch: Dispatch) => {
 
 export const fetchProfilePicture = async (dispatch: Dispatch) => {
 	const profilePictureUrl = await serveUserProfileImage();
-	dispatch(setProfilePictureUrl(profilePictureUrl || ""));
+	const newUrl = replaceLocalhost(profilePictureUrl, currentIp);
+	dispatch(setProfilePictureUrl(newUrl || ""));
 };
 
 export const fetchUserData = async (dispatch: Dispatch) => {
 	const userData = await getUserInfo();
 	dispatch(setUserName(userData.name));
+	dispatch(setEmail(userData.email));
 };
 
 export const clearStorageOnDev = async () => {
