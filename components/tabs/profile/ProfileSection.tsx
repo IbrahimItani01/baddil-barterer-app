@@ -23,3 +23,32 @@ const iconMap: {
 	Password: "lock",
 	Account: "person",
 };
+	const theme = useAppSelector((state) => state.system.colorScheme);
+	const { email } = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+
+	const [alertVisible, setAlertVisible] = useState(false);
+	const [alertFor, setAlertFor] = useState<
+		"username" | "password" | "profilePicture"
+	>("username");
+
+	const handleOpenAlert = (
+		type: "username" | "password" | "profilePicture"
+	) => {
+		setAlertFor(type);
+		setAlertVisible(true);
+	};
+
+	const handleConfirm = (value: string) => {
+		if (alertFor === "username" && value.trim()) {
+			dispatch(setUserName(value));
+		} else if (alertFor === "password") {
+			withLoader(dispatch, () => sendForgetPasswordEmail(email));
+		} else if (alertFor === "profilePicture") {
+			// handle profile picture change
+		}
+		setAlertVisible(false);
+	};
+	const handleAccountDelete = () => {
+		// handle account delete logic here
+	};
