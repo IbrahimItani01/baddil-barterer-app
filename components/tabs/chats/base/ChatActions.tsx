@@ -10,6 +10,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import { colors } from "@/lib/constants/colors.constant";
 import { useAppSelector } from "@/store/hooks";
+import QRCodeBubble from "../QRCodeBubble";
 
 interface ChatActionsProps {
 	onSendMessage: (message: string) => void;
@@ -18,15 +19,24 @@ interface ChatActionsProps {
 const ChatActions: React.FC<ChatActionsProps> = ({ onSendMessage }) => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const [message, setMessage] = useState("");
-
+	const [meetupVisible,setMeetupVisible] = useState(false)
 	const handleMessageSend = () => {
 		if (message.trim()) {
 			onSendMessage(message.trim());
 			setMessage(""); // Clear message after sending
 		}
 	};
-
+	const handleMeetupBubble = ()=>{
+		// Your meetup bubble logic here
+		setMeetupVisible(!meetupVisible)
+	}
 	return (
+		<>
+		{meetupVisible && (
+			<>
+			<QRCodeBubble/>
+			</>
+		)}
 		<KeyboardAvoidingView
 			behavior={Platform.OS === "ios" ? "padding" : "height"}
 			style={{ position: "absolute", bottom: -35, left: 0, right: 0 }}
@@ -41,7 +51,7 @@ const ChatActions: React.FC<ChatActionsProps> = ({ onSendMessage }) => {
 					alignItems: "center",
 				}}
 			>
-				<TouchableOpacity>
+				<TouchableOpacity onPress={handleMeetupBubble}>
 					<MaterialIcons
 						name='handshake'
 						size={30}
@@ -81,6 +91,7 @@ const ChatActions: React.FC<ChatActionsProps> = ({ onSendMessage }) => {
 				</TouchableOpacity>
 			</View>
 		</KeyboardAvoidingView>
+		</>
 	);
 };
 
