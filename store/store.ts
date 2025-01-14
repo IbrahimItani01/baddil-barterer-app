@@ -5,6 +5,9 @@ import screenLoaderSlice from "./slices/screenLoader.slice";
 import tierSlice from "./slices/tier.slice";
 import systemSlice from "./slices/system.slice";
 import itemsSlice from "./slices/items.slice";
+import categoriesSlice from "./slices/categories.slice";
+import walletSlice from "./slices/wallet.slice";
+import locationsSlice from "./slices/locations.slice";
 
 const store = configureStore({
 	reducer: {
@@ -14,7 +17,9 @@ const store = configureStore({
 		tiers: tierSlice,
 		system: systemSlice,
 		item: itemsSlice,
-
+		categories: categoriesSlice,
+		wallets: walletSlice,
+		locations: locationsSlice,
 	},
 });
 
