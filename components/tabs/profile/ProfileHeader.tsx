@@ -1,5 +1,5 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
+import { Image, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
 import CustomText from "@/components/base/CustomText";
 import { MaterialIcons } from "@expo/vector-icons"; // Import Material Icons for fallback face icon
 import CustomView from "@/components/base/CustomView";
@@ -10,15 +10,14 @@ import { fontFamily } from "@/lib/constants/fonts.constant";
 const ProfileHeader = () => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const { userName, profilePictureUrl } = useAppSelector((state) => state.user);
-	const fallbackProfilePicture =
-		profilePictureUrl || "https://via.placeholder.com/100";
 	const fallbackUserName = userName || "John Doe";
+
 	return (
 		<CustomView style={styles.profileContainer}>
 			{/* Profile Picture */}
-			{profilePictureUrl ? (
+			{profilePictureUrl != "" ? (
 				<Image
-					source={{ uri: fallbackProfilePicture }}
+					source={{ uri: profilePictureUrl }}
 					alt='Profile'
 					style={styles.profileImage}
 				/>
@@ -52,8 +51,8 @@ const styles = StyleSheet.create({
 		gap: 5,
 	},
 	profileImage: {
-		width: "100%",
-		height: "100%",
+		width: 80,
+		height: 80,
 		borderRadius: 50,
 	},
 	profileName: {
