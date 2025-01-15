@@ -14,6 +14,7 @@ import CustomText from "@/components/base/CustomText";
 import { launchImageLibraryAsync } from "expo-image-picker";
 import { changeProfilePicture } from "@/apis/routes/user/user.routes";
 import { withLoader } from "@/lib/utils/async.utils";
+import { fetchProfilePicture } from "@/lib/utils/system.utils";
 
 interface Props {
 	alertFor: "username" | "password" | "profilePicture";
@@ -49,7 +50,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 		setSelectedImage("");
 		onCancel(); // Call the provided onCancel handler
 	};
-	const handleConfirm = () => {
+	const handleConfirm = async () => {
 		if (alertFor === "profilePicture" && selectedImage) {
 			const fileType = selectedImage.split(".").pop()?.toLowerCase();
 			const mimeType = fileType === "png" ? "image/png" : "image/jpeg";
@@ -64,6 +65,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 				name: fileName,
 			} as unknown as Blob);
 			withLoader(dispatch, () => changeProfilePicture(formData));
+			await fetchProfilePicture(dispatch);
 			onCancel(); // Close the modal after updating
 		} else {
 			onConfirm(inputValue); // Handle other alerts
