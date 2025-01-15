@@ -4,7 +4,6 @@ import { useAppSelector } from "@/store/hooks";
 import CustomText from "@/components/base/CustomText";
 import CustomView from "@/components/base/CustomView";
 import { MaterialIcons } from "@expo/vector-icons";
-import { isValidProfilePictureUrl } from "@/lib/utils/authValidation.utils";
 import { colors } from "@/lib/constants/colors.constant";
 
 const WelcomeBar = () => {
@@ -17,7 +16,7 @@ const WelcomeBar = () => {
 				style={styles.welcomeText}
 				content={`Welcome, ${userName ? userName : "John"}!`}
 			/>
-			{isValidProfilePictureUrl(profilePictureUrl) ? (
+			{profilePictureUrl ? (
 				<Image
 					source={{ uri: profilePictureUrl }}
 					style={styles.profileImage}
@@ -40,15 +39,16 @@ const styles = StyleSheet.create({
 		width: "100%",
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "space-between",
+		justifyContent:'space-between',
+		alignItems:'center'
 	},
 	welcomeText: {
 		fontSize: 24,
 		fontFamily: "Raleway-Bold",
 	},
 	profileImage: {
-		width: 30,
-		height: 30,
-		borderRadius: 15,
+		width: 45,
+		height: 50,
+		borderRadius: 50,
 	},
 });
