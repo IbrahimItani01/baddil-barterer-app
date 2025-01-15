@@ -10,6 +10,7 @@ import { Camera, CameraView } from "expo-camera";
 import Button from "@/components/base/Button";
 import { Linking } from "react-native"; // Import for opening links
 import { getBaseAppUrl } from "@/lib/constants/connection.constant";
+import { currentIp } from "@/apis/main";
 
 const QRCodeBubble = () => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
@@ -18,7 +19,7 @@ const QRCodeBubble = () => {
 	const [scanned, setScanned] = useState(false);
 	const [isScannerVisible, setScannerVisible] = useState(false);
 	const email = useAppSelector((state) => state.user.email);
-	const [baseUrl, setBaseUrl] = useState("http://200.200.200.105:8081");
+	const [baseUrl, setBaseUrl] = useState(`http://${currentIp}:8081`);
 
 	useEffect(() => {
 		// const fetchBaseUrl = async () => {
