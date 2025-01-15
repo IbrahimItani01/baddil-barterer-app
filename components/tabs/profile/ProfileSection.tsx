@@ -10,6 +10,7 @@ import { setUserName } from "@/store/slices/user.slice";
 import CustomAlert from "./base/CustomAlert";
 import { withLoader } from "@/lib/utils/async.utils";
 import { sendForgetPasswordEmail } from "@/apis/routes/auth/auth.routes";
+import { updateUserInfo } from "@/apis/routes/user/user.routes";
 
 const iconMap: {
 	[key in
@@ -43,6 +44,7 @@ const ProfileSection = () => {
 	const handleConfirm = (value: string) => {
 		if (alertFor === "username" && value.trim()) {
 			dispatch(setUserName(value));
+			withLoader(dispatch, () => updateUserInfo({ name: value }));
 		} else if (alertFor === "password") {
 			withLoader(dispatch, () => sendForgetPasswordEmail(email));
 		} else if (alertFor === "profilePicture") {
