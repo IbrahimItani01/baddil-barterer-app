@@ -19,7 +19,7 @@ const QRCodeBubble = () => {
 	const [scanned, setScanned] = useState(false);
 	const [isScannerVisible, setScannerVisible] = useState(false);
 	const email = useAppSelector((state) => state.user.email);
-	const [baseUrl, setBaseUrl] = useState(`http://${currentIp}:8081`);
+	const [baseUrl, setBaseUrl] = useState(`http://${currentIp}:5173`);
 
 	useEffect(() => {
 		// const fetchBaseUrl = async () => {
@@ -34,7 +34,7 @@ const QRCodeBubble = () => {
 		};
 		getPermissions();
 	}, []);
-	const uniqueId = `${baseUrl}/qr?email=${encodeURIComponent(email)}`;
+	const uniqueId = `${baseUrl}/meetup-verify/${encodeURIComponent(email)}`;
 
 	const handleQrDisplay = () => {
 		setQrVisible(true);
