@@ -21,6 +21,8 @@ import { fetchCategories } from "@/apis/routes/categories/categories.routes";
 import { setCategories } from "@/store/slices/categories.slice";
 import { replaceLocalhost } from "./general.utils";
 import { currentIp } from "@/apis/main";
+import { setLocations } from "@/store/slices/locations.slice";
+import { getAllLocationsData } from "@/apis/routes/locations/locations.routes";
 
 export const initializeApp = async (dispatch: Dispatch) => {
 	await checkOnboardingStatus(dispatch);
@@ -29,6 +31,7 @@ export const initializeApp = async (dispatch: Dispatch) => {
 	await getUserTier(dispatch);
 	await getCategoriesData(dispatch);
 	await fetchUserData(dispatch);
+	await getAllLocations(dispatch)
 };
 
 export const handleNavigation = async (router: Router) => {
@@ -114,3 +117,7 @@ export const getCategoriesData = async (dispatch: Dispatch) => {
 	const categoriesData = await fetchCategories();
 	dispatch(setCategories(categoriesData));
 };
+export const getAllLocations = async (dispatch: Dispatch)=>{
+	const locationsData = await getAllLocationsData();
+	dispatch(setLocations(locationsData));
+}
