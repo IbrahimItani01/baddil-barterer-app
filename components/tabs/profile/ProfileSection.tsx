@@ -128,16 +128,6 @@ const ProfileSection = () => {
 										}}
 										onPress={handleAccountDelete}
 									>
-										<MaterialIcons
-											name='delete'
-											size={16}
-											color={
-												theme === "dark"
-													? colors["white-font"]
-													: colors["black-font"]
-											}
-										/>
-										<></>
 										<CustomText
 											content='Delete'
 											style={[
@@ -165,15 +155,6 @@ const ProfileSection = () => {
 												: handleOpenAlert("profilePicture")
 										}
 									>
-										<MaterialIcons
-											name='edit'
-											size={16}
-											color={
-												theme === "dark"
-													? colors["light-bg"]
-													: colors["dark-bg"]
-											} // Dynamic color based on text and theme
-										/>
 										<CustomText
 											content='Change'
 											style={styles.changeText}
