@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
 		padding: 10,
 		width: "100%",
 		textAlign: "center",
-		borderRadius: 12,
+		borderRadius: 8,
 	},
 });
