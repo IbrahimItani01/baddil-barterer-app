@@ -24,7 +24,7 @@ const ItemCard = ({ item }: { item: Barter }) => {
 		console.log("Navigate to item details screen");
 		// TODO: route to path with item id
 	};
-	
+
 	return (
 		<TouchableOpacity
 			onPress={handleNavigate}
@@ -36,11 +36,12 @@ const ItemCard = ({ item }: { item: Barter }) => {
 				}}
 				style={[styles.card, { borderColor: borderBlockColor }]}
 			>
+				<View style={styles.overlay} />
 				<View style={styles.textContainer}>
-					<Text style={[styles.title, { color: colors["black-font"] }]}>
+					<Text style={[styles.title, { color: colors["white-font"] }]}>
 						{item.title}
 					</Text>
-					<Text style={[styles.location, { color: colors["black-font"] }]}>
+					<Text style={[styles.location, { color: colors["white-font"] }]}>
 						{item.location}
 					</Text>
 				</View>
@@ -48,9 +49,9 @@ const ItemCard = ({ item }: { item: Barter }) => {
 					<MaterialIcons
 						name='calendar-today'
 						size={16}
-						color={colors["black-font"]}
+						color={colors["white-font"]}
 					/>
-					<Text style={[styles.timestamp, { color: colors["black-font"] }]}>
+					<Text style={[styles.timestamp, { color: colors["white-font"] }]}>
 						{item.timestamp}
 					</Text>
 				</View>
@@ -58,7 +59,7 @@ const ItemCard = ({ item }: { item: Barter }) => {
 					<MaterialIcons
 						name={item.favorite ? "favorite" : "favorite-border"}
 						size={24}
-						color={item.favorite ? colors.primary : colors["black-font"]}
+						color={item.favorite ? colors.primary : colors["white-font"]}
 					/>
 				</View>
 			</ImageBackground>
@@ -79,7 +80,10 @@ const styles = StyleSheet.create({
 		overflow: "hidden",
 		position: "relative",
 	},
-
+	overlay: {
+		...StyleSheet.absoluteFillObject,
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
+	},
 	textContainer: {
 		position: "absolute",
 		flexDirection: "column",
