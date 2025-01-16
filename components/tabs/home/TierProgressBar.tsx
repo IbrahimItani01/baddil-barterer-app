@@ -12,29 +12,25 @@ const TierProgressBar = () => {
 
 	return (
 		<CustomView style={styles.container}>
-			{currentTier ? (
-				<>
-					<CustomText
-						content={`Tier: ${currentTier}`}
-						style={styles.tierText}
-					/>
-					<Progress.Bar
-						progress={progress / 100}
-						width={null}
-						height={12}
-						useNativeDriver={true}
-						color={colors.primary}
-						borderColor={
-							theme === "light"
-								? colors["light-gray-light-theme"]
-								: colors["dark-gray-dark-theme"]
-						}
-						borderRadius={20}
-					/>
-				</>
-			) : (
-				<CustomText content='Start Bartering to open Tiers' />
-			)}
+			<CustomText
+				content={`Tier: ${
+					currentTier ? currentTier : "Start Bartering to fill your Tier Bar!"
+				}`}
+				style={styles.tierText}
+			/>
+			<Progress.Bar
+				progress={currentTier ? progress / 100 : 0}
+				width={null}
+				height={12}
+				useNativeDriver={true}
+				color={colors.primary}
+				borderColor={
+					theme === "light"
+						? colors["light-gray-light-theme"]
+						: colors["dark-gray-dark-theme"]
+				}
+				borderRadius={20}
+			/>
 		</CustomView>
 	);
 };
