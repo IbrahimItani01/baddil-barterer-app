@@ -1,27 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import CustomText from "@/components/base/CustomText";
 import { colors } from "@/lib/constants/colors.constant";
 import { capitalizeFirstLetter } from "@/lib/utils/general.utils";
 import { fontFamily } from "@/lib/constants/fonts.constant";
+import { Category, Subcategory } from "@/store/slices/categories.slice";
 
-interface Category {
-	id: number;
-	name: string;
-	iconName: string;
-	subcategories: {
-		id: number;
-		name: string;
-		iconName: string;
-	}[];
-}
 
-interface Subcategory {
-	id: number;
-	name: string;
-	iconName: string;
-}
 
 interface DetailsHeadlineProps {
 	category: Category | undefined;
@@ -32,6 +18,9 @@ const DetailsHeadline: React.FC<DetailsHeadlineProps> = ({
 	category,
 	subcategory,
 }) => {
+	useEffect(()=>{
+		console.log(subcategory)
+	},[])
 	return (
 		<View style={styles.categoryContainer}>
 			<View
@@ -46,7 +35,7 @@ const DetailsHeadline: React.FC<DetailsHeadlineProps> = ({
 				}}
 			>
 				<FontAwesome5
-					name={category?.iconName || "category"}
+					name={category?.category_icon || "category"}
 					size={30}
 					color={colors["white-font"]}
 				/>
