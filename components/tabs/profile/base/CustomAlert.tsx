@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
 	input: {
 		backgroundColor: "transparent",
 		padding: 10,
-		borderRadius: 50,
+		borderRadius: 5,
 		borderWidth: 1,
 		marginVertical: 20,
 	},
