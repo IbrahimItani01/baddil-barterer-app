@@ -5,12 +5,9 @@ import CustomText from "@/components/base/CustomText"; // Assuming you are using
 import { colors } from "@/lib/constants/colors.constant";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import { useAppSelector } from "@/store/hooks";
+import { Subcategory } from "@/store/slices/categories.slice";
 
-type Subcategory = {
-	id: number;
-	name: string;
-	iconName: string;
-};
+
 
 type CategoryCardProps = {
 	name: string;
