@@ -2,69 +2,91 @@ import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import TabScreen from "@/components/tabs/base/TabScreen";
 import { useLocalSearchParams } from "expo-router";
-import { categories } from "@/lib/constants/categories.constant";
 import Button from "@/components/base/Button";
 import DetailsHeadline from "@/components/tabs/baddil/DetailsHeadline";
 import UploadImageSection from "@/components/tabs/baddil/UploadImageSection";
 import ItemInputs from "@/components/tabs/baddil/ItemInputs";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addItem } from "@/store/slices/wallet.slice";
+import CustomText from "@/components/base/CustomText";
+
 const DetailsPage = () => {
-	const { id, subId } = useLocalSearchParams();
-	const category = categories.find((cat) => cat.id === Number(id));
-	const subcategory = category?.subcategories.find(
-		(sub) => sub.id === Number(subId)
-	);
+  const { id, subId } = useLocalSearchParams();
 
-	const { title, location, condition, description, images } = useAppSelector(
-		(state) => state.item
-	);
+  const dispatch = useAppDispatch();
+  
+  const categories = useAppSelector((state) => state.categories.categories);
+  const walletState = useAppSelector((state) => state.wallets.items);
 
-	const handleItemAdd = () => {
-		// Add item to database
-	};
-	return (
-		<TabScreen title='Details'>
-			<View style={styles.container}>
-				<ScrollView
-					contentContainerStyle={styles.scrollViewContent}
-					keyboardShouldPersistTaps='handled'
-					showsVerticalScrollIndicator={false}
-				>
-					{/* Category and Subcategory */}
-					<DetailsHeadline
-						category={category}
-						subcategory={subcategory}
-					/>
-					{/* Image Upload Section */}
-					<UploadImageSection />
-					{/* Item Inputs */}
-					<ItemInputs />
-					<Button
-						disabled={
-							!title.trim() ||
-							!location.trim() ||
-							!condition.trim() ||
-							!description.trim() ||
-							images.length === 0
-						}
-						onPress={handleItemAdd}
-						title='Add to wallet'
-					/>
-				</ScrollView>
-				{/* Submit Button outside ScrollView for better positioning */}
-			</View>
-		</TabScreen>
-	);
+  const category = categories.find((cat) => cat.id === id); // Assuming id is already a string
+  const subcategory = category?.subcategories.find((sub) => sub.id === subId);
+
+  const walletItems = useAppSelector((state) => state.wallets.items); // Access the items array
+  const currentItem = walletItems.find(item => item.id === id); // Select an item if it's for editing
+
+  // Manage form state for adding a new item
+  const [title, setTitle] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [condition, setCondition] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [images, setImages] = React.useState<string[]>([]);
+
+//   const handleItemAdd = () => {
+//     if (title && location && condition && description && images.length > 0) {
+//       dispatch(
+//         addItem({
+//           id: String(new Date().getTime()), // Simple ID for demo purposes
+//           name: title,
+//           description,
+//           category_id: String(category?.id),
+//           subcategory_id: String(subcategory?.id),
+//           condition,
+//           location_id: location,
+//           wallet_id: "", // Replace with wallet ID as needed
+//           value: 0, // Replace as needed
+//           created_at: new Date(),
+//           updated_at: new Date(),
+//         })
+//       );
+//       alert("Item successfully added to wallet.");
+//     }
+//   };
+
+  return (
+    <TabScreen title="Details">
+      <View style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <DetailsHeadline category={category} subcategory={subcategory} />
+          <UploadImageSection />
+          <ItemInputs />
+          <Button
+            disabled={
+              !title.trim() ||
+              !location.trim() ||
+              !condition.trim() ||
+              !description.trim() 
+            }
+            // onPress={handleItemAdd}
+            title="Add to wallet"
+          />
+        </ScrollView>
+      </View>
+    </TabScreen>
+  );
 };
 
 const styles = StyleSheet.create({
-	container: {
-		height: 600,
-	},
-	scrollViewContent: {
-		paddingBottom: 20, // Add space to avoid content being cut off by the button
-		flexGrow: 1, // Allow content to grow
-	},
+  container: {
+	height:580
+  },
+  scrollViewContent: {
+    paddingBottom: 20,
+    flexGrow: 1,
+  },
 });
 
 export default DetailsPage;
