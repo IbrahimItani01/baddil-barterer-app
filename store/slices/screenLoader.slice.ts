@@ -29,6 +29,6 @@ const screenLoaderSlice = createSlice({
 	},
 });
 
-export const { showLoader, hideLoader, stoppedBooting,startBooting } =
+export const { showLoader, hideLoader, stoppedBooting, startBooting } =
 	screenLoaderSlice.actions;
 export default screenLoaderSlice.reducer;

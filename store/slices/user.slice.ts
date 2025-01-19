@@ -33,13 +33,13 @@ const userSlice = createSlice({
 			state.hasOnboarded = true;
 		},
 		setOnboarding(state, action) {
-			state.hasOnboarded = action.payload; 
+			state.hasOnboarded = action.payload;
 		},
 		setUserName(state, action) {
 			state.userName = action.payload;
 		},
-		setEmail(state,action){
-			state.email = action.payload
+		setEmail(state, action) {
+			state.email = action.payload;
 		},
 		setProfilePictureUrl(state, action) {
 			state.profilePictureUrl = action.payload;
@@ -58,6 +58,6 @@ export const {
 	setUserName,
 	setProfilePictureUrl,
 	setStatus,
-	setEmail
+	setEmail,
 } = userSlice.actions;
 export default userSlice.reducer;

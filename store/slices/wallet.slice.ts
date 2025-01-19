@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Define the types for the state
 interface WalletItem {
 	id: string;
 	name: string;
 	description: string;
 	category_id: string;
 	subcategory_id: string;
-	condition: string; // Adjusting condition to a string to match `ItemCondition` enum
+	condition: string;
 	location_id: string;
 	wallet_id: string;
 	value: number;
@@ -15,44 +14,39 @@ interface WalletItem {
 	updated_at: Date;
 }
 
-// Define the state structure
 interface WalletState {
-	items: WalletItem[]; // Store all items
+	items: WalletItem[];
 }
 
-// Initial state
 const initialState: WalletState = {
-	items: [], // Empty items array initially
+	items: [],
 };
 
-// Create the slice
 const walletSlice = createSlice({
 	name: "wallet",
 	initialState,
 	reducers: {
 		setItems: (state, action: PayloadAction<WalletItem[]>) => {
-			state.items = action.payload; // Replace items with the new list
+			state.items = action.payload;
 		},
 		addItem: (state, action: PayloadAction<WalletItem>) => {
-			state.items.push(action.payload); // Add a new item
+			state.items.push(action.payload);
 		},
 		updateItem: (state, action: PayloadAction<WalletItem>) => {
 			const index = state.items.findIndex(
 				(item) => item.id === action.payload.id
 			);
 			if (index !== -1) {
-				state.items[index] = action.payload; // Update item if found
+				state.items[index] = action.payload;
 			}
 		},
 		removeItem: (state, action: PayloadAction<string>) => {
-			state.items = state.items.filter((item) => item.id !== action.payload); // Remove item by ID
+			state.items = state.items.filter((item) => item.id !== action.payload);
 		},
 	},
 });
 
-// Export actions
 export const { setItems, addItem, updateItem, removeItem } =
 	walletSlice.actions;
 
-// Export the reducer
 export default walletSlice.reducer;
