@@ -3,7 +3,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import CustomText from "@/components/base/CustomText";
 import CustomView from "@/components/base/CustomView";
 import CustomLink from "@/components/base/CustomLink";
-import '../global.css'
+import "../global.css";
 
 export default function NotFoundScreen() {
 	return (
@@ -20,7 +20,11 @@ export default function NotFoundScreen() {
 						content={"Page Not-Found"}
 					/>
 				</View>
-				<CustomLink NativeClasses="nunito font-bold uppercase w-full text-center text-primary" href={"back"} content="return"/>
+				<CustomLink
+					NativeClasses='nunito font-bold uppercase w-full text-center text-primary'
+					href={"back"}
+					content='return'
+				/>
 			</CustomView>
 		</>
 	);
