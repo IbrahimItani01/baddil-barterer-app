@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import CustomText from "@/components/base/CustomText";
@@ -6,8 +6,6 @@ import { colors } from "@/lib/constants/colors.constant";
 import { capitalizeFirstLetter } from "@/lib/utils/general.utils";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import { Category, Subcategory } from "@/store/slices/categories.slice";
-
-
 
 interface DetailsHeadlineProps {
 	category: Category | undefined;
@@ -18,7 +16,6 @@ const DetailsHeadline: React.FC<DetailsHeadlineProps> = ({
 	category,
 	subcategory,
 }) => {
-	
 	return (
 		<View style={styles.categoryContainer}>
 			<View
@@ -64,16 +61,15 @@ const styles = StyleSheet.create({
 	},
 	categoryTextContainer: {
 		marginLeft: 10,
-		display:'flex',
-		flexDirection: 'column',
-		gap:5
+		display: "flex",
+		flexDirection: "column",
+		gap: 5,
 	},
 	categoryText: {
 		fontSize: 18,
-		fontFamily: fontFamily.NunitoSans.SemiBold
+		fontFamily: fontFamily.NunitoSans.SemiBold,
 	},
 	subcategoryText: {
 		fontSize: 12,
-		
 	},
 });

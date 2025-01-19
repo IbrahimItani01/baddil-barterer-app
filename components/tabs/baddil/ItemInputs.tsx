@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
 	View,
 	TouchableOpacity,
@@ -11,14 +11,11 @@ import {
 	Platform,
 } from "react-native";
 import CustomText from "@/components/base/CustomText";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addItem } from "@/store/slices/wallet.slice";
+import { useAppSelector } from "@/store/hooks";
 import { colors } from "@/lib/constants/colors.constant";
 import { fontFamily } from "@/lib/constants/fonts.constant";
-import { v4 as uuidv4 } from "uuid";
 
 const ItemInputs = () => {
-	const dispatch = useAppDispatch();
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const locations = useAppSelector((state) => state.locations.locations);
 
@@ -40,31 +37,6 @@ const ItemInputs = () => {
 		handleInputChange("location", locationId);
 		setModalVisible(false);
 	};
-
-	// const handleSubmit = () => {
-	//   if (!form.title || !form.location || !form.condition || !form.description) {
-	//     alert("All fields are required!");
-	//     return;
-	//   }
-
-	//   const newItem = {
-	//     id: uuidv4(),
-	//     name: form.title,
-	//     description: form.description,
-	//     category_id: "", // Replace as needed
-	//     subcategory_id: "", // Replace as needed
-	//     condition: form.condition,
-	//     location_id: form.location,
-	//     wallet_id: "", // Replace with user's wallet ID
-	//     value: 0, // Replace as needed
-	//     created_at: new Date(),
-	//     updated_at: new Date(),
-	//   };
-
-	//   dispatch(addItem(newItem));
-	//   alert("Item added to wallet!");
-	//   setForm({ title: "", description: "", location: "", condition: "" }); // Reset form
-	// };
 
 	return (
 		<View>
@@ -156,7 +128,7 @@ const ItemInputs = () => {
 						onPress={() =>
 							handleInputChange(
 								"condition",
-								form.condition === option ? "" : option // Toggle selection
+								form.condition === option ? "" : option
 							)
 						}
 						style={[
@@ -188,7 +160,7 @@ const ItemInputs = () => {
 			/>
 			<KeyboardAvoidingView
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
-				keyboardVerticalOffset={100} // Adjust as needed to control push distance
+				keyboardVerticalOffset={100}
 			>
 				<TextInput
 					style={[
