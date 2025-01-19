@@ -55,6 +55,8 @@ const Login = ({ onSubmit }: AuthInterface) => {
 	);
 };
 
+export default Login;
+
 const styles = StyleSheet.create({
 	mainScreen: {
 		flex: 1,
@@ -91,5 +93,3 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 });
-
-export default Login;

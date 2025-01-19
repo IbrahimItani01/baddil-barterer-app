@@ -51,15 +51,15 @@ const AuthFooter = (props: AuthFooterInterface) => {
 	);
 };
 
+export default AuthFooter;
+
 const styles = StyleSheet.create({
 	hintText: {
 		fontFamily: `${fontFamily.NunitoSans.Light}`,
 	},
 	hyperLinkText: {
 		textDecorationLine: "underline",
-		color:colors.primary,
+		color: colors.primary,
 		fontFamily: fontFamily.NunitoSans.Bold,
 	},
 });
-
-export default AuthFooter;

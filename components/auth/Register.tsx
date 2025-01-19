@@ -66,6 +66,9 @@ const Register = ({ onSubmit }: AuthInterface) => {
 	);
 };
 
+
+export default Register;
+
 const styles = StyleSheet.create({
 	mainScreen: {
 		display: "flex",
@@ -104,5 +107,3 @@ const styles = StyleSheet.create({
 		gap: 5,
 	},
 });
-
-export default Register;

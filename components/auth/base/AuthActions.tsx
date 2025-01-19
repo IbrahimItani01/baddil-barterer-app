@@ -55,6 +55,8 @@ const AuthActions = (props: AuthActions) => {
 	);
 };
 
+export default AuthActions;
+
 const styles = StyleSheet.create({
 	googleButton: {
 		borderColor: colors.primary,
@@ -64,5 +66,3 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 	},
 });
-
-export default AuthActions;
