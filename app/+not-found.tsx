@@ -1,32 +1,31 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { View } from "react-native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import CustomText from "@/components/base/CustomText";
+import CustomView from "@/components/base/CustomView";
+import CustomLink from "@/components/base/CustomLink";
+import "../global.css";
 
 export default function NotFoundScreen() {
-  return (
-    <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type="title">This screen doesn't exist.</ThemedText>
-        <Link href="/" style={styles.link}>
-          <ThemedText type="link">Go to home screen!</ThemedText>
-        </Link>
-      </ThemedView>
-    </>
-  );
+	return (
+		<>
+			<CustomView NativeClasses='h-full w-full flex flex-col justify-center items-center'>
+				<View className='flex flex-col items-center mb-20 gap-3'>
+					<MaterialIcons
+						name='error'
+						size={80}
+						color={"#E60000"}
+					/>
+					<CustomText
+						NativeClasses={" text-2xl raleway font-semibold"}
+						content={"Page Not-Found"}
+					/>
+				</View>
+				<CustomLink
+					NativeClasses='nunito font-bold uppercase w-full text-center text-primary'
+					href={"back"}
+					content='return'
+				/>
+			</CustomView>
+		</>
+	);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});
