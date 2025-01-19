@@ -1,5 +1,5 @@
 import { APIS_BASE_URL } from "@/apis/main";
-import { login, setStatus, setUserName } from "@/store/slices/user.slice";
+import { login, setStatus } from "@/store/slices/user.slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { router } from "expo-router";

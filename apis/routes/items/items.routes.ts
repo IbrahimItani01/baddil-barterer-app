@@ -8,9 +8,8 @@ interface AddItemToWalletPayload {
 	subcategoryId: string;
 	condition: string;
 	locationId: string;
-	files: File[]; // Files to upload (exactly 5 images)
+	files: File[];
 }
-
 
 export const fetchNonUserItems = async () => {
 	try {
@@ -19,7 +18,7 @@ export const fetchNonUserItems = async () => {
 			`${APIS_BASE_URL}/wallet/items/not-owned`,
 			{
 				headers: {
-					Authorization: `Bearer ${token}`, // Include JWT from local storage or state
+					Authorization: `Bearer ${token}`,
 				},
 			}
 		);
@@ -31,7 +30,7 @@ export const fetchNonUserItems = async () => {
 		}
 	} catch (error) {
 		console.error("Error fetching items not owned by the user:", error);
-		throw error; // Propagate error for handling in the calling function
+		throw error;
 	}
 };
 
@@ -44,7 +43,7 @@ export const fetchUserItems = async (userId?: string) => {
 
 		const response = await axios.get(endpoint, {
 			headers: {
-				Authorization: `Bearer ${token}`, // Include JWT from local storage or state
+				Authorization: `Bearer ${token}`,
 			},
 		});
 
@@ -55,7 +54,7 @@ export const fetchUserItems = async (userId?: string) => {
 		}
 	} catch (error) {
 		console.error("Error fetching user wallet items:", error);
-		throw error; // Propagate error for handling in the calling function
+		throw error;
 	}
 };
 
@@ -74,7 +73,7 @@ export const addItemToWallet = async (payload: AddItemToWalletPayload) => {
 		formData.append("locationId", payload.locationId);
 
 		payload.files.forEach((file) => {
-			formData.append("files", file); // Add each file to the FormData
+			formData.append("files", file);
 		});
 		const token = await AsyncStorage.getItem("jwtToken");
 		const response = await axios.post(
@@ -88,10 +87,10 @@ export const addItemToWallet = async (payload: AddItemToWalletPayload) => {
 			}
 		);
 
-		return response.data; // Handle success response
+		return response.data;
 	} catch (error) {
 		console.error("Error adding item to wallet:", error);
-		throw error; // Re-throw error for further handling
+		throw error;
 	}
 };
 
@@ -101,6 +100,6 @@ export const fetchItemDetails = async (itemId: string): Promise<any> => {
 		return response.data.data;
 	} catch (error) {
 		console.error("Error fetching item details:", error);
-		throw error; // Re-throw error for further handling
+		throw error;
 	}
 };
