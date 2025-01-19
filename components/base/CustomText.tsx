@@ -1,12 +1,13 @@
 import { colors } from "@/lib/constants/colors.constant";
 import { CustomTextInterface } from "@/lib/interfaces/CustomText.interface";
 import React from "react";
-import { Text, useColorScheme } from "react-native";
+import { Text } from "react-native";
 import "../../global.css";
 import { useAppSelector } from "@/store/hooks";
 
 const CustomText = (prop: CustomTextInterface) => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
+	
 	return (
 		<Text
 			style={[

@@ -67,6 +67,8 @@ const ScreenLoader: React.FC = () => {
 	);
 };
 
+export default ScreenLoader;
+
 const styles = StyleSheet.create({
 	container: {
 		position: "absolute",
@@ -94,5 +96,3 @@ const styles = StyleSheet.create({
 		zIndex: 1000,
 	},
 });
-
-export default ScreenLoader;

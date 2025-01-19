@@ -3,7 +3,9 @@ import { CustomLinkInterface } from "@/lib/interfaces/CustomLink.interface";
 import { colors } from "@/lib/constants/colors.constant";
 import "../../global.css"
 import { useAppSelector } from "@/store/hooks";
+
 const CustomLink = (prop: CustomLinkInterface) => {
+  
   const theme = useAppSelector((state) => state.system.colorScheme);
   const handlePress = () => {
     if (prop.href === "back") {

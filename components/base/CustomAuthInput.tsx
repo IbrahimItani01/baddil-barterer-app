@@ -13,6 +13,7 @@ const CustomAuthInput = ({
 	forRegister = false,
 	...props
 }: AuthInputInterface) => {
+	
 	const { email } = useAppSelector((state) => state.auth);
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const dispatch = useDispatch();

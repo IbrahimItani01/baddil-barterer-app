@@ -4,6 +4,7 @@ import { useCustomFonts } from "@/hooks/fonts.hook";
 import { CustomWrapper } from "@/lib/interfaces/Wrapper.interface";
 
 const Loader: React.FC<CustomWrapper> = ({ children, color, size }) => {
+	
 	const fontsLoaded = useCustomFonts();
 
 	if (!fontsLoaded) {
