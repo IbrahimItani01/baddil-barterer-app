@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import "../global.css";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import AppNavigator from "@/components/AppNavigator";
 import Loader from "@/components/base/Loader";
-import { clearStorageOnDev } from "@/lib/utils/system.utils";
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
-
-	// useEffect(() => {
-	// 	clearStorageOnDev();
-	// }, []);
 
 	return (
 		<Provider store={store}>

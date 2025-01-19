@@ -5,8 +5,8 @@ const Layout = () => {
 	return (
 		<Stack
 			screenOptions={{
-				headerShown: false, // Custom header visibility
-				animation: "slide_from_right", // Transition animation
+				headerShown: false,
+				animation: "slide_from_right",
 			}}
 		>
 			<Stack.Screen name='index' />
