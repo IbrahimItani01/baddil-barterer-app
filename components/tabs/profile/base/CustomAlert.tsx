@@ -16,42 +16,51 @@ import { changeProfilePicture } from "@/apis/routes/user/user.routes";
 import { withLoader } from "@/lib/utils/async.utils";
 import { fetchProfilePicture } from "@/lib/utils/system.utils";
 
+// Component for handling custom alert dialogs
 interface Props {
-	alertFor: "username" | "password" | "profilePicture";
-	visible: boolean;
-	onCancel: () => void;
-	onConfirm: (value: string) => void;
+	alertFor: "username" | "password" | "profilePicture"; // Type for different alerts
+	visible: boolean; // Whether the alert modal is visible or not
+	onCancel: () => void; // Callback for cancel action
+	onConfirm: (value: string) => void; // Callback for confirm action with value input
 }
 
 const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
+	// Retrieving theme and user data from Redux store
 	const theme = useAppSelector((state) => state.system.colorScheme);
-	const [inputValue, setInputValue] = useState("");
-	const [selectedImage, setSelectedImage] = useState("");
-	const { userName, profilePictureUrl } = useAppSelector((state) => state.user);
+	const [inputValue, setInputValue] = useState(""); // State for holding input value
+	const [selectedImage, setSelectedImage] = useState(""); // State for holding selected image URI
+	const { userName, profilePictureUrl } = useAppSelector((state) => state.user); // User data from Redux store
 	const dispatch = useAppDispatch();
+
+	// Effect to populate the inputValue when alertFor changes
 	useEffect(() => {
 		if (alertFor === "username") {
-			setInputValue(userName ?? "");
+			setInputValue(userName ?? ""); // Set input value to username
 		} else if (alertFor === "profilePicture") {
-			setInputValue(profilePictureUrl ?? "");
+			setInputValue(profilePictureUrl ?? ""); // Set input value to profile picture URL
 		}
 	}, [alertFor, userName, profilePictureUrl]);
 
+	// Function to handle image selection using the image picker
 	const handleImageSelect = async () => {
 		const result = await launchImageLibraryAsync({ mediaTypes: ["images"] });
 		if (!result.canceled && result.assets && result.assets.length > 0) {
 			const imageUri = result.assets[0].uri;
-			setSelectedImage(imageUri);
+			setSelectedImage(imageUri); // Update the selected image state with URI
 		}
 	};
+
+	// Handle cancel action (reset states and call onCancel callback)
 	const handleCancel = () => {
-		// Reset inputs and clear selected image
-		setInputValue("");
-		setSelectedImage("");
-		onCancel(); // Call the provided onCancel handler
+		setInputValue(""); // Reset input value
+		setSelectedImage(""); // Reset selected image
+		onCancel(); // Call the onCancel callback passed as prop
 	};
+
+	// Handle confirm action (save or update based on alertFor type)
 	const handleConfirm = async () => {
 		if (alertFor === "profilePicture" && selectedImage) {
+			// If it's a profile picture update, handle image upload
 			const fileType = selectedImage.split(".").pop()?.toLowerCase();
 			const mimeType = fileType === "png" ? "image/png" : "image/jpeg";
 			const fileExtension = mimeType.split("/")[1];
@@ -59,22 +68,24 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 			const fileName = `${Date.now()}.${fileExtension}`;
 			const formData = new FormData();
 
+			// Append image data to formData
 			formData.append("file", {
 				uri: selectedImage,
 				type: mimeType,
 				name: fileName,
 			} as unknown as Blob);
-			withLoader(dispatch, () => changeProfilePicture(formData));
-			await fetchProfilePicture(dispatch);
-			onCancel(); // Close the modal after updating
+			withLoader(dispatch, () => changeProfilePicture(formData)); // Dispatch image upload request
+			await fetchProfilePicture(dispatch); // Fetch and update the profile picture
+			onCancel(); // Close the alert modal
 		} else {
-			onConfirm(inputValue); // Handle other alerts
+			onConfirm(inputValue); // For username or password, pass the input value to onConfirm
 		}
 	};
 
+	// Modal for showing the alert
 	return (
 		<Modal
-			visible={visible}
+			visible={visible} // Show modal based on visible prop
 			transparent
 			animationType='fade'
 		>
@@ -84,8 +95,8 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 					{
 						backgroundColor:
 							theme === "light"
-								? "rgba(0, 0, 0, 0.5)"
-								: "rgba(255, 255, 255, 0.5)",
+								? "rgba(0, 0, 0, 0.5)" // Semi-transparent dark overlay for light theme
+								: "rgba(255, 255, 255, 0.5)", // Semi-transparent light overlay for dark theme
 					},
 				]}
 			>
@@ -94,7 +105,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 						styles.alertContainer,
 						{
 							backgroundColor:
-								theme === "dark" ? colors["dark-bg"] : colors["light-bg"],
+								theme === "dark" ? colors["dark-bg"] : colors["light-bg"], // Set background color based on theme
 						},
 					]}
 				>
@@ -104,7 +115,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 							{
 								color:
 									theme === "dark"
-										? colors["white-font"]
+										? colors["white-font"] // Set title color based on theme
 										: colors["black-font"],
 							},
 						]}
@@ -113,7 +124,8 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 							? "Upload Profile Picture"
 							: alertFor === "username"
 							? "Change Username"
-							: "Change Password"}
+							: "Change Password"}{" "}
+						{/* Set the modal title based on the alert type */}
 					</Text>
 					{alertFor === "password" ? (
 						<CustomText
@@ -126,6 +138,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 						/>
 					) : alertFor === "profilePicture" ? (
 						<>
+							{/* Button for selecting profile picture */}
 							<TouchableOpacity
 								onPress={handleImageSelect}
 								style={[
@@ -149,6 +162,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 									{selectedImage ? "Change Selected Image" : "Select Image"}
 								</Text>
 							</TouchableOpacity>
+							{/* Display message if an image is selected */}
 							{selectedImage && (
 								<Text
 									style={{
@@ -163,6 +177,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 							)}
 						</>
 					) : (
+						// Input field for username
 						<TextInput
 							style={[
 								styles.input,
@@ -178,16 +193,19 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 								},
 							]}
 							placeholderTextColor={
+								// Set placeholder text color based on theme
 								theme === "dark"
 									? colors["dark-gray-dark-theme"]
 									: colors["light-gray-light-theme"]
 							}
 							value={inputValue}
-							placeholder={"Enter your new username"}
-							onChangeText={setInputValue}
+							placeholder={"Enter your new username"} // Placeholder for username input
+							onChangeText={setInputValue} // Update input value on change
 						/>
 					)}
+					{/* Button container for cancel and confirm actions */}
 					<View style={styles.buttonContainer}>
+						{/* Cancel button */}
 						<TouchableOpacity
 							style={[
 								styles.cancelButton,
@@ -214,6 +232,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 								Cancel
 							</Text>
 						</TouchableOpacity>
+						{/* Confirm button */}
 						<TouchableOpacity
 							style={styles.confirmButton}
 							onPress={handleConfirm}
@@ -229,6 +248,7 @@ const CustomAlert = ({ alertFor, visible, onCancel, onConfirm }: Props) => {
 
 export default CustomAlert;
 
+// Style definitions for the alert modal and its contents
 const styles = StyleSheet.create({
 	overlay: { flex: 1, justifyContent: "center", alignItems: "center" },
 	alertContainer: { width: "80%", padding: 20, borderRadius: 10 },

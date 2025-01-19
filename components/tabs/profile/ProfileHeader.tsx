@@ -42,6 +42,7 @@ const ProfileHeader = () => {
 };
 
 export default ProfileHeader;
+
 const styles = StyleSheet.create({
 	profileContainer: {
 		display: "flex",

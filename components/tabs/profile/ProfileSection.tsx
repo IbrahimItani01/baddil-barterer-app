@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native"; // Import StyleSheet for styling
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "@/components/base/CustomText";
 import CustomView from "@/components/base/CustomView";
-import { MaterialIcons } from "@expo/vector-icons"; // Import Material Icons for fallback face icon
+import { MaterialIcons } from "@expo/vector-icons";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { colors } from "@/lib/constants/colors.constant";
 import { fontFamily } from "@/lib/constants/fonts.constant";
@@ -48,13 +48,10 @@ const ProfileSection = () => {
 		} else if (alertFor === "password") {
 			withLoader(dispatch, () => sendForgetPasswordEmail(email));
 		} else if (alertFor === "profilePicture") {
-			// handle profile picture change
 		}
 		setAlertVisible(false);
 	};
-	const handleAccountDelete = () => {
-		// handle account delete logic here
-	};
+	const handleAccountDelete = () => {};
 
 	return (
 		<>
@@ -94,11 +91,11 @@ const ProfileSection = () => {
 								}}
 							>
 								<MaterialIcons
-									name={iconMap[text as keyof typeof iconMap]} // Dynamically set icon name from iconMap
+									name={iconMap[text as keyof typeof iconMap]}
 									size={24}
 									color={
 										theme === "dark" ? colors["light-bg"] : colors["dark-bg"]
-									} // Dynamic color based on text and theme
+									}
 								/>
 
 								<CustomText
@@ -171,6 +168,7 @@ const ProfileSection = () => {
 };
 
 export default ProfileSection;
+
 const styles = StyleSheet.create({
 	accountDetailItem: {
 		flexDirection: "row",
