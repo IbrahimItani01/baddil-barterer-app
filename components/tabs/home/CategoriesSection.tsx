@@ -18,11 +18,7 @@ const CategoriesSection = () => {
 				data={categories.slice(0, 8)}
 				numColumns={4}
 				keyExtractor={(item) => item.id.toString()}
-				renderItem={({ item }) => (
-					<CategoryButton
-						item={item}
-					/>
-				)}
+				renderItem={({ item }) => <CategoryButton item={item} />}
 			/>
 		</View>
 	);

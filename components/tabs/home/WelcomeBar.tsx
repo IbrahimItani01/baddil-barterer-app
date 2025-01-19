@@ -24,7 +24,11 @@ const WelcomeBar = () => {
 			) : (
 				<MaterialIcons
 					name='face'
-					color={theme === "dark" ? `${colors["white-font"]}` : `${colors["black-font"]}`}
+					color={
+						theme === "dark"
+							? `${colors["white-font"]}`
+							: `${colors["black-font"]}`
+					}
 					size={30}
 				/>
 			)}
@@ -39,8 +43,8 @@ const styles = StyleSheet.create({
 		width: "100%",
 		display: "flex",
 		flexDirection: "row",
-		justifyContent:'space-between',
-		alignItems:'center'
+		justifyContent: "space-between",
+		alignItems: "center",
 	},
 	welcomeText: {
 		fontSize: 24,

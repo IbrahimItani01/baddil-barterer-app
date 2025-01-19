@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
 	categoryText: {
 		fontSize: 12,
 		textAlign: "center",
-		fontFamily: fontFamily.NunitoSans.SemiBold
+		fontFamily: fontFamily.NunitoSans.SemiBold,
 	},
 });

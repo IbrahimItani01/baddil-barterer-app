@@ -50,9 +50,8 @@ const SearchBar = () => {
 				}
 				inputStyle={{
 					color: theme === "dark" ? "white" : "black",
-					fontFamily: `${fontFamily.NunitoSans.Regular}`
+					fontFamily: `${fontFamily.NunitoSans.Regular}`,
 				}}
-				
 			/>
 		</View>
 	);
