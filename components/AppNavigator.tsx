@@ -1,6 +1,6 @@
 import { RootState } from "@/store/store";
 import { Stack, useRouter } from "expo-router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	handleStatusNavigation,
@@ -27,12 +27,11 @@ const AppNavigator = () => {
 	useEffect(() => {
 		const initAndNavigate = async () => {
 			const token = await AsyncStorage.getItem("jwtToken");
-			const onboarded = await AsyncStorage.getItem("onboarded");
 			if (token) {
 				dispatch(startBooting());
 				await initializeApp(dispatch).finally(() => dispatch(stoppedBooting()));
 			}
-			handleStatusNavigation(status, router,dispatch);
+			handleStatusNavigation(status, router, dispatch);
 		};
 
 		initAndNavigate();
@@ -43,7 +42,7 @@ const AppNavigator = () => {
 
 		const listener = Appearance.addChangeListener(
 			({ colorScheme }: { colorScheme: ColorSchemeName }) => {
-				dispatch(setTheme(colorScheme)); // Corrected typo here
+				dispatch(setTheme(colorScheme));
 			}
 		);
 
