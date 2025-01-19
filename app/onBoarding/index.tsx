@@ -31,9 +31,7 @@ const OnboardingScreen = () => {
 			await AsyncStorage.setItem("onboarded", "true");
 			dispatch(completeOnboarding());
 			router.replace("/auth");
-		} catch (error) {
-			console.error("Failed to save onboarding status:", error);
-		}
+		} catch (error) {}
 	};
 
 	const pages = [
