@@ -18,9 +18,7 @@ const DetailsHeadline: React.FC<DetailsHeadlineProps> = ({
 	category,
 	subcategory,
 }) => {
-	useEffect(()=>{
-		console.log(subcategory)
-	},[])
+	
 	return (
 		<View style={styles.categoryContainer}>
 			<View

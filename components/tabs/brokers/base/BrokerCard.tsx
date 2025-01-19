@@ -16,7 +16,6 @@ const BrokerCard = ({ hired = true }: BrokerCardInterface) => {
 	const toggleOverlay = () => setIsOverlayVisible((prev) => !prev);
 	const handleCardOpen = () => {
 		// handle card open logic here
-		console.log("card info");
 		toggleOverlay();
 	};
 	return (

@@ -21,7 +21,6 @@ const ItemCard = ({ item }: { item: Barter }) => {
 			: colors["light-gray-light-theme"];
 
 	const handleNavigate = () => {
-		console.log("Navigate to item details screen");
 		// TODO: route to path with item id
 	};
 

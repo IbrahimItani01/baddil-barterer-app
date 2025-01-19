@@ -8,10 +8,6 @@ interface BrokerCardActionsInterface {
 }
 const BrokerCardActions = ({ hired }: BrokerCardActionsInterface) => {
 	const handleCardAction = () => {
-		hired //handle chat
-			? console.log("chat open")
-			: //handle hire
-			  console.log("request sent to broker");
 	};
 	return (
 		<CustomView
