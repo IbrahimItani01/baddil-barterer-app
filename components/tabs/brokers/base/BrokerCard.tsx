@@ -15,7 +15,6 @@ const BrokerCard = ({ hired = true }: BrokerCardInterface) => {
 	const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 	const toggleOverlay = () => setIsOverlayVisible((prev) => !prev);
 	const handleCardOpen = () => {
-		// handle card open logic here
 		toggleOverlay();
 	};
 	return (
@@ -24,8 +23,8 @@ const BrokerCard = ({ hired = true }: BrokerCardInterface) => {
 				<CustomView
 					style={{
 						position: "relative",
-						width: hired ? 200 : 165, // Conditional width
-						height: 110, // Conditional height
+						width: hired ? 200 : 165,
+						height: 110,
 						padding: 10,
 						borderRadius: 12,
 						borderWidth: 2,

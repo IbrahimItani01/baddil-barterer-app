@@ -21,22 +21,23 @@ const ItemsSection = () => {
 	return (
 		<View style={styles.container}>
 			<CustomText
-				content="Recommended Barters"
+				content='Recommended Barters'
 				style={styles.header}
 			/>
 			<FlatList
 				data={bartersData}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id}
-				horizontal={true}  // Enables horizontal scroll
-				showsHorizontalScrollIndicator={false}  // Hides the scrollbar
-				// Adjust the card size and spacing here
+				horizontal={true}
+				showsHorizontalScrollIndicator={false}
 				contentContainerStyle={styles.flatListContent}
-				ItemSeparatorComponent={() => <View style={styles.separator} />}  // Adds space between items
+				ItemSeparatorComponent={() => <View style={styles.separator} />}
 			/>
 		</View>
 	);
 };
+
+export default ItemsSection;
 
 const styles = StyleSheet.create({
 	container: {},
@@ -46,11 +47,9 @@ const styles = StyleSheet.create({
 		fontFamily: `${fontFamily.Raleway.SemiBold}`,
 	},
 	flatListContent: {
-		paddingHorizontal: 8, // Adjust padding for better spacing
+		paddingHorizontal: 8,
 	},
 	separator: {
-		width: 16, // Adjust separator width for spacing between cards
+		width: 16,
 	},
 });
-
-export default ItemsSection;

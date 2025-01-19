@@ -108,8 +108,7 @@ const CardDetailsOverlay: React.FC<CardDetailsOverlayProps> = ({
 								</CustomView>
 							</View>
 
-                            <Button title={isHired ? "Chat" : "Hire"}/>
-							
+							<Button title={isHired ? "Chat" : "Hire"} />
 						</View>
 					</TouchableWithoutFeedback>
 				</View>
@@ -148,29 +147,28 @@ const styles = StyleSheet.create({
 	name: {
 		fontSize: 24,
 		marginBottom: 5,
-        fontFamily: fontFamily.NunitoSans.Bold
+		fontFamily: fontFamily.NunitoSans.Bold,
 	},
 	subtitle: {
 		fontSize: 14,
-        fontFamily: fontFamily.NunitoSans.SemiBold
-
+		fontFamily: fontFamily.NunitoSans.SemiBold,
 	},
 	statsContainer: {
-        display:'flex',
+		display: "flex",
 		flexDirection: "row",
-		marginHorizontal:'auto',
-        gap: 40
+		marginHorizontal: "auto",
+		gap: 40,
 	},
 
 	statTitle: {
-        fontFamily: fontFamily.NunitoSans.SemiBold,
-        color: colors.primary,
-        fontSize: 16,
-    },
+		fontFamily: fontFamily.NunitoSans.SemiBold,
+		color: colors.primary,
+		fontSize: 16,
+	},
 	statValue: {
 		fontSize: 24,
-        textAlign:'center',
-        fontFamily: fontFamily.NunitoSans.Bold
+		textAlign: "center",
+		fontFamily: fontFamily.NunitoSans.Bold,
 	},
 	hireButton: {
 		backgroundColor: colors.primary,

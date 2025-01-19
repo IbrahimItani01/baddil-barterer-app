@@ -1,4 +1,4 @@
-import { View, Text, ViewStyle, TouchableOpacity, Alert } from "react-native";
+import { View, ViewStyle, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import CustomText from "@/components/base/CustomText";
 import { fontFamily } from "@/lib/constants/fonts.constant";
@@ -23,29 +23,29 @@ const TabScreen: React.FC<GenericScreenProps> = ({
 	style,
 	isProfile = false,
 }) => {
-	const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch();
 	const router = useRouter();
-	const handleLogout = ()=>{
+	const handleLogout = () => {
 		Alert.alert(
-			'Logout Confirmation',
-			'Are you sure you want to log out?',
+			"Logout Confirmation",
+			"Are you sure you want to log out?",
 			[
-			  {
-				text: 'Cancel',
-				style: 'cancel',
-			  },
-			  {
-				text: 'Yes',
-				onPress: async () => {
-				  dispatch(logout()); // Dispatch the logout action
-				  await AsyncStorage.removeItem('jwtToken'); // Remove the token
-				  router.replace('/auth'); // Navigate to the auth screen
+				{
+					text: "Cancel",
+					style: "cancel",
 				},
-			  },
+				{
+					text: "Yes",
+					onPress: async () => {
+						dispatch(logout());
+						await AsyncStorage.removeItem("jwtToken");
+						router.replace("/auth");
+					},
+				},
 			],
 			{ cancelable: true }
-		  );
-	}
+		);
+	};
 	return (
 		<CustomView mainScreen={true}>
 			<SafeAreaView
@@ -55,7 +55,7 @@ const TabScreen: React.FC<GenericScreenProps> = ({
 					display: "flex",
 					flexDirection: "column",
 					gap: 20,
-					...style, // Allow custom styles
+					...style,
 				}}
 			>
 				<View

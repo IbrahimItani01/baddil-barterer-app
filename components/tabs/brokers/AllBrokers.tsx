@@ -1,11 +1,4 @@
-import {
-	View,
-	Text,
-	ScrollView,
-	RefreshControl,
-	FlatList,
-	Dimensions,
-} from "react-native";
+import { View, RefreshControl, FlatList, Dimensions } from "react-native";
 import React, { useState } from "react";
 import CustomText from "@/components/base/CustomText";
 import { fontFamily } from "@/lib/constants/fonts.constant";
@@ -13,18 +6,19 @@ import BrokerCard from "./base/BrokerCard";
 import { colors } from "@/lib/constants/colors.constant";
 
 const screenWidth = Dimensions.get("window").width;
-const cardMargin = 10; // Adjust as needed
+const cardMargin = 10;
+
 const AllBrokers = () => {
 	const [refreshing, setRefreshing] = useState(false);
 
 	const onRefresh = () => {
 		setRefreshing(true);
-		// Simulate data fetching or API call
+
 		setTimeout(() => {
-			setRefreshing(false); // Stop refreshing after data is fetched
-		}, 2000); // Adjust timeout duration or use actual fetching logic
+			setRefreshing(false);
+		}, 2000);
 	};
-	const brokers = Array.from({ length: 10 }); // Example data
+	const brokers = Array.from({ length: 10 });
 
 	return (
 		<View
@@ -63,7 +57,7 @@ const AllBrokers = () => {
 							tintColor={colors.primary}
 						/>
 					}
-					contentContainerStyle={{ paddingBottom: 20, flexGrow: 1 }} // Ensures full scrollability
+					contentContainerStyle={{ paddingBottom: 20, flexGrow: 1 }}
 					showsVerticalScrollIndicator={false}
 				/>
 			</View>

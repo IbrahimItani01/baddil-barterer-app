@@ -7,8 +7,7 @@ interface BrokerCardActionsInterface {
 	hired: boolean;
 }
 const BrokerCardActions = ({ hired }: BrokerCardActionsInterface) => {
-	const handleCardAction = () => {
-	};
+	const handleCardAction = () => {};
 	return (
 		<CustomView
 			style={{
