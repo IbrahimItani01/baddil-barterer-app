@@ -4,13 +4,12 @@ import CategoryCard from "@/components/tabs/baddil/CategoryCard";
 import { FlatList } from "react-native";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 import { useRouter } from "expo-router";
-import { useAppSelector } from "@/store/hooks"; // Import the selector hook
+import { useAppSelector } from "@/store/hooks";
 import { Subcategory } from "@/store/slices/categories.slice";
 
 export default function Tab() {
 	const router = useRouter();
 
-	// Access categories from Redux state
 	const categories = useAppSelector((state) => state.categories.categories);
 
 	const handleCategoryPress = (
