@@ -1,16 +1,16 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import CustomText from "@/components/base/CustomText";
 import { colors } from "@/lib/constants/colors.constant";
 import { Divider } from "react-native-paper";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 
-interface ChatCardInterface{
-	onPress: (chatId:string) => void;
-	chatId: string
+interface ChatCardInterface {
+	onPress: (chatId: string) => void;
+	chatId: string;
 }
 
-const ChatCard = ({chatId,onPress}: ChatCardInterface) => {
+const ChatCard = ({ chatId, onPress }: ChatCardInterface) => {
 	return (
 		<View
 			style={{
@@ -20,7 +20,7 @@ const ChatCard = ({chatId,onPress}: ChatCardInterface) => {
 				marginBottom: 10,
 			}}
 		>
-			<TouchableOpacity onPress={()=>onPress(chatId)}>
+			<TouchableOpacity onPress={() => onPress(chatId)}>
 				<View
 					style={{
 						display: "flex",
@@ -88,7 +88,7 @@ const ChatCard = ({chatId,onPress}: ChatCardInterface) => {
 				<Divider
 					style={{
 						marginLeft: 50,
-                        marginTop:5
+						marginTop: 5,
 					}}
 				/>
 			</TouchableOpacity>

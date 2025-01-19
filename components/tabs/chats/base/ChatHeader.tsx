@@ -1,11 +1,4 @@
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Alert,
-	StyleSheet,
-	Image,
-} from "react-native";
+import { View, TouchableOpacity, Alert, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -15,7 +8,7 @@ import { colors } from "@/lib/constants/colors.constant";
 import { fontFamily } from "@/lib/constants/fonts.constant";
 
 const ChatHeader = () => {
-	const [isFlagged, setIsFlagged] = useState(false); // Track flag status
+	const [isFlagged, setIsFlagged] = useState(false);
 
 	const toggleFlag = () => {
 		if (isFlagged) {

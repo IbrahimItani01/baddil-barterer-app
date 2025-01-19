@@ -19,78 +19,77 @@ interface ChatActionsProps {
 const ChatActions: React.FC<ChatActionsProps> = ({ onSendMessage }) => {
 	const theme = useAppSelector((state) => state.system.colorScheme);
 	const [message, setMessage] = useState("");
-	const [meetupVisible,setMeetupVisible] = useState(false)
+	const [meetupVisible, setMeetupVisible] = useState(false);
 	const handleMessageSend = () => {
 		if (message.trim()) {
 			onSendMessage(message.trim());
-			setMessage(""); // Clear message after sending
+			setMessage("");
 		}
 	};
-	const handleMeetupBubble = ()=>{
-		// Your meetup bubble logic here
-		setMeetupVisible(!meetupVisible)
-	}
+	const handleMeetupBubble = () => {
+		setMeetupVisible(!meetupVisible);
+	};
 	return (
 		<>
-		{meetupVisible && (
-			<>
-			<QRCodeBubble/>
-			</>
-		)}
-		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
-			style={{ position: "absolute", bottom: -35, left: 0, right: 0 }}
-		>
-			<View
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					paddingHorizontal: 10,
-					paddingVertical: 8,
-					gap: 10,
-					alignItems: "center",
-				}}
+			{meetupVisible && (
+				<>
+					<QRCodeBubble />
+				</>
+			)}
+			<KeyboardAvoidingView
+				behavior={Platform.OS === "ios" ? "padding" : "height"}
+				style={{ position: "absolute", bottom: -35, left: 0, right: 0 }}
 			>
-				<TouchableOpacity onPress={handleMeetupBubble}>
-					<MaterialIcons
-						name='handshake'
-						size={30}
-						color={colors.primary}
-					/>
-				</TouchableOpacity>
-				<TextInput
+				<View
 					style={{
-						flex: 1,
-						borderWidth: 1,
-						borderColor:
+						display: "flex",
+						flexDirection: "row",
+						paddingHorizontal: 10,
+						paddingVertical: 8,
+						gap: 10,
+						alignItems: "center",
+					}}
+				>
+					<TouchableOpacity onPress={handleMeetupBubble}>
+						<MaterialIcons
+							name='handshake'
+							size={30}
+							color={colors.primary}
+						/>
+					</TouchableOpacity>
+					<TextInput
+						style={{
+							flex: 1,
+							borderWidth: 1,
+							borderColor:
+								theme === "dark"
+									? colors["dark-gray-dark-theme"]
+									: colors["light-gray-light-theme"],
+							padding: 10,
+							borderRadius: 50,
+							fontFamily: fontFamily.NunitoSans.Regular,
+							color:
+								theme === "dark" ? colors["white-font"] : colors["black-font"],
+						}}
+						cursorColor={colors.primary}
+						placeholderTextColor={
 							theme === "dark"
 								? colors["dark-gray-dark-theme"]
-								: colors["light-gray-light-theme"],
-						padding: 10,
-						borderRadius: 50,
-						fontFamily: fontFamily.NunitoSans.Regular,
-						color:
-							theme === "dark" ? colors["white-font"] : colors["black-font"],
-					}}
-					cursorColor={colors.primary}
-					placeholderTextColor={
-						theme === "dark"
-							? colors["dark-gray-dark-theme"]
-							: colors["light-gray-light-theme"]
-					}
-					placeholder='Write your message ...'
-					value={message}
-					onChangeText={setMessage}
-				/>
-				<TouchableOpacity onPress={handleMessageSend}>
-					<MaterialIcons
-						name='send'
-						size={30}
-						color={colors.primary}
+								: colors["light-gray-light-theme"]
+						}
+						placeholder='Write your message ...'
+						value={message}
+						onChangeText={setMessage}
 					/>
-				</TouchableOpacity>
-			</View>
-		</KeyboardAvoidingView>
+					<TouchableOpacity onPress={handleMessageSend}>
+						<MaterialIcons
+							name='send'
+							size={30}
+							color={colors.primary}
+						/>
+					</TouchableOpacity>
+				</View>
+			</KeyboardAvoidingView>
 		</>
 	);
 };

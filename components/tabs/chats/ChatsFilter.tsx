@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import CustomText from "@/components/base/CustomText";
 import { fontFamily } from "@/lib/constants/fonts.constant";
@@ -11,7 +11,7 @@ const ChatsFilter = () => {
 
 	const handlePress = (option: string) => {
 		if (condition === option) {
-			setCondition(""); // Reset to "All" by default if the same option is pressed
+			setCondition("");
 		} else {
 			setCondition(option);
 		}
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		gap: 5,
 		marginBottom: 16,
-		paddingHorizontal: 4, // Optional padding for better spacing
+		paddingHorizontal: 4,
 	},
 	conditionButton: {
 		paddingHorizontal: 16,

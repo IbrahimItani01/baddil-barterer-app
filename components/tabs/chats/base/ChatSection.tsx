@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import React from "react";
 import { useAppSelector } from "@/store/hooks";
 import { colors } from "@/lib/constants/colors.constant";
@@ -21,11 +21,15 @@ const ChatSection: React.FC<ChatSectionProps> = ({ messages }) => {
 					theme === "dark"
 						? colors["dark-gray-dark-theme"]
 						: colors["light-gray-light-theme"],
-						paddingTop:15
+				paddingTop: 15,
 			}}
 		>
 			{messages.map((msg) => (
-				<ChatBubble key={msg.id} isSender={msg.isSender} msg={msg}/>
+				<ChatBubble
+					key={msg.id}
+					isSender={msg.isSender}
+					msg={msg}
+				/>
 			))}
 		</ScrollView>
 	);
