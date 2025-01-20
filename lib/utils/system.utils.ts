@@ -25,15 +25,16 @@ import { currentIp } from "@/apis/main";
 import { setLocations } from "@/store/slices/locations.slice";
 import { getAllLocationsData } from "@/apis/routes/locations/locations.routes";
 
-// Initialize the app by calling necessary functions to check statuses and fetch data
 export const initializeApp = async (dispatch: Dispatch) => {
-	await checkOnboardingStatus(dispatch); // Check if the user has completed onboarding
-	await checkLoginStatus(dispatch); // Check if the user is logged in
-	await fetchProfilePicture(dispatch); // Fetch the user's profile picture
-	await getUserTier(dispatch); // Fetch user tier (if relevant)
-	await getCategoriesData(dispatch); // Fetch categories data
-	await fetchUserData(dispatch); // Fetch user data (name and email)
-	await getAllLocations(dispatch); // Fetch all location data
+	await Promise.all([
+		checkOnboardingStatus(dispatch),
+		checkLoginStatus(dispatch),
+		fetchProfilePicture(dispatch),
+		getUserTier(dispatch),
+		getCategoriesData(dispatch),
+		fetchUserData(dispatch),
+		getAllLocations(dispatch),
+	]);
 };
 
 // Handle the navigation based on the login and onboarding status
